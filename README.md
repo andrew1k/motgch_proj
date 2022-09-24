@@ -1,4 +1,7 @@
-# motgch_proj
+# motgch
+# Team of motgch
+
+For backend discover  [Firebase Documentation](https://firebase.google.com/docs?authuser=0&hl=en)
 
 ## Project setup
 ```
