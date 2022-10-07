@@ -43,8 +43,8 @@
     </v-form>
   <v-card-text class="my-0 py-0">
   </v-card-text>
-  <vDivider />
-  <v-card-actions>
+
+  <v-card-actions class="my-2">
     <vSpacer />
     <v-btn
       @keydown.enter="saveData"
@@ -55,10 +55,15 @@
 </template>
 
 <script>
-import {ref} from 'vue'
+import {onBeforeMount, ref} from 'vue'
+import store from '@/store'
 
 export default {
   setup() {
+    onBeforeMount(() => {
+        store.dispatch('settings/getUserFromDB')
+    }
+    )
     const textFieldRules = [
       v => !!v || 'Это поле обязательно',
       v => (v && v.length <= 32) || 'Это поле не может содержать больше 32 символов',

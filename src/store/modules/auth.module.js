@@ -16,9 +16,6 @@ import store from '@/store'
 
 export default {
   namespaced: true,
-  state() {
-    return {}
-  },
   mutations: {
     setUserAuthInfo(state, user) {
       for (let item in user) {

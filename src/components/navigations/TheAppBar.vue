@@ -1,5 +1,10 @@
 <template>
-  <v-app-bar height="50" prominent flat color="cyan" >
+  <v-app-bar
+    height="50"
+    prominent
+    elevation="1"
+    flat
+     >
     <vSpacer v-if="!mdAndDown"/>
     <v-app-bar-title>
       MotGCh
@@ -26,12 +31,22 @@
       </v-card>
     </v-menu>
   </v-app-bar>
-  <v-navigation-drawer>
-
+  <v-navigation-drawer
+    v-model="mdAndUp"
+    floating
+    permanent
+    bottom
+    :rail="md"
+    @click="md = !md"
+  >
+    <v-list density="comfortable" nav>
+      <vListItem prepend-icon="mdi-home" title="Главная" value="homePage" to="/"/>
+      <vListItem prepend-icon="mdi-book-open" title="Studying" value="studyingPage"/>
+      <vListItem prepend-icon="mdi-account-group" title="Материалы для МГ" value="materialsForSG"/>
+      <vListItem prepend-icon="mdi-calendar" title="Календарь"/>
+      <vListItem prepend-icon="mdi-table" title="Управление" value="appUsers"/>
+    </v-list>
   </v-navigation-drawer>
-
-
-
 </template>
 
 <script>
@@ -39,13 +54,17 @@ import {firebaseAuth} from '@/firebase/firebase.config'
 import store from '@/store'
 import router from '@/router'
 import { useDisplay } from 'vuetify'
+import {ref} from 'vue'
 
 export default  {
   setup() {
-    const {mdAndDown} = useDisplay()
+    const {md ,mdAndDown, mdAndUp} = useDisplay()
 
     const profileName = firebaseAuth.currentUser.displayName
     const email = firebaseAuth.currentUser.email
+
+    const drawer = ref(true)
+    const rail = ref(true)
 
     const onLogout = async () => {
       await store.dispatch('auth/appLogout')
@@ -55,6 +74,10 @@ export default  {
       profileName, email,
       onLogout,
       mdAndDown,
+      mdAndUp,
+      md,
+      drawer,
+      rail,
     }
   }
 }
