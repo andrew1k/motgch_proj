@@ -32,12 +32,9 @@
     </v-menu>
   </v-app-bar>
   <v-navigation-drawer
-    v-model="mdAndUp"
-    floating
-    permanent
+    :floating="mdAndUp"
+    :permanent="mdAndUp"
     bottom
-    :rail="md"
-    @click="md = !md"
   >
     <v-list density="comfortable" nav>
       <vListItem prepend-icon="mdi-home" title="Главная" value="homePage" to="/"/>
@@ -58,7 +55,7 @@ import {ref} from 'vue'
 
 export default  {
   setup() {
-    const {md ,mdAndDown, mdAndUp} = useDisplay()
+    const {md ,mdAndDown, mdAndUp, lgAndUp} = useDisplay()
 
     const profileName = firebaseAuth.currentUser.displayName
     const email = firebaseAuth.currentUser.email
@@ -76,6 +73,7 @@ export default  {
       mdAndDown,
       mdAndUp,
       md,
+      lgAndUp,
       drawer,
       rail,
     }

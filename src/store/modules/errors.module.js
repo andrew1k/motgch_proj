@@ -21,16 +21,10 @@ export default {
         commit('clearMessage')
       }, 8000)
     },
-    clearMessage({commit}) {
-      commit('clearMessage')
-    }
   },
   getters: {
     getErrorMessage(state) {
       return state.message
-    },
-    getErrorType(state) {
-      return state.type
     }
   }
 }

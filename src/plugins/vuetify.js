@@ -16,7 +16,7 @@ export default createVuetify({
         dark: false,
         colors: {
             background: '#fff',
-            surface: '#eee', //
+            surface: '#f6f6f6', //
             primary: '#0023d2', // primary color from logo
             secondary: '#ffa10d', // secondary color from logo
             error: '#df1f26', //  worship color
