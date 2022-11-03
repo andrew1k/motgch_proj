@@ -40,7 +40,7 @@
       <vListItem prepend-icon="mdi-home" title="Главная" value="homePage" to="/"/>
       <vListItem prepend-icon="mdi-book-open" title="Studying" value="studyingPage"/>
       <vListItem prepend-icon="mdi-account-group" title="Материалы для МГ" value="materialsForSG"/>
-      <vListItem prepend-icon="mdi-calendar" title="Календарь"/>
+      <vListItem prepend-icon="mdi-calendar" title="Календарь" value="calendar" to="/calendar" />
       <vListItem prepend-icon="mdi-table" title="Управление" value="appUsers"/>
     </v-list>
   </v-navigation-drawer>

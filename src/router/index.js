@@ -1,20 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import auth from '@/router/routes/auth'
 import homePage from '@/views/homePage/homePage'
-// import {firebaseAuth} from '@/firebase/firebase.config'
 import store from '@/store'
-
+import mainCalendar from '@/views/calendar/mainCalendar'
 
 const routes = [
-  {
-    path: '/home',
-    name: 'unauthHomePage',
-    component: () => {import('@/views/unauthHome/HomePage')},
-    meta: {
-      layout: 'unauth',
-      auth: false,
-    }
-  },
   {
     path: '/',
     name: 'home',
@@ -22,6 +12,14 @@ const routes = [
     meta: {
       layout: 'main',
       auth: true
+    }
+  }, {
+    path:  '/calendar',
+    name: 'calendar',
+    component: mainCalendar,
+    meta:  {
+      layout: 'main',
+      auth: true,
     }
   },
   ...auth,
@@ -34,7 +32,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next)=> {
   store.dispatch('auth/getUser')
-  // store.dispatch('auth/authStateChanges')
   const requireAuth = to.meta.auth
   const isAuthed = store.getters['auth/accessToken']
   if (requireAuth && !isAuthed) {

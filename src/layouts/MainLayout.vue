@@ -9,7 +9,7 @@
   <theBottomNavigation />
   <v-main>
     <v-container>
-      <router-view/>
+      <routerView />
     </v-container>
   </v-main>
 </template>

@@ -18,11 +18,17 @@
   <v-row >
     <v-col>
       <v-card color="info">
+        <v-card-actions>
+
+        </v-card-actions>
         <v-card-title>Sunday</v-card-title>
       </v-card>
     </v-col>
     <v-col>
-      <v-card color="success" >
+      <v-card color="success">
+        <v-card-actions>
+
+        </v-card-actions>
         <v-card-title >Connection</v-card-title>
       </v-card>
     </v-col>
