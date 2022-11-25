@@ -17,12 +17,12 @@ export default createVuetify({
         colors: {
             background: '#fff',
             surface: '#f6f6f6', //
-            primary: '#0023d2', // primary color from logo
-            secondary: '#ffa10d', // secondary color from logo
-            error: '#df1f26', //  worship color
-            info: '#2674bb', // gospel color
-            success: '#058341', // learning color
-            warning: '#e28126', // communication color
+            primary: '#556bd0', // primary color from logo
+            secondary: '#ffcd7c', // secondary color from logo
+            error: '#de4e53', //  worship color
+            info: '#74b4ef', // gospel color
+            success: '#5fc08e', // learning color
+            warning: '#daa274', // communication color
         },
       },
       mbvDarkTheme: {
