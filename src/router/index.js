@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import auth from '@/router/routes/auth'
+import homePageRoutes from '@/router/routes/homePage'
+import discoverPage from '@/router/routes/discoverPage'
 import homePage from '@/views/homePage/homePage'
 import store from '@/store'
-import mainCalendar from '@/views/calendar/mainCalendar'
 
 const routes = [
   {
@@ -13,16 +14,10 @@ const routes = [
       layout: 'main',
       auth: true
     }
-  }, {
-    path:  '/calendar',
-    name: 'calendar',
-    component: mainCalendar,
-    meta:  {
-      layout: 'main',
-      auth: true,
-    }
   },
   ...auth,
+  ...homePageRoutes,
+  ...discoverPage,
 ]
 
 const router = createRouter({
