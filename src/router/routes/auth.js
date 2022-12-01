@@ -15,5 +15,13 @@ export default [
       layout:  'auth',
       auth: false,
     }
+  },{
+    path: '/restorePassword',
+    name: 'RestorePassword',
+    component: () => import('@/views/appAuth/RestorePassword'),
+    meta: {
+      layout:  'auth',
+      auth: false,
+    }
   }
 ]

@@ -8,10 +8,19 @@
       <vListItem prepend-icon="mdi-account-group" title="Материалы для МГ" value="materialsForSG"/>
       <vListItem prepend-icon="mdi-calendar" title="Календарь" value="calendar" to="/calendar"/>
       <vListItem prepend-icon="mdi-table" title="Управление" value="appUsers"/>
+      <vListItem prepend-icon="mdi-table" title="Архив" value="churchArchive" />
+
     </v-list>
   </v-navigation-drawer>
 
-  <v-bottom-navigation density="comfortable" elevation="0" grow v-if="mdAndDown">
+  <v-bottom-navigation
+    density="comfortable"
+    elevation="0"
+    grow
+    v-if="mdAndDown"
+    selected-class="v-btn--block"
+    class="v-btn--"
+  >
     <vBtn icon="mdi-home" to="/"/>
     <vBtn icon="mdi-calendar" to="/calendar"/>
     <vBtn icon="mdi-compass" to="/discover"/>
@@ -24,5 +33,5 @@ import {useDisplay} from 'vuetify'
 import {ref} from 'vue'
 
 const {mdAndDown} = useDisplay()
-const drawer = ref(null)
+let drawer = ref(null)
 </script>

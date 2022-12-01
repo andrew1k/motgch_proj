@@ -14,6 +14,14 @@ const routes = [
       layout: 'main',
       auth: true
     }
+  }, {
+    path: '/privacyPolicy',
+    name: 'privacyPolicy',
+    component: () => import('@/views/policies/privacyPolicy'),
+    meta: {
+      layout: 'main', // Debug needed
+      auth: true,
+    }
   },
   ...auth,
   ...homePageRoutes,
@@ -30,7 +38,7 @@ router.beforeEach((to, from, next)=> {
   const requireAuth = to.meta.auth
   const isAuthed = store.getters['auth/accessToken']
   if (requireAuth && !isAuthed) {
-    next('/home?message=needAuthorization')
+    next('/auth?message=needAuthorization')
   } else if (requireAuth && isAuthed) {
     next()
   } else if (!requireAuth && isAuthed){

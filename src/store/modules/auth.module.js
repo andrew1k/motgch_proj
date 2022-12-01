@@ -5,7 +5,6 @@ import {
   sendPasswordResetEmail,
   updateProfile,
   signOut,
-  onAuthStateChanged,
 } from 'firebase/auth'
 import {
   set,
@@ -16,18 +15,46 @@ import store from '@/store'
 
 export default {
   namespaced: true,
+  state() {
+    return {
+      uid: null,
+      displayName: null,
+      accessToken: null,
+      email: null,
+      emailVerified: null,
+      phoneNumber: null,
+      providerId: null,
+      photoURL: null,
+      isAnonymous: null,
+    }
+  },
   mutations: {
     setUserAuthInfo(state, user) {
       for (let item in user) {
         state[item] = user[item]
       }
-    }
+    },
+    clearUserAuthInfo(state) {
+      // eslint-disable-next-line no-unused-vars
+      state = null
+    },
   },
   actions: {
     async appLogin({ commit }, payload) {
       try {
         await signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
-        commit('setUserAuthInfo', firebaseAuth.currentUser)
+        const user = firebaseAuth.currentUser
+        commit('setUserAuthInfo', {
+          uid: user.uid,
+          displayName: user.displayName,
+          accessToken: user.accessToken,
+          email: user.email,
+          emailVerified: user.emailVerified,
+          phoneNumber: user.phoneNumber,
+          providerId: user.providerId,
+          photoURL: user.photoURL,
+          isAnonymous: user.isAnonymous
+        })
         await store.dispatch('errors/setMessage', {value: 'Welcome'})
       } catch(e) {
         await store.dispatch('errors/setMessage', {value: handleErrors(e.code)})
@@ -61,17 +88,24 @@ export default {
       await sendPasswordResetEmail(firebaseAuth, payload.email)
     },
     async getUser({commit}) {
-      commit('setUserAuthInfo', firebaseAuth.currentUser)
-    },
-    async authStateChanges(state) {
-      await onAuthStateChanged(firebaseAuth, (user) => {
-        for (let item in user) {
-          state[item] = user[item]
-        }
+      const user = firebaseAuth.currentUser
+      commit('setUserAuthInfo', {
+        uid: user.uid,
+        displayName: user.displayName,
+        accessToken: user.accessToken,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        phoneNumber: user.phoneNumber,
+        providerId: user.providerId,
+        photoURL: user.photoURL,
+        isAnonymous: user.isAnonymous
       })
     },
     async appLogout() {
       await signOut(firebaseAuth)
+      await store.commit('auth/clearUserAuthInfo')
+      // ---------------------------------------------------------------------------- Debug needed: after logout push to auth page
+
     }
   },
   getters: {

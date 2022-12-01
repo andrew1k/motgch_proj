@@ -5,29 +5,32 @@
       v-model="firstNameValue"
       :rules="textFieldRules"
       type="text"
-      label="Ваше имя"
+      label="Имя"
+      hint="Как вас зовут?"
       density="comfortable"
       variant="outlined"
-      class="my-3"
+      class="my-4"
     />
     <vTextField
       required
       v-model="secondNameValue"
       :rules="textFieldRules"
       type="text"
-      label="Ваша фамилия"
+      label="Фамилия"
+      hint="Скажите вашу фамилию?"
       density="comfortable"
       variant="outlined"
-      class="my-3"
+      class="my-4"
     />
     <vTextField
       required
       v-model="birthDateValue"
       type="date"
-      label="Ваш день рождения"
+      label="День рождения"
+      hint="Когда вы родитись?"
       density="comfortable"
       variant="outlined"
-      class="my-3"
+      class="my-4"
     />
     <vTextField
       required
@@ -35,20 +38,22 @@
       :rules="emailRules"
       type="email"
       label="Email"
+      hint="Напишите ваш действующий email"
       density="comfortable"
       variant="outlined"
-      class="my-3"
+      class="my-4"
     />
     <vTextField
       density="comfortable"
       v-model="passwordValue"
       :rules="passwordRules"
       label="Пароль"
+      hint="Придумайте пароль"
       variant="outlined"
-      :append-icon="showPassword ?'mdi-eye-off' : 'mdi-eye'"
+      :append-inner-icon="showPassword ?'mdi-eye-off' : 'mdi-eye'"
       :type="showPassword ? 'text' : 'password'"
-      @click:append="showPassword = !showPassword"
-      class="my-3"
+      @click:append-inner="showPassword = !showPassword"
+      class="my-4"
     />
     <v-radio-group
       density="compact"
@@ -64,9 +69,9 @@
       label="Согласен"
       v-model="acceptCheckbox"
     />
-    <vDivider />
+
     <v-card-actions>
-      <vSpacer />
+      <vSpacer/>
       <v-btn
         :disabled="!acceptCheckbox || !isValid"
         @click="onSignup"
@@ -80,72 +85,45 @@
   </v-form>
 </template>
 
-<script>
+<script setup>
 import {ref} from 'vue'
 import store from '@/store'
-import router from '@/router'
 
-export default {
-  setup() {
-    const signupForm = ref()
-    const isValid = ref(true)
-    const showPassword = ref(false)
+const signupForm = ref()
+const isValid = ref(true)
+const showPassword = ref(false)
 
-    const emailRules =  [
-      v => !!v || 'Поле Email обязательно',
-      v => /.+@.+\..+/.test(v) || 'Введите пральный Email',
-      v => (v && v.length <= 32) || 'Поле email не может содержать больше 32 символов',
-    ]
-    const textFieldRules = [
-      v => !!v || 'Это поле обязательно',
-      v => (v && v.length <= 32) || 'Это поле не может содержать больше 32 символов',
-    ]
-    const passwordRules = [
-      v => !!v || 'Поле Email обязательно',
-      v => (v && v.length <= 32) || 'Поле для пароля не может содержать больше 32 символов',
-      v => (v && v.length >= 6) || 'Пароль должен иметь не менее 6 символов',
-    ]
+const emailRules = [
+  v => !!v || 'Поле Email обязательно',
+  v => /.+@.+\..+/.test(v) || 'Введите пральный Email',
+  v => (v && v.length <= 32) || 'Поле email не может содержать больше 32 символов',
+]
+const textFieldRules = [
+  v => !!v || 'Это поле обязательно',
+  v => (v && v.length <= 32) || 'Это поле не может содержать больше 32 символов',
+]
+const passwordRules = [
+  v => !!v || 'Поле Email обязательно',
+  v => (v && v.length <= 32) || 'Поле для пароля не может содержать больше 32 символов',
+  v => (v && v.length >= 6) || 'Пароль должен иметь не менее 6 символов',
+]
 
-    let firstNameValue = ref('')
-    let secondNameValue = ref('')
-    let birthDateValue = ref('') // debug needed to be in storage yyyy/mm/dd
-    let emailValue = ref('')
-    let passwordValue = ref('')
-    let personGenderValue = ref('male')
-    let acceptCheckbox = ref(false)
-    const onSignup = async () => {
-      const toDB = {
-        firstName:firstNameValue.value,
-        secondName:secondNameValue.value,
-        birthDate: birthDateValue.value,
-        email: emailValue.value,
-        password: passwordValue.value,
-        personGender: personGenderValue.value,
-      }
-      await store.dispatch('auth/appSignup', toDB)
-      await router.push('/')
-    }
-
-    return {
-      signupForm,
-      isValid,
-      showPassword,
-      emailRules,
-      textFieldRules,
-      passwordRules,
-      firstNameValue,
-      secondNameValue,
-      birthDateValue,
-      emailValue,
-      passwordValue,
-      personGenderValue,
-      acceptCheckbox,
-      onSignup
-    }
+let firstNameValue = ref('')
+let secondNameValue = ref('')
+let birthDateValue = ref('')
+let emailValue = ref('')
+let passwordValue = ref('')
+let personGenderValue = ref()
+let acceptCheckbox = ref(false)
+const onSignup = async () => {
+  const toDB = {
+    firstName: firstNameValue.value,
+    secondName: secondNameValue.value,
+    birthDate: birthDateValue.value,
+    email: emailValue.value,
+    password: passwordValue.value,
+    personGender: personGenderValue.value,
   }
+  await store.dispatch('auth/appSignup', toDB)
 }
 </script>
-
-<style scoped>
-
-</style>

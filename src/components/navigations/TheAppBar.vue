@@ -38,8 +38,8 @@
 <script setup>
 import {firebaseAuth} from '@/firebase/firebase.config'
 import store from '@/store'
-import router from '@/router'
 import {useDisplay} from 'vuetify'
+import router from '@/router'
 
 
 const {mdAndDown} = useDisplay()
