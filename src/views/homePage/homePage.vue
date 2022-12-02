@@ -17,60 +17,36 @@
   </v-row>
   <v-row >
     <v-col>
-      <v-card color="info" to="/sunday">
-        <v-card-actions>
-          <vSpacer />
-          <vIcon icon="mdi-broadcast"/>
-        </v-card-actions>
+      <v-card theme="light" color="info" to="/sunday" append-icon="mdi-broadcast">
         <v-card-title>Sunday</v-card-title>
       </v-card>
     </v-col>
     <v-col>
-      <v-card color="success" to="/connection">
-        <v-card-actions>
-          <vSpacer />
-          <vIcon icon="mdi-human-greeting"/>
-        </v-card-actions>
+      <v-card theme="light" color="success" to="/connection" append-icon="mdi-human-greeting">
         <v-card-title >Connection</v-card-title>
       </v-card>
     </v-col>
   </v-row>
   <v-row >
     <v-col>
-      <v-card color="primary" to="/myNotes">
-        <v-card-actions>
-          <vSpacer />
-          <vIcon icon="mdi-note"/>
-        </v-card-actions>
+      <v-card theme="light" color="primary" to="/myNotes" append-icon="mdi-note">
         <v-card-title>Notes</v-card-title>
       </v-card>
     </v-col>
     <v-col>
-      <v-card color="warning" to="/givingCard">
-        <v-card-actions>
-          <vSpacer />
-          <vIcon icon="mdi-hand-heart" />
-        </v-card-actions>
+      <v-card theme="light" color="warning" to="/givingCard" append-icon="mdi-hand-heart">
         <v-card-title >Giving</v-card-title>
       </v-card>
     </v-col>
   </v-row>
   <v-row >
     <v-col>
-      <v-card color="brown" to="/calendar">
-        <v-card-actions>
-          <vSpacer />
-          <vIcon icon="mdi-calendar"/>
-        </v-card-actions>
+      <v-card theme="light" color="brown" to="/calendar" append-icon="mdi-calendar">
         <v-card-title>Calendar</v-card-title>
       </v-card>
     </v-col>
     <v-col>
-      <v-card color="error" to="/discover">
-        <v-card-actions>
-          <vSpacer />
-          <vIcon icon="mdi-compass" />
-        </v-card-actions>
+      <v-card theme="light" color="error" to="/discover" append-icon="mdi-compass">
         <v-card-title >Discover</v-card-title>
       </v-card>
     </v-col>

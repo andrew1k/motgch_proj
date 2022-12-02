@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <component :is="`${layout}-layout`" v-if="layout"/>
+    <component :is="`${layout}-layout`"/>
   </v-app>
 </template>
 

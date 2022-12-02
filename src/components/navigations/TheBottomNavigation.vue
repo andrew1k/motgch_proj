@@ -23,7 +23,7 @@
   >
     <vBtn icon="mdi-home" to="/"/>
     <vBtn icon="mdi-calendar" to="/calendar"/>
-    <vBtn icon="mdi-compass" to="/discover"/>
+    <vBtn icon="mdi-compass" to="/discover"/> <!-- mdi-magnify -->
     <vBtn flat icon="mdi-menu" @click="drawer = !drawer"/>
   </v-bottom-navigation>
 </template>

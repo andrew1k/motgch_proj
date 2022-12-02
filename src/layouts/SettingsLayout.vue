@@ -1,12 +1,12 @@
 <template>
+  <v-snackbar
+    v-model="snackbar"
+    multi-line
+    location="top"
+    v-if="message"
+  >{{message}}</v-snackbar>
   <v-main>
     <v-container class="py-0 my-0 px-0 px-md-2 px-lg-2 px-xl-16">
-      <v-snackbar
-        v-model="snackbar"
-        multi-line
-        location="top"
-        v-if="message"
-      >{{message}}</v-snackbar>
       <router-view />
     </v-container>
   </v-main>
