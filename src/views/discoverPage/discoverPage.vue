@@ -5,9 +5,8 @@
       v-for="tab in discoverTabs"
       :key="tab.tabId"
       :value="tab.tabId"
-      :title="smAndDown ? '' : tab.tabValue"
-
     >
+      {{ smAndDown ? '' : tab.tabValue }}
       <vIcon v-if="smAndDown" :icon="tab.tabIcon" />
     </v-tab>
   </v-tabs>
@@ -49,6 +48,5 @@ const discoverTabs = ref([
     tabIcon: 'mdi-tag-heart',
     tabComponent: discoverMinistries,
   },
-
 ])
 </script>

@@ -22,7 +22,6 @@ export default {
           commit('storeUser', snapshot.val())
           console.log(snapshot.val())
       } )
-
     },
   },
   getters: {},

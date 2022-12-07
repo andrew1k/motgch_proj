@@ -1,10 +1,10 @@
 <template>
-  <v-card v-if="savedNotes">
+  <v-card v-if="savedNotes" max-width="1000" class="mx-auto pa-1" variant="text">
     <v-card-text>
       Your notes:
     </v-card-text>
     <vDivider />
-    <v-card v-for="note in savedNotes" :key="note.nateId">
+    <v-card v-for="note in savedNotes" :key="note.nateId" max-width="1000" class="mx-auto" variant="text">
       <v-card-text>
         <v-card-actions>
           {{ note.noteName }}
@@ -12,9 +12,10 @@
           <vBtn icon="mdi-pencil"/>
         </v-card-actions>
       </v-card-text>
+      <vDivider />
     </v-card>
   </v-card>
-  <v-card v-else max-width="800" class="mx-auto">
+  <v-card v-else max-width="1000" class="mx-auto" variant="text">
     <v-card-text>
       There is no any notes
     </v-card-text>

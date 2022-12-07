@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card max-width="1000" class="mx-auto pa-1" variant="text">
     <v-card-title>
       Connection Card
     </v-card-title>
@@ -7,18 +7,17 @@
     <v-card-text>
       All data we keep secure
     </v-card-text>
-    <vDivider />
     <v-form>
       <v-select
         v-model="selectInput"
-        variant="solo"
+        variant="outlined"
         clearable
         label="Выберите"
         :items="selectableItems"
         multiple
       />
       <v-textarea
-        variant="solo"
+        variant="outlined"
         v-model="textareaInput"
         rows="1"
         auto-grow
@@ -29,7 +28,7 @@
       </v-textarea>
       <v-card-actions>
         <vSpacer />
-        <v-btn variant="elevated" elevation="2" @click="submitForm" @keydown.enter="submitForm">Отправить</v-btn>
+        <v-btn variant="outlined" @click="submitForm" @keydown.enter="submitForm">Отправить</v-btn>
       </v-card-actions>
     </v-form>
     <vDivider />

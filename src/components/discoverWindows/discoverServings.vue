@@ -1,8 +1,7 @@
 <template>
-  <v-card-text>
-    <div>ourServings.vue</div>
-  </v-card-text>
 
+  <v-card-title>Служения для вас</v-card-title>
+  <v-card-text>Здесь собраны всё, чем мы можем вам помочь, послужить</v-card-text>
 </template>
 
 <script setup>

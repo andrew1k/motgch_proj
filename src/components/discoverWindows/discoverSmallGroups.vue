@@ -7,7 +7,6 @@
   <v-card-text>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi non pariatur quasi.
   </v-card-text>
-
   <vDivider/>
   <v-tabs v-model="listOrMap" density="comfortable" hide-slider>
     <vTab value="list" title="Список"/>
