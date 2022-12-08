@@ -12,8 +12,8 @@ const options = reactive({
   headerToolbar: false,
   initialView: 'listWeek',
   locale: ruLocale,
-  eventClick: (arg) => {
-    console.log(arg)
-  }
+  // eventClick: (arg) => {
+  //   console.log(arg)
+  // }
 })
 </script>

@@ -20,9 +20,7 @@ export default {
         ref(firebaseDB, `appUsers/${appUserId}`),
         (snapshot) => {
           commit('storeUser', snapshot.val())
-          console.log(snapshot.val())
       } )
     },
   },
-  getters: {},
 }

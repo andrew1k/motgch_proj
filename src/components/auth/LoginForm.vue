@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="loginForm" v-model="isValid" lazy-validation @keydown.enter="onLogin">
+  <v-form ref="loginForm" v-model="isValid" lazy-validation>
     <vTextField
       density="comfortable"
       v-model="emailValue"
@@ -49,13 +49,13 @@ import router from '@/router'
 let passwordEye = ref(false)
 const loginForm = ref()
 const isValid = ref(true)
-let emailValue = ref('')
+let emailValue = ref(''.trim())
 const emailRules = [
   v => !!v || 'Поле Email обязательно',
   v => /.+@.+\..+/.test(v) || 'Введите правельный Email',
   v => (v && v.length <= 32) || 'Поле email не может содержать больше 32 символов',
 ]
-let passwordValue = ref('')
+let passwordValue = ref(''.trim())
 const passwordRules = [
   v => !!v || 'Это поле обязательно',
   v => (v && v.length <= 32) || 'Поле для пароля не может содержать больше 32 символов',

@@ -91,7 +91,7 @@ import store from '@/store'
 
 const signupForm = ref()
 const isValid = ref(true)
-const showPassword = ref(false)
+let showPassword = ref(false)
 
 const emailRules = [
   v => !!v || 'Поле Email обязательно',

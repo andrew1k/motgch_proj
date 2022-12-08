@@ -1,5 +1,5 @@
 <template>
-  <v-card-title>Calendar</v-card-title>
+<!--  <v-card-title>Calendar</v-card-title>-->
   <v-card-actions>
     <v-btn @click="changeToMonthView">Месяц</v-btn>
     <v-btn @click="changeToDayView">День</v-btn>

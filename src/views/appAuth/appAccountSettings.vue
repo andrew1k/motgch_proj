@@ -1,68 +1,45 @@
 <template>
-  <v-card max-width="800" class="mx-auto" flat>
+  <v-card max-width="800" class="mx-auto" variant="text">
     <v-toolbar density="comfortable">
       <v-btn prepend-icon="mdi-chevron-left" to="/">Настройки</v-btn>
-
       <template v-slot:extension>
-        <v-tabs
-          v-model="tab"
-        >
-          <v-tab value="account">
-            Базовые
-          </v-tab>
-          <v-tab value="authSettings">
-            Авторизации
+        <v-tabs v-model="tabs" align-tabs="center" density="comfortable">
+          <v-tab
+            v-for="tab in settingsTabs"
+            :key="tab.tabValue"
+            :value="tab.tabValue"
+            :prepend-icon="tab.tabIcon"
+          >
+            {{ tab.tabName }}
           </v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
-    <vDivider />
-    <v-window v-model="tab" touch="{
-      left:  () => swipe('left'),
-      right: () => swipe('right')
-    }">
-      <v-window-item value="account">
-        <v-card-text>
-          <accountSettings/>
-        </v-card-text>
-      </v-window-item>
-      <v-window-item value="authSettings">
-        <v-card-text>
-          <authSettings/>
-        </v-card-text>
+    <v-window v-model="tabs">
+      <v-window-item v-for="tab in settingsTabs" :key="tab.tabValue" :value="tab.tabValue">
+        <component :is="tab.tabComponent"/>
       </v-window-item>
     </v-window>
-
   </v-card>
 </template>
 
-<script>
-import accountSettings from '@/components/accountSettings/accountSettings'
-import authSettings from '@/components/accountSettings/authSettings'
+<script setup>
 import {ref} from 'vue'
+import AccountSettings from '@/components/accountSettings/accountSettings.vue'
+import AuthSettings from '@/components/accountSettings/authSettings.vue'
 
-export default {
-  setup() {
-    const tab = ref('account')
-    const swipe = (direction) => {
-      if (direction === 'left') {
-        tab.value = 'authSettings'
-      } else if (direction === 'right') {
-        tab.value = 'account'
-      }
-    }
-    return {
-      tab,
-      swipe,
-    }
+const tabs = ref(null)
+const settingsTabs = ref([
+  {
+    tabValue: 'accountSettings',
+    tabName: 'Базовые',
+    tabIcon: 'mdi-account-outline',
+    tabComponent: AccountSettings,
+  }, {
+    tabValue: 'authSettings',
+    tabName: 'Авторизации',
+    tabIcon: 'mdi-security',
+    tabComponent: AuthSettings,
   },
-  components: {
-    accountSettings,
-    authSettings,
-  },
-}
+])
 </script>
-
-<style scoped>
-
-</style>

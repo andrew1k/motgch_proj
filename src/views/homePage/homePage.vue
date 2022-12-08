@@ -7,10 +7,8 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="12" md="4">
-        <v-card flat>
-          <v-responsive :aspect-ratio="4">
-            Question of the Day or Daily Verse
-          </v-responsive>
+        <v-card variant="text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi explicabo molestias mollitia placeat quo rem sint sit velit veritatis vero?
         </v-card>
       </v-col>
     </v-row>
@@ -32,7 +30,6 @@
         </v-card>
       </v-col>
     </v-row>
-
   </v-card>
 </template>
 

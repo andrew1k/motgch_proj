@@ -35,6 +35,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next)=> {
   store.dispatch('auth/getUser')
+  store.dispatch('settings/getUserFromDB')
   const requireAuth = to.meta.auth
   const isAuthed = store.getters['auth/accessToken']
   if (requireAuth && !isAuthed) {
