@@ -59,7 +59,7 @@ const textFieldRules = [
 ]
 const accountSettings = ref()
 const isValid = ref(true)
-const appUser = store.state.settings.appUser
+const appUser = store.state.auth
 const firstNameValue = ref(appUser.firstName)
 const secondNameValue = ref(appUser.secondName)
 const birthDateValue = ref(appUser.birthDate)

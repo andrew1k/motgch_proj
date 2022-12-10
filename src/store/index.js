@@ -1,9 +1,8 @@
 import { createStore } from 'vuex'
-import errors from '@/store/modules/errors.module'
+import message from '@/store/modules/message.module'
 import auth from '@/store/modules/auth.module'
-import settings from '@/store/modules/settings.module'
 import calendar from '@/store/modules/calendar.module'
-import listOfSG from '@/store/modules/listOfSG.module'
+import lists from '@/store/modules/lists.module'
 
 export default createStore({
   state: {
@@ -11,14 +10,16 @@ export default createStore({
   getters: {
   },
   mutations: {
+    clearState() {
+      this.state = null
+    }
   },
   actions: {
   },
   modules: {
-    errors,
+    message,
     auth,
-    settings,
     calendar,
-    listOfSG,
+    lists,
   }
 })

@@ -35,9 +35,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next)=> {
   store.dispatch('auth/getUser')
-  store.dispatch('settings/getUserFromDB')
   const requireAuth = to.meta.auth
-  const isAuthed = store.getters['auth/accessToken']
+  const isAuthed = !!store.state.auth.uid
   if (requireAuth && !isAuthed) {
     next('/auth?message=needAuthorization')
   } else if (requireAuth && isAuthed) {

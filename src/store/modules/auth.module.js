@@ -1,15 +1,13 @@
-import {handleErrors} from '@/utilities/handleErrors'
+/* eslint-disable no-unused-vars */
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   updateProfile,
   signOut,
+  onAuthStateChanged,
 } from 'firebase/auth'
-import {
-  set,
-  ref
-} from 'firebase/database'
+import { set, ref, onValue } from 'firebase/database'
 import {firebaseAuth, firebaseDB} from '@/firebase/firebase.config'
 import store from '@/store'
 
@@ -19,47 +17,53 @@ export default {
     return {
       uid: null,
       displayName: null,
-      accessToken: null,
       email: null,
       emailVerified: null,
       phoneNumber: null,
-      providerId: null,
       photoURL: null,
-      isAnonymous: null,
+      isAdmin: null,
+      birthDate: null,
+      firstName: null,
+      secondName: null,
+      personGender: null,
+      servTeam: [],
+      telegram: {
+        firstName: null,
+        id: null,
+        isAuthed: null,
+        username: null,
+      },
     }
   },
   mutations: {
+    // ==============================================================================================
     setUserAuthInfo(state, user) {
       for (let item in user) {
         state[item] = user[item]
       }
     },
-    clearUserAuthInfo(state) {
-      // eslint-disable-next-line no-unused-vars
-      state = null
+    // ==============================================================================================
+    setUserInfo(state, user) {
+      for (let item in user) {
+        state[item] = user[item]
+      }
     },
   },
   actions: {
-    async appLogin({ commit }, payload) {
+    // ============================================LOGIN==================================================
+    async appLogin(_, payload) {
       try {
-        await signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
-        const user = firebaseAuth.currentUser
-        commit('setUserAuthInfo', {
-          uid: user.uid,
-          displayName: user.displayName,
-          accessToken: user.accessToken,
-          email: user.email,
-          emailVerified: user.emailVerified,
-          phoneNumber: user.phoneNumber,
-          providerId: user.providerId,
-          photoURL: user.photoURL,
-          isAnonymous: user.isAnonymous
-        })
-        await store.dispatch('errors/setMessage', {value: 'Welcome'})
-      } catch(e) {
-        await store.dispatch('errors/setMessage', {value: handleErrors(e.code)})
+        const res = await signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
+        if (res) {
+          await store.dispatch('message/setMessage', 'Welcome')
+        } else {
+          throw new Error('Error')
+        }
+      } catch (e) {
+        await store.dispatch('message/setMessage', e.message)
       }
     },
+    // ============================================SIGNUP==================================================
     async appSignup({ commit }, payload) {
       try {
         await createUserWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
@@ -73,42 +77,59 @@ export default {
           personGender: payload.personGender,
           birthDate: payload.birthDate,
           phoneNumber: '',
-          authLevel: '',
+          isAdmin: false,
           servTeam: []
         }
         await set(ref(firebaseDB, 'appUsers/' + firebaseAuth.currentUser.uid), toDB)
         // send Email verification
         await commit('setUserAuthInfo', firebaseAuth.currentUser)
-        await store.dispatch('errors/setMessage', 'Все прошло успешно, добро пожаловать')
+        await store.dispatch('message/setMessage', 'Все прошло успешно, добро пожаловать')
       } catch (e) {
-        await store.dispatch('errors/setMessage', {value: handleErrors(e.code)})
+        await store.dispatch('message/setMessage', e.code)
       }
     },
+    // ============================================RESTOREPASSWORD==================================================
     async restorePassword(_, payload) {
       await sendPasswordResetEmail(firebaseAuth, payload.email)
     },
+    // ============================================GETUSER==================================================
     async getUser({commit}) {
-      const user = firebaseAuth.currentUser
-      commit('setUserAuthInfo', {
-        uid: user.uid,
-        displayName: user.displayName,
-        accessToken: user.accessToken,
-        email: user.email,
-        emailVerified: user.emailVerified,
-        phoneNumber: user.phoneNumber,
-        providerId: user.providerId,
-        photoURL: user.photoURL,
-        isAnonymous: user.isAnonymous
-      })
+      try {
+        let user = firebaseAuth.currentUser
+        onAuthStateChanged(firebaseAuth, (_user) => {
+          if (_user) {
+            user = _user
+            commit('setUserAuthInfo', {
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              emailVerified: user.emailVerified,
+              phoneNumber: user.phoneNumber,
+              photoURL: user.photoURL,
+            })
+            onValue(
+              ref(firebaseDB, `appUsers/${user.uid}`),
+              (snapshot) => {
+                commit('setUserInfo', snapshot.val())
+              }
+            )
+          }
+        })
+      } catch (e) {
+        await store.dispatch('message/setMessage', e.code)
+      }
     },
+    // ============================================LOGOUT==================================================
     async appLogout() {
-      await signOut(firebaseAuth)
-      await store.commit('auth/clearUserAuthInfo')
-      // ---------------------------------------------------------------------------- Debug needed: after logout push to auth page
-
-    }
+      try {
+        await signOut(firebaseAuth)
+        // ---------------------------------------------------------------------------- Debug needed: after logout push to auth page
+        // ---------------------------------------------------------------------------- with onAuthStateChange
+      } catch (e) {
+        await store.dispatch('message/setMessage', e.code)
+        console.log(e.message)
+        console.log(e.code)
+      }
+    },
   },
-  getters: {
-    accessToken(state) {return state.accessToken}
-  }
 }

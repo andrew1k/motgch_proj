@@ -20,11 +20,7 @@
         <v-list>
           <v-list-item :title="profileName" :subtitle="email">
             <template v-slot:append>
-              <vBtn
-                icon="mdi-logout"
-                flat
-                @click="onLogout"
-              />
+              <LogoutBtn />
             </template>
           </v-list-item>
           <vDivider/>
@@ -37,17 +33,11 @@
 
 <script setup>
 import {firebaseAuth} from '@/firebase/firebase.config'
-import store from '@/store'
 import {useDisplay} from 'vuetify'
-import router from '@/router'
+import LogoutBtn from '@/components/auth/logoutBtn.vue'
 
 
 const {mdAndDown} = useDisplay()
 const profileName = firebaseAuth.currentUser.displayName
 const email = firebaseAuth.currentUser.email
-
-const onLogout = async () => {
-  await store.dispatch('auth/appLogout')
-  await router.push('/auth')
-}
 </script>

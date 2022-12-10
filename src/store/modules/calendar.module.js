@@ -1,7 +1,6 @@
-import {handleErrors} from '@/utilities/handleErrors'
 import {firebaseDB} from '@/firebase/firebase.config'
 import { ref, onValue} from 'firebase/database'
-import store from '@/store'
+// import store from '@/store'
 export default {
   namespaced: true,
   state() {
@@ -24,28 +23,29 @@ export default {
         })
 
       } catch (e) {
-        await store.dispatch('errors/setMessage', {value: handleErrors(e.code)})
+        // await store.dispatch('message/setMessage', e.code)
+        console.log(e.message)
       }
     },
     // async createEvent(_, payload) {
     //   try {
     //     await set(ref(firebaseDB, 'calendar/' + payload.id), payload)
     //   } catch (e) {
-    //     await store.dispatch('errors/setMessage', {value: handleErrors(e.code)})
+    //     await store.dispatch('message/setMessage', {value: handleErrors(e.code)})
     //   }
     // },
     // async updateEvent(_, payload) {
     //   try {
     //     await set(ref(firebaseDB, 'calendar/' + payload.id), payload)
     //   } catch (e) {
-    //     await store.dispatch('errors/setMessage', {value: handleErrors(e.code)})
+    //     await store.dispatch('message/setMessage', {value: handleErrors(e.code)})
     //   }
     // },
     // async deleteEvent(_, payload) {
     //   try {
     //     await set(ref(firebaseDB, 'calendar/' + payload.id), payload)
     //   } catch (e) {
-    //     await store.dispatch('errors/setMessage', {value: handleErrors(e.code)})
+    //     await store.dispatch('message/setMessage', {value: handleErrors(e.code)})
     //   }
     // }
   },

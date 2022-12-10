@@ -63,6 +63,6 @@ const passwordRules = [
 ]
 const onLogin = async () => {
   await store.dispatch('auth/appLogin', {email: emailValue.value, password: passwordValue.value})
-  await router.push('/')
+    .then(() => {router.push('/')})
 }
 </script>

@@ -1,11 +1,4 @@
 <template>
-  <v-snackbar
-    v-model="snackbar"
-    multi-line
-    location="top"
-    v-if="message"
-  >{{ message }}
-  </v-snackbar>
   <TheAppBar/>
   <TheBottomNavigation />
   <v-main>
@@ -16,12 +9,8 @@
 <script setup>
 import TheAppBar from '@/components/navigations/TheAppBar'
 import TheBottomNavigation from '@/components/navigations/TheBottomNavigation'
-import {computed, ref} from 'vue'
-import store from '@/store'
 // import {useDisplay} from 'vuetify'
 //
 // const {smAndDown} = useDisplay()
 
-let message = computed(() => store.getters['errors/getErrorMessage'])
-const snackbar = ref(true)
 </script>

@@ -14,17 +14,15 @@ const firebaseConfig = {
 }
 
 // init firebase
-const firebaseApp = initializeApp(firebaseConfig)
+initializeApp(firebaseConfig)
 
-const firebaseAuth = getAuth(firebaseApp)
+const firebaseAuth = getAuth()
 
-const firebaseDB = getDatabase(firebaseApp)
+const firebaseDB = getDatabase()
 
 // const firestoreDB = getFirestore(firebaseApp)
 
 export {
-  firebaseApp,
   firebaseAuth,
   firebaseDB,
-  // firestoreDB
 }

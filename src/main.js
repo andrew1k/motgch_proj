@@ -10,7 +10,8 @@ loadFonts()
 
 let app
 import {firebaseAuth} from '@/firebase/firebase.config'
-firebaseAuth.onAuthStateChanged(() => {
+import {onAuthStateChanged} from 'firebase/auth'
+onAuthStateChanged(firebaseAuth,() => {
   if (!app) {
     app = createApp(App)
       .use(router)
