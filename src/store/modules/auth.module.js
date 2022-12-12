@@ -10,6 +10,7 @@ import {
 import { set, ref, onValue } from 'firebase/database'
 import {firebaseAuth, firebaseDB} from '@/firebase/firebase.config'
 import store from '@/store'
+import router from '@/router'
 
 export default {
   namespaced: true,
@@ -88,9 +89,10 @@ export default {
         await store.dispatch('message/setMessage', e.code)
       }
     },
-    // ============================================RESTOREPASSWORD==================================================
+    // ============================================RESTORE PASSWORD==================================================
     async restorePassword(_, payload) {
       await sendPasswordResetEmail(firebaseAuth, payload.email)
+      await router.go(0)
     },
     // ============================================GETUSER==================================================
     async getUser({commit}) {
@@ -113,22 +115,21 @@ export default {
                 commit('setUserInfo', snapshot.val())
               }
             )
+          } else if (!_user) {
+            throw new Error('Не можем свзаться с базой данных')
           }
         })
       } catch (e) {
-        await store.dispatch('message/setMessage', e.code)
+        await store.dispatch('message/setMessage', e.message)
       }
     },
     // ============================================LOGOUT==================================================
     async appLogout() {
       try {
         await signOut(firebaseAuth)
-        // ---------------------------------------------------------------------------- Debug needed: after logout push to auth page
-        // ---------------------------------------------------------------------------- with onAuthStateChange
+        router.go(0)
       } catch (e) {
-        await store.dispatch('message/setMessage', e.code)
-        console.log(e.message)
-        console.log(e.code)
+        await store.dispatch('message/setMessage', e.message)
       }
     },
   },
