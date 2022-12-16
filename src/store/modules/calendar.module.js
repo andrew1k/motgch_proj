@@ -1,55 +1,61 @@
-import {firebaseDB} from '@/firebase/firebase.config'
-import { ref, onValue} from 'firebase/database'
-// import store from '@/store'
+/* eslint-disable no-unused-vars */
+import {db} from '@/firebase/firebase.config'
+import {collection, onSnapshot} from 'firebase/firestore'
+import store from '@/store'
+
+
+let curr = new Date
+let week = []
+
+for (let i = 1; i <= 7; i++) {
+  let first = curr.getDate() - curr.getDay() + i
+  let day = new Date(curr.setDate(first)).toISOString().slice(0, 10)
+  week.push(day)
+}
+console.log(week)
+
 export default {
   namespaced: true,
   state() {
     return {
       events: {},
+      weekEvents: {},
     }
   },
   mutations: {
     setEvents(state, payload) {
       state.events = payload
     },
+    setWeekEvents(state, payload) {
+      state.weekEvents = payload
+    },
   },
   actions: {
-    async getEvents({commit}) {
+    getEvents({commit}) {
       try {
-        const calendarRef =ref(firebaseDB, 'calendar/')
-        await onValue(calendarRef, (snapshot) => {
-          const calendarEvents = snapshot.val()
-          commit('setEvents',  calendarEvents)
-        })
+        const colRef = collection(db, 'calendar')
+        onSnapshot(colRef, snapshot => {
+          let events = []
+          let days = {}
+          snapshot.docs.forEach(doc => {
+            let docData = doc.data()
+            let dayEvents = Object.values(docData)
+            events.push(...dayEvents)
+            days[doc.id] = dayEvents
+          })
+          let filteredDays = Object.keys(days)
+            .filter(key => week.includes(key))
+            .reduce((obj, key) => {
+              obj[key] = days[key]
+              return obj
+            }, {})
+          commit('setWeekEvents', filteredDays)
 
+          commit('setEvents', events)
+        })
       } catch (e) {
-        // await store.dispatch('message/setMessage', e.code)
-        console.log(e.message)
+        store.dispatch('message/setMessage', e.message)
       }
     },
-    // async createEvent(_, payload) {
-    //   try {
-    //     await set(ref(firebaseDB, 'calendar/' + payload.id), payload)
-    //   } catch (e) {
-    //     await store.dispatch('message/setMessage', {value: handleErrors(e.code)})
-    //   }
-    // },
-    // async updateEvent(_, payload) {
-    //   try {
-    //     await set(ref(firebaseDB, 'calendar/' + payload.id), payload)
-    //   } catch (e) {
-    //     await store.dispatch('message/setMessage', {value: handleErrors(e.code)})
-    //   }
-    // },
-    // async deleteEvent(_, payload) {
-    //   try {
-    //     await set(ref(firebaseDB, 'calendar/' + payload.id), payload)
-    //   } catch (e) {
-    //     await store.dispatch('message/setMessage', {value: handleErrors(e.code)})
-    //   }
-    // }
-  },
-  getters: {
-    getEvents(state) {return state.events}
   },
 }

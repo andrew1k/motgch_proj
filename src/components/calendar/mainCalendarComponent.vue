@@ -1,5 +1,4 @@
 <template>
-<!--  <v-card-title>Calendar</v-card-title>-->
   <v-card-actions>
     <v-btn @click="changeToMonthView">Месяц</v-btn>
     <v-btn @click="changeToDayView">День</v-btn>
@@ -8,7 +7,7 @@
     <vBtn icon="mdi-chevron-down" size="sm" @click="changeViewToNow"/>
     <vBtn icon="mdi-chevron-right" size="sm" @click="changeViewToRight"/>
   </v-card-actions>
-  <full-calendar ref="fCalendar" :options="calendarOptions"/>
+  <full-calendar ref="fCalendar" :options="calendarOptions" />
 </template>
 
 <script setup>
@@ -18,7 +17,7 @@ import ruLocale from '@fullcalendar/core/locales/ru'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
-import {computed, onBeforeMount, reactive, ref} from 'vue'
+import {computed, onBeforeMount, reactive} from 'vue'
 import store from '@/store'
 
 onBeforeMount(() => {
@@ -31,37 +30,22 @@ const calendarOptions = reactive({
   height: 'auto',
   fixedWeekCount: false,
   locale: ruLocale,
-  editable: true,
-  selectable: true,
-  events: null,
+  events: computed(() => store.state.calendar.events),
   headerToolbar: false,
-  select: (arg) => {
-    const cal = arg.view.calendar
-    cal.unselect()
-    const id = ref(Date.now())
-    cal.addEvent({
-      id: id.value,
-      title: `event ${id.value}`,
-      text: `some text`,
-      start: arg.start,
-      end: arg.end,
-      allDay: true,
-    })
+  eventClick(arg)  {
+    // console.log(arg.event.extendedProps.text) // text
+    // console.log(arg.event.title) // title
+    // console.log(arg.event.allDay) // allDay
+    console.log(arg.event.id) // id
   },
-  // select: (arg) => {
-  //   console.log(arg.startStr + ' ' + arg.endStr)
-  // },
-  // eventClick: (arg) => {
-  //   console.log(arg.event)
+  // dateClick(arg) {
+  //   console.log(arg)
   // },
 })
 
 
-const calendarEvents = ref(computed(() => store.getters['calendar/getEvents']))
-calendarOptions.events = Object.keys(calendarEvents.value).map(key => {
-  return {...calendarEvents.value[key]}
-})
-console.log(calendarOptions.events)
+
+
 
 </script>
 <script>

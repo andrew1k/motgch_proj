@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -82,7 +81,7 @@ export default {
           servTeam: []
         }
         await set(ref(firebaseDB, 'appUsers/' + firebaseAuth.currentUser.uid), toDB)
-        // send Email verification
+        // --------------------------------------------------------------------------------------------------- send Email verification
         await commit('setUserAuthInfo', firebaseAuth.currentUser)
         await store.dispatch('message/setMessage', 'Все прошло успешно, добро пожаловать')
       } catch (e) {
@@ -91,8 +90,13 @@ export default {
     },
     // ============================================RESTORE PASSWORD==================================================
     async restorePassword(_, payload) {
-      await sendPasswordResetEmail(firebaseAuth, payload.email)
-      await router.go(0)
+      try {
+        await sendPasswordResetEmail(firebaseAuth, payload.email)
+        await store.dispatch('message/setMessage', `Мы отправили вам письмо на ${payload.email}`)
+        await router.go(0)
+      } catch (e) {
+        await store.dispatch('message/setMessage', e.message)
+      }
     },
     // ============================================GETUSER==================================================
     async getUser({commit}) {
