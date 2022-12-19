@@ -35,6 +35,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next)=> {
   store.dispatch('auth/getUser')
+  store.dispatch('calendar/getEvents')
   const requireAuth = to.meta.auth
   const isAuthed = !!store.state.auth.uid
   if (requireAuth && !isAuthed) {

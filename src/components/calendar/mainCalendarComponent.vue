@@ -8,6 +8,8 @@
     <vBtn icon="mdi-chevron-right" size="sm" @click="changeViewToRight"/>
   </v-card-actions>
   <full-calendar ref="fCalendar" :options="calendarOptions" />
+
+
 </template>
 
 <script setup>
@@ -17,12 +19,10 @@ import ruLocale from '@fullcalendar/core/locales/ru'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
-import {computed, onBeforeMount, reactive} from 'vue'
+import {computed, reactive} from 'vue'
 import store from '@/store'
 
-onBeforeMount(() => {
-  store.dispatch('calendar/getEvents')
-})
+
 
 const calendarOptions = reactive({
   plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],

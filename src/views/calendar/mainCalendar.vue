@@ -1,6 +1,7 @@
 <template>
   <v-card max-width="800" class="mx-auto" variant="text">
-    <MainCalendarComponent />
+<!--    <MainCalendarComponent />-->
+    <CalendarComponent />
   </v-card>
   <v-card max-width="800" class="mx-auto py-2" variant="text">
     <UserEvents />
@@ -8,6 +9,7 @@
 </template>
 
 <script setup>
-import MainCalendarComponent from '@/components/calendar/mainCalendarComponent.vue'
+// import MainCalendarComponent from '@/components/calendar/mainCalendarComponent.vue'
 import UserEvents from '@/components/calendar/userEvents.vue'
+import CalendarComponent from '@/components/calendar/calendarComponent.vue'
 </script>
