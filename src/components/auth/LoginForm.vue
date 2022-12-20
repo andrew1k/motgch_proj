@@ -31,7 +31,7 @@
     <vSpacer/>
     <v-btn
       variant="flat"
-      @click.prevent="onLogin"
+      @click.prevent="appLogin({email: emailValue, password: passwordValue})"
       color="primary"
       type="submit"
       :disabled="!isValid"
@@ -43,8 +43,8 @@
 
 <script setup>
 import {ref} from 'vue'
-import store from '@/store'
-import router from '@/router'
+import {useAuthStore} from '@/stores/authStore'
+const { appLogin } = useAuthStore()
 
 let passwordEye = ref(false)
 const loginForm = ref()
@@ -61,8 +61,4 @@ const passwordRules = [
   v => (v && v.length <= 32) || 'Поле для пароля не может содержать больше 32 символов',
   v => (v && v.length >= 6) || 'Пароль должен иметь не менее 6 символов',
 ]
-const onLogin = async () => {
-  await store.dispatch('auth/appLogin', {email: emailValue.value, password: passwordValue.value})
-    .then(() => {router.push('/')})
-}
 </script>

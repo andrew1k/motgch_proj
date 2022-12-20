@@ -3,7 +3,10 @@ import auth from '@/router/routes/auth'
 import homePageRoutes from '@/router/routes/homePage'
 import discoverPage from '@/router/routes/discoverPage'
 import homePage from '@/views/homePage/homePage'
-import store from '@/store'
+import { useAuthStore } from '@/stores/authStore'
+import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+
+
 
 const routes = [
   {
@@ -34,19 +37,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next)=> {
-  store.dispatch('auth/getUser')
-  store.dispatch('calendar/getEvents')
+  const { getUser, isAuthed } = useAuthStore()
+  const {getCalendarEvents} = useCalendarEventsStore()
+  getCalendarEvents()
+  getUser()
   const requireAuth = to.meta.auth
-  const isAuthed = !!store.state.auth.uid
-  if (requireAuth && !isAuthed) {
-    next('/auth?message=needAuthorization')
-  } else if (requireAuth && isAuthed) {
-    next()
-  } else if (!requireAuth && isAuthed){
-    next('/')
-  } else {
-    next()
-  }
+  if (requireAuth && !isAuthed) next('/auth?message=needAuthorization')
+  else if (requireAuth && isAuthed) next()
+  else if (!requireAuth && isAuthed)next('/')
+  else next()
+
 })
 
 export default router

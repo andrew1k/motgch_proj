@@ -16,7 +16,7 @@
     <v-menu activator="#accountMenu">
       <v-card min-width="300">
         <v-list>
-          <v-list-item :title="profileName" :subtitle="email">
+          <v-list-item :title="displayName" :subtitle="email">
             <template v-slot:append>
               <LogoutBtn />
             </template>
@@ -30,10 +30,8 @@
 </template>
 
 <script setup>
-import {firebaseAuth} from '@/firebase/firebase.config'
 import LogoutBtn from '@/components/auth/logoutBtn.vue'
+import {useAuthStore} from '@/stores/authStore'
 
-
-const profileName = firebaseAuth.currentUser.displayName
-const email = firebaseAuth.currentUser.email
+const {email, displayName} = useAuthStore()
 </script>

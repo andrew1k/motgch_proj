@@ -22,6 +22,18 @@
       variant="outlined"
       class="my-4"
     />
+    <VTextField
+      required
+      v-model="phoneNumberValue"
+      :rules="[v => v && v.length === 10 || 'Это поле должно иметь 10 символов', v => !!+v || 'Должно быть число',]"
+      prefix="+7"
+      counter="10"
+      variant="outlined"
+      density="comfortable"
+      type="text"
+      label="Ваш номер телефона"
+      hint="Без идентификатора страны(+7)"
+    />
     <vTextField
       required
       v-model="birthDateValue"
@@ -87,7 +99,9 @@
 
 <script setup>
 import {ref} from 'vue'
-import store from '@/store'
+import {useAuthStore} from '@/stores/authStore'
+
+const { appSignup } = useAuthStore()
 
 const signupForm = ref()
 const isValid = ref(true)
@@ -95,7 +109,7 @@ let showPassword = ref(false)
 
 const emailRules = [
   v => !!v || 'Поле Email обязательно',
-  v => /.+@.+\..+/.test(v) || 'Введите пральный Email',
+  v => /.+@.+\..+/.test(v) || 'Введите правельный Email',
   v => (v && v.length <= 32) || 'Поле email не может содержать больше 32 символов',
 ]
 const textFieldRules = [
@@ -110,20 +124,21 @@ const passwordRules = [
 
 let firstNameValue = ref('')
 let secondNameValue = ref('')
+let phoneNumberValue = ref('')
 let birthDateValue = ref('')
 let emailValue = ref('')
 let passwordValue = ref('')
 let personGenderValue = ref()
 let acceptCheckbox = ref(false)
 const onSignup = async () => {
-  const toDB = {
+  appSignup({
     firstName: firstNameValue.value,
     secondName: secondNameValue.value,
     birthDate: birthDateValue.value,
     email: emailValue.value,
     password: passwordValue.value,
     personGender: personGenderValue.value,
-  }
-  await store.dispatch('auth/appSignup', toDB)
+    phoneNumber: phoneNumberValue.value
+  })
 }
 </script>

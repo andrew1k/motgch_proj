@@ -2,14 +2,11 @@
   <vBtn
     icon="mdi-logout"
     flat
-    @click="onLogout"
+    @click="appLogout"
   />
 </template>
 
 <script setup>
-import store from '@/store'
-
-const onLogout = async () => {
-  await store.dispatch('auth/appLogout')
-}
+import {useAuthStore} from '@/stores/authStore'
+const { appLogout } = useAuthStore()
 </script>

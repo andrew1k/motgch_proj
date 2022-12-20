@@ -1,7 +1,7 @@
 <template>
     <v-list  density="compact">
       <v-list-item
-        v-for="evnt in events"
+        v-for="evnt in wCalEvnts"
         :key="evnt.id"
         nav
       >
@@ -16,10 +16,10 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue'
-import store from '@/store'
+import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
 
-const events = ref(computed(() => store.state.calendar.weekEvents))
+const {wCalEvnts} = useCalendarEventsStore()
+
 
 const signToEvent = (evnt) => {
   console.log(evnt.id)

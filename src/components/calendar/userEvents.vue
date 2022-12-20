@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-for="event in events"
+    v-for="event in allCalEvnts"
     :key="event.id"
     variant="outlined"
     :title="event.title"
@@ -15,12 +15,13 @@
 </template>
 
 <script setup>
-import {computed} from 'vue'
-import store from '@/store'
+import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+
+const {allCalEvnts} = useCalendarEventsStore()
+
 
 const signToEvent = (event) => {
   console.log(event.id)
 }
 
-const events = computed(() => store.state.calendar.events)
 </script>

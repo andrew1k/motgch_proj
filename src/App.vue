@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-snackbar v-model="message" multi-line location="top" >{{ message }}</v-snackbar>
+    <v-snackbar v-model="getMessage" multi-line location="top" >{{ getMessage }}</v-snackbar>
     <component :is="`${layout}-layout`"/>
   </v-app>
 </template>
@@ -11,14 +11,15 @@ import {useRoute} from 'vue-router'
 import MainLayout from '@/layouts/MainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
 import SettingsLayout from '@/layouts/SettingsLayout'
-import store from '@/store'
+import {useSnackbarMessages} from '@/stores/snackbarMessages'
 
 export default {
   setup() {
+    const {getMessage} = useSnackbarMessages()
     const route = useRoute()
     return {
       layout: computed(() => route.meta.layout),
-      message: computed(() => store.getters['message/getMessage']),
+      getMessage
     }
   },
   components: {

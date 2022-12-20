@@ -17,6 +17,7 @@
     "@mdi/font": "5.9.55",
     "core-js": "^3.26.1",
     "firebase": "^9.15.0",
+    "pinia": "^2.0.28",
     "roboto-fontface": "*",
     "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.45",

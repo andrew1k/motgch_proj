@@ -10,14 +10,16 @@
 </template>
 
 <script setup>
-/* eslint-disable */
-import {Calendar} from 'v-calendar'
-import store from '@/store'
-import {computed, ref} from 'vue'
 
-let events = ref(computed(() => store.state.calendar.events))
+import {Calendar} from 'v-calendar'
+import {ref} from 'vue'
+import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+
+const {allCalEvnts} = useCalendarEventsStore()
+
+
 let attrs = ref([])
-events.value.map(evnt => {
+allCalEvnts.map(evnt => {
   attrs.value.push({
     key: evnt.id,
     dates: evnt.start,
