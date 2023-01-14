@@ -18,7 +18,7 @@
 <script setup>
 import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
 
-const {wCalEvnts} = useCalendarEventsStore()
+const { wCalEvnts } = useCalendarEventsStore()
 
 
 const signToEvent = (evnt) => {

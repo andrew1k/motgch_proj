@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app'
 import {getAuth} from 'firebase/auth'
-// import {getDatabase} from 'firebase/database'
 import {getFirestore} from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -17,8 +16,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig)
 
 const auth = getAuth()
-//
-// const firebaseDB = getDatabase()
+auth.languageCode = 'ru'
 
 const db = getFirestore()
 

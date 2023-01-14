@@ -25,7 +25,9 @@
     <VTextField
       required
       v-model="phoneNumberValue"
-      :rules="[v => v && v.length === 10 || 'Это поле должно иметь 10 символов', v => !!+v || 'Должно быть число',]"
+      :rules="[
+        v => v && v.length === 10 || 'Это поле должно иметь 10 символов',
+        v => !!+v || 'Должно быть число']"
       prefix="+7"
       counter="10"
       variant="outlined"
@@ -131,7 +133,7 @@ let passwordValue = ref('')
 let personGenderValue = ref()
 let acceptCheckbox = ref(false)
 const onSignup = async () => {
-  appSignup({
+  await appSignup({
     firstName: firstNameValue.value,
     secondName: secondNameValue.value,
     birthDate: birthDateValue.value,

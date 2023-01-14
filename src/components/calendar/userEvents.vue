@@ -9,7 +9,7 @@
   >
     <v-card-actions>
       <VSpacer />
-      <v-btn @click="signToEvent(event)">Записаться</v-btn>
+      <v-btn @click="signToEvent(event)">Октрыть</v-btn>
     </v-card-actions>
   </v-card>
 </template>

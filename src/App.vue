@@ -1,6 +1,12 @@
 <template>
   <v-app>
-    <v-snackbar v-model="getMessage" multi-line location="top" >{{ getMessage }}</v-snackbar>
+    <v-snackbar
+      v-model="snackbarMessage"
+      multi-line
+      location="top"
+    >
+      {{ snackbarMessage }}
+    </v-snackbar>
     <component :is="`${layout}-layout`"/>
   </v-app>
 </template>
@@ -12,14 +18,18 @@ import MainLayout from '@/layouts/MainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
 import SettingsLayout from '@/layouts/SettingsLayout'
 import {useSnackbarMessages} from '@/stores/snackbarMessages'
+import {storeToRefs} from 'pinia'
 
 export default {
   setup() {
-    const {getMessage} = useSnackbarMessages()
+    const messagesStore = useSnackbarMessages()
+    const {snackbarMessage} = storeToRefs(messagesStore)
+    console.log(snackbarMessage.value)
+
     const route = useRoute()
     return {
       layout: computed(() => route.meta.layout),
-      getMessage
+      snackbarMessage,
     }
   },
   components: {

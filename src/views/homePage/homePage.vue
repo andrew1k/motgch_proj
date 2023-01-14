@@ -3,12 +3,14 @@
     <v-row>
       <v-col cols="12" sm="12" md="8">
         <v-card flat max-width="800" class="mx-auto" variant="text">
-            <WeekEvents />
+          <WeekEvents v-if="wCalEvnts"/>
+          <UiSpinner v-else/>
         </v-card>
       </v-col>
       <v-col cols="12" sm="12" md="4">
         <v-card variant="text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi explicabo molestias mollitia placeat quo rem sint sit velit veritatis vero?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi explicabo molestias mollitia placeat quo rem
+          sint sit velit veritatis vero?
         </v-card>
       </v-col>
     </v-row>
@@ -36,6 +38,11 @@
 <script setup>
 import {ref} from 'vue'
 import WeekEvents from '@/components/calendar/weekEvents.vue'
+import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+import UiSpinner from '@/components/ui/uiSpinner.vue'
+
+const {wCalEvnts} = useCalendarEventsStore()
+
 
 const cardsOnHomePage = ref([
   {

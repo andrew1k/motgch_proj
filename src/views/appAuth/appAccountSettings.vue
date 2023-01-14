@@ -1,7 +1,7 @@
 <template>
   <v-card max-width="800" class="mx-auto" variant="text">
     <v-toolbar density="comfortable">
-      <v-btn prepend-icon="mdi-chevron-left" to="/">Настройки</v-btn>
+      <v-btn prepend-icon="mdi-chevron-left" @click="$router.go(-1)">Настройки</v-btn>
       <!--      <template v-slot:extension>-->
       <!--        <v-tabs v-model="tabs" align-tabs="center" density="comfortable">-->
       <!--          <v-tab-->

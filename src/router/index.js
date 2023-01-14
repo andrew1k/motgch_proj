@@ -4,7 +4,7 @@ import homePageRoutes from '@/router/routes/homePage'
 import discoverPage from '@/router/routes/discoverPage'
 import homePage from '@/views/homePage/homePage'
 import { useAuthStore } from '@/stores/authStore'
-import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+import {storeToRefs} from 'pinia'
 
 
 
@@ -29,6 +29,12 @@ const routes = [
   ...auth,
   ...homePageRoutes,
   ...discoverPage,
+  // catchall 404
+  {
+    path: '/:catchAll(.*)',
+    name: 'notFound',
+    component:  () => import('@/views/notFound.vue')
+  },
 ]
 
 const router = createRouter({
@@ -37,16 +43,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next)=> {
-  const { getUser, isAuthed } = useAuthStore()
-  const {getCalendarEvents} = useCalendarEventsStore()
-  getCalendarEvents()
-  getUser()
+  const authStore = useAuthStore()
+  const { isAuthed } = storeToRefs(authStore)
   const requireAuth = to.meta.auth
-  if (requireAuth && !isAuthed) next('/auth?message=needAuthorization')
-  else if (requireAuth && isAuthed) next()
-  else if (!requireAuth && isAuthed)next('/')
+  if (requireAuth && !isAuthed.value) next('/auth?message=needAuthorization')
+  else if (requireAuth && isAuthed.value) next()
+  else if (!requireAuth && isAuthed.value)next('/')
   else next()
-
 })
 
 export default router

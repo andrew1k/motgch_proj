@@ -16,7 +16,7 @@
     <v-menu activator="#accountMenu">
       <v-card min-width="300">
         <v-list>
-          <v-list-item :title="displayName" :subtitle="email">
+          <v-list-item :title="`${dbUser.firstName} ${dbUser.secondName}`" :subtitle="email">
             <template v-slot:append>
               <LogoutBtn />
             </template>
@@ -31,7 +31,9 @@
 
 <script setup>
 import LogoutBtn from '@/components/auth/logoutBtn.vue'
-import {useAuthStore} from '@/stores/authStore'
+import { useAuthStore } from '@/stores/authStore'
+import {storeToRefs} from 'pinia'
 
-const {email, displayName} = useAuthStore()
+const authStore = useAuthStore()
+const { email, dbUser } = storeToRefs(authStore)
 </script>

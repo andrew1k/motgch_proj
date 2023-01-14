@@ -24,8 +24,8 @@
       <vSpacer/>
       <v-btn
         :disabled="!isValidRestorePassword"
-        @click="restorePassword"
-        @keydown.enter="restorePassword"
+        @click="restorePassword(restoreEmailValue)"
+        @keydown.enter="restorePassword(restoreEmailValue)"
         color="primary"
         variant="flat"
       >Восстановить пароль
@@ -36,7 +36,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import store from '@/store'
+import {useAuthStore} from '@/stores/authStore'
 
 let restoreEmailValue = ref('')
 const emailRules = [
@@ -46,7 +46,5 @@ const emailRules = [
 ]
 const restorePasswordForm = ref()
 const isValidRestorePassword = ref(true)
-const restorePassword = async () => {
-  await store.dispatch('auth/restorePassword', {email: restoreEmailValue.value})
-}
+const {restorePassword} = useAuthStore()
 </script>

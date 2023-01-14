@@ -1,5 +1,10 @@
 <template>
-  <v-form ref="loginForm" v-model="isValid" lazy-validation @submit="onLogin" @keydown.enter="onLogin">
+  <v-form
+    ref="loginForm"
+    v-model="isValid"
+    lazy-validation
+    @submit="appLogin({email: emailValue, password: passwordValue})"
+    @keydown.enter="appLogin({email: emailValue, password: passwordValue})">
     <vTextField
       density="comfortable"
       v-model="emailValue"

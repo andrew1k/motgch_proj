@@ -1,8 +1,7 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
 import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
+  createUserWithEmailAndPassword, onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
@@ -10,80 +9,60 @@ import {
 import {auth, db} from '@/firebase/firebase.config'
 import {doc, setDoc, onSnapshot} from 'firebase/firestore'
 import router from '@/router'
+import {useSnackbarMessages} from '@/stores/snackbarMessages'
 
 export const useAuthStore = defineStore('authStore', () => {
-  const dbUser = ref({})
-  const currUser = ref({})
-  const uid = ref(computed(() => currUser.value.uid))
-  const email = ref(computed(() => currUser.value.email))
-  const displayName = ref(computed(() => `${dbUser.value.firstName} ${dbUser.value.secondName}`))
-  const isAuthed = computed(() => !!currUser.value.accessToken)
-
-  async function appLogin(payload) {
-    try {
-      const res = await signInWithEmailAndPassword(auth, payload.email, payload.password)
-      if (res) {
-        await getUser()
-        await router.push('/')
-      }
-      else throw new Error('Error')
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  async function appSignup(payload) {
+  const {setMessage} = useSnackbarMessages() // messages for errors to user
+  let user = ref(auth.currentUser)
+  let dbUser = ref({})
+  const uid = computed(() => user.value.uid)
+  const email = computed(() => user.value.email)
+  const isAuthed = computed(() => user.value ? !!user.value : null)
+  const appSignup = async (payload) => {  // ------------------------------------------------------------------------------------------------------------------------------------ Done: tests needed
     try {
       const res = await createUserWithEmailAndPassword(auth, payload.email, payload.password)
-      if (res) {
-        await setDoc(doc(db, 'users', auth.currentUser.uid), {
-          email: payload.email,
-          firstName: payload.firstName,
-          secondName: payload.secondName,
-          personGender: payload.personGender,
-          birthDate: payload.birthDate,
-          phoneNumber: payload.phoneNumber,
-          isAdmin: false,
-          servTeam: [],
-        }).catch(e => {
-            throw new Error(`Произошла ошибка с записью в базу данных: ${e.message}`)
-          })
-        await getUser()
-        await router.push('/')
-      } else {
-        throw new Error('Произошла неизвестная ошибка')
+      if (!res) throw new Error('Произошла неизвестная ошибка, повторите попытку позже')
+      const dbData = {
+        email: payload.email,
+        firstName: payload.firstName,
+        secondName: payload.secondName,
+        personGender: payload.personGender,
+        birthDate: payload.birthDate,
+        phoneNumber: payload.phoneNumber,
+        servTeam: [],
       }
+      await setDoc(doc(db, 'users', res.user.uid), dbData)
+      await onSnapshot(doc(db, 'users', res.user.uid), (snapshot) => {
+        dbUser.value = snapshot.data()
+      })
+      await router.push('/')
     } catch (e) {
-      console.log(e)
+      setMessage(e.message)
+    }
+  }
+  const appLogin = async (payload) => {  // ------------------------------------------------------------------------------------------------------------------------------------ Done: test needed
+    try {
+      const res = await signInWithEmailAndPassword(auth, payload.email, payload.password)
+      if (!res) throw new Error('Ошибка входа, нет ответа с сервера')
+      await router.push('/')
+    } catch (e) {
+      setMessage(e.message)
     }
   }
 
-  async function restorePassword(payload) {
+  const restorePassword = async (payload) => {  // ------------------------------------------------------------------------------------------------------------------------------------
     try {
       await sendPasswordResetEmail(auth, payload.email)
-      console.log('we send email')
+        .catch(e => {
+          throw new Error(e.message)
+        })
       await router.go(0)
+      setMessage('Мы отправили вам сообщение')
     } catch (e) {
-      console.log(e.message)
+      setMessage(e.message)
     }
   }
-
-  async function getUser() {
-    try {
-      await onAuthStateChanged(auth, (user) => {
-        if (user) {
-          currUser.value = user
-          onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
-            dbUser.value = snapshot.data()
-          })
-        }
-      })
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
-
-  async function appLogout() {
+  const appLogout = async () => {
     try {
       await signOut(auth)
       router.go(0)
@@ -92,14 +71,26 @@ export const useAuthStore = defineStore('authStore', () => {
     }
   }
 
+
+  // realtime actions for getting cerrent state of user
+  onAuthStateChanged(auth, (_user) => {
+    user.value = _user
+    if (_user) onSnapshot(doc(db, 'users', _user.uid), (snapshot) => {
+      dbUser.value = snapshot.data()
+    })
+  })
+  if (auth.currentUser) onSnapshot(doc(db, 'users', auth.currentUser.uid), (snapshot) => {
+    dbUser.value = snapshot.data()
+  })
+
   return {
-    uid, currUser, dbUser,
-    displayName, email,
+    uid,
+    dbUser,
+    email,
     isAuthed,
     appLogin,
     appSignup,
     appLogout,
-    getUser,
-    restorePassword
+    restorePassword,
   }
 })
