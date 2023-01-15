@@ -5,16 +5,19 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
+  updateEmail,
+  updatePassword,
+  deleteUser,
 } from 'firebase/auth'
 import {auth, db} from '@/firebase/firebase.config'
-import {doc, setDoc, onSnapshot} from 'firebase/firestore'
+import {doc, setDoc, updateDoc, onSnapshot, getDoc, deleteDoc} from 'firebase/firestore'
 import router from '@/router'
 import {useSnackbarMessages} from '@/stores/snackbarMessages'
 
 export const useAuthStore = defineStore('authStore', () => {
   const {setMessage} = useSnackbarMessages() // messages for errors to user
-  let user = ref(auth.currentUser)
-  let dbUser = ref({})
+  const user = ref(auth.currentUser)
+  const dbUser = ref({})
   const uid = computed(() => user.value.uid)
   const email = computed(() => user.value.email)
   const isAuthed = computed(() => user.value ? !!user.value : null)
@@ -49,7 +52,6 @@ export const useAuthStore = defineStore('authStore', () => {
       setMessage(e.message)
     }
   }
-
   const restorePassword = async (payload) => {  // ------------------------------------------------------------------------------------------------------------------------------------
     try {
       await sendPasswordResetEmail(auth, payload.email)
@@ -67,10 +69,72 @@ export const useAuthStore = defineStore('authStore', () => {
       await signOut(auth)
       router.go(0)
     } catch (e) {
-      console.log(e.message)
+      setMessage(e.message)
     }
   }
-
+  const appUpdateUserData = async (payload) => {
+    try {
+      await updateDoc(doc(db, 'users', user.value.uid), {
+        firstName: payload.firstName,
+        secondName: payload.secondName,
+        birthDate: payload.birthDate,
+        phoneNumber: payload.phoneNumber,
+      })
+      console.log(payload)
+    } catch (e) {
+      setMessage(e.message)
+    }
+  }
+  const appUpdateEmail = (email) => {
+    try {
+      updateEmail(auth.currentUser, email)
+        .then(() => {
+          updateDoc(doc(db, 'users', user.value.uid), {
+            email,
+          })
+        })
+        .catch(e => {
+          throw new Error(e.message)
+        })
+    } catch (e) {
+      setMessage(e.message)
+    }
+  }
+  const appUpdatePassword = (password) => {
+    try {
+      updatePassword(auth.currentUser, password)
+        .then(() => {
+          setMessage('Успешно обновлен')
+        })
+        .catch((e) => {
+          throw new Error(e.message)
+        })
+    } catch (e) {
+      setMessage(e.message)
+    }
+  }
+  const appDeleteAcc = async () => {
+    try {
+      const dbSnap = await getDoc(doc(db, 'users', auth.currentUser.uid))
+        .catch(() => {
+          throw new Error('Произошла ошибка, пожалуйста, напишите в поддержку')
+        })
+      await setDoc(doc(db, 'deletedUsers', auth.currentUser.uid), dbSnap.data())
+        .catch(() => {
+          throw new Error('Произошла ошибка, пожалуйста, напишите в поддержку')
+        })
+      await deleteDoc(doc(db, 'users', auth.currentUser.uid))
+        .catch(() => {
+          throw new Error('Произошла ошибка, пожалуйста, напишите в поддержку')
+        })
+      await deleteUser(auth.currentUser)
+        .catch(e => {
+          throw new Error('Произошла ошибка, пожалуйста, напишите в поддержку' + e.message)
+        })
+    } catch (e) {
+      setMessage(e.message)
+    }
+  }
 
   // realtime actions for getting cerrent state of user
   onAuthStateChanged(auth, (_user) => {
@@ -92,5 +156,9 @@ export const useAuthStore = defineStore('authStore', () => {
     appSignup,
     appLogout,
     restorePassword,
+    appUpdateUserData,
+    appUpdateEmail,
+    appUpdatePassword,
+    appDeleteAcc,
   }
 })

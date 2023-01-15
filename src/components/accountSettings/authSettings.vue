@@ -3,9 +3,9 @@
     Изменить email
   </v-card-title>
   <v-card-text>
-    <v-form ref="changeEmail" v-model="isEmailValid" lazy-validation>
+    <v-form ref="changeEmail" v-model="isEmailValid" lazy-validation validate-on="blur">
       <vTextField
-        v-model="emailValue"
+        v-model="email"
         :rules="emailRules"
         label="Введите новый email"
         variant="underlined"
@@ -18,7 +18,7 @@
   <v-card-actions>
     <vSpacer/>
     <v-btn
-      @click="updateEmail"
+      @click="appUpdateEmail(email)"
       :disabled="!isEmailValid"
     >Обновить email
     </v-btn>
@@ -44,7 +44,7 @@
   <v-card-actions>
     <vSpacer/>
     <v-btn
-      @click="updatePassword"
+      @click="appUpdatePassword(newPasswordValue)"
       :disabled="!isPasswordValid"
     >
       Обновить пароль
@@ -62,16 +62,20 @@
   </v-card-actions>
   <v-card-actions>
     <vSpacer/>
-    <v-btn :disabled="!deleteAccountCheckbox" color="error" @click="deleteAccount">Удалить аккаунт</v-btn>
+    <v-btn :disabled="!deleteAccountCheckbox" color="error" @click="appDeleteAcc">Удалить аккаунт</v-btn>
   </v-card-actions>
 </template>
 
 <script setup>
 import {ref} from 'vue'
+import {useAuthStore} from '@/stores/authStore'
+import {storeToRefs} from 'pinia'
+const authStore = useAuthStore()
+const {email} = storeToRefs(authStore)
+const {appUpdateEmail, appUpdatePassword, appDeleteAcc} = authStore
 
 const changeEmail = ref('')
 const isEmailValid = ref(true)
-const emailValue = ref('')
 const emailRules = [
   v => !!v || 'Поле Email обязательно',
   v => /.+@.+\..+/.test(v) || 'Введите пральный Email',
@@ -88,14 +92,4 @@ const passwordRules = [
 ]
 const showPassword = ref(false)
 const deleteAccountCheckbox = ref(false)
-
-const updateEmail = () => {
-  console.log(emailValue.value)
-}
-const updatePassword = () => {
-  console.log(newPasswordValue.value)
-}
-const deleteAccount = () => {
-
-}
 </script>

@@ -24,7 +24,6 @@ export default {
   setup() {
     const messagesStore = useSnackbarMessages()
     const {snackbarMessage} = storeToRefs(messagesStore)
-    console.log(snackbarMessage.value)
 
     const route = useRoute()
     return {

@@ -2,7 +2,7 @@
   <v-form ref="accountSettings" v-model="isValid" lazy-validation validate-on="blur">
     <v-card-text>
       <VTextField
-        v-model="firstNameValue"
+        v-model="dbUser.firstName"
         :rules="textFieldRules"
         type="text"
         label="Ваше имя"
@@ -11,7 +11,7 @@
         class="my-3"
       />
       <VTextField
-        v-model="secondNameValue"
+        v-model="dbUser.secondName"
         :rules="textFieldRules"
         type="text"
         label="Ваша фамилия"
@@ -23,12 +23,12 @@
         type="date"
         variant="underlined"
         label="Дата рождения"
-        v-model="birthDateValue"
+        v-model="dbUser.birthDate"
         :rules="[v => !!v || 'Это поле обязательно']"
         class="my-3"
       />
       <VTextField
-        v-model="phoneNumberValue"
+        v-model="dbUser.phoneNumber"
         :rules="[v => v && v.length === 10 || 'Это поле должно иметь 10 символов', v => !!+v || 'Должно быть число',]"
         prefix="+7"
         counter="10"
@@ -40,7 +40,11 @@
     <v-card-actions class="my-2">
       <VSpacer/>
       <v-btn
-        @click.prevent="saveData"
+        @click.prevent="appUpdateUserData({
+        firstName: dbUser.firstName,
+        secondName: dbUser.secondName,
+        birthDate: dbUser.birthDate,
+        phoneNumber: dbUser.phoneNumber})"
         type="submit"
         :disabled="!isValid"
       >Сохранить
@@ -51,7 +55,11 @@
 
 <script setup>
 import {ref} from 'vue'
-import store from '@/store'
+import {storeToRefs} from 'pinia'
+import {useAuthStore} from '@/stores/authStore'
+const authStore = useAuthStore()
+const {dbUser} = storeToRefs(authStore)
+const {appUpdateUserData} = authStore
 
 const textFieldRules = [
   v => !!v || 'Это поле обязательно',
@@ -59,18 +67,4 @@ const textFieldRules = [
 ]
 const accountSettings = ref()
 const isValid = ref(true)
-const appUser = store.state.auth
-const firstNameValue = ref(appUser.firstName)
-const secondNameValue = ref(appUser.secondName)
-const birthDateValue = ref(appUser.birthDate)
-const phoneNumberValue = ref(appUser.phoneNumber)
-const saveData = () => {
-  const toDB = {
-    firstName: firstNameValue.value,
-    secondName: secondNameValue.value,
-    birthDate: birthDateValue.value,
-    phoneNumber: phoneNumberValue.value,
-  }
-    console.log(toDB)
-}
 </script>
