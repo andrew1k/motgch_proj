@@ -4,11 +4,15 @@ import 'vuetify/styles'
 
 // Vuetify
 import { createVuetify,  } from 'vuetify'
+import {VDataTable} from 'vuetify/lib/labs/VDataTable'
 
 
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
+  components: {
+    VDataTable
+  },
   theme:  {
     defaultTheme: 'mbvLightTheme',
     themes: {
