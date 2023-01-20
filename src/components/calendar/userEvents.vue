@@ -1,4 +1,5 @@
 <template>
+  <v-card-text>user</v-card-text>
   <v-card
     v-for="event in allCalEvnts"
     :key="event.id"

@@ -1,4 +1,5 @@
 <template>
+  week
     <v-list  density="compact">
       <v-list-item
         v-for="evnt in wCalEvnts"

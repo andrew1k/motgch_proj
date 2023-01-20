@@ -19,8 +19,8 @@ export default createVuetify({
       mbvLightTheme: {
         dark: false,
         colors: {
-            background: '#fff',
-            surface: '#f6f6f6', //
+            background: '#f6f6f6',
+            surface: '#fff', //
             primary: '#7c7dc0', // primary color from logo
             secondary: '#ffcd7c', // secondary color from logo
             error: '#de4e53', //  worship color

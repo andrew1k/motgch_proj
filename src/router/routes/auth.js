@@ -2,7 +2,7 @@ export default [
   {
     path: '/settings',
     name: 'accountSettings',
-    component: () => import('@/views/appAuth/appAccountSettings'),
+    component: () => import('@/views/profilePage/appProfilePage.vue'),
     meta: {
       layout:  'settings',
       auth: true,

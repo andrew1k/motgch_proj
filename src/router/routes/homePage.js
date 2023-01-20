@@ -10,7 +10,7 @@ export default [
   },{
     path: '/sunday',
     name: 'sunday',
-    component: () => import('@/views/homePage/sundayPage'),
+    component: () => import('@/components/forHomePage/sundayPage.vue'),
     meta: {
       layout: 'main',
       auth: true,
@@ -18,7 +18,7 @@ export default [
   },{
     path: '/connection',
     name: 'connection',
-    component: () => import('@/views/homePage/connectionCard'),
+    component: () => import('@/components/forHomePage/connectionCard.vue'),
     meta: {
       layout: 'main',
       auth: true,
@@ -26,7 +26,7 @@ export default [
   },{
     path: '/myNotes',
     name: 'myNotes',
-    component: () => import('@/views/homePage/myNotes'),
+    component: () => import('@/components/forHomePage/myNotes.vue'),
     meta: {
       layout: 'main',
       auth: true,

@@ -1,14 +1,12 @@
 <template>
   <v-card max-width="1000" class="mx-auto" variant="text">
   <v-row>
-    <v-col cols="12" md="8" lg="6">
-      <v-responsive class="bg-green-accent-1" :aspect-ratio="16/9">
+    <v-col cols="12">
+      <v-responsive class="bg-red-accent-1 ma-1" :aspect-ratio="16/9">
         <v-card-text>
           Video
         </v-card-text>
       </v-responsive>
-    </v-col>
-    <v-col cols="12" md="4" lg="6">
       <v-card-text>
         <v-card-actions>
           Notes here:
