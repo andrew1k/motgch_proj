@@ -24,9 +24,9 @@
 <script setup>
 import {ref} from 'vue'
 import {useDisplay} from 'vuetify'
-import discoverSmallGroups from '@/components/discoverWindows/discoverSmallGroups'
-import discoverServings from '@/components/discoverWindows/discoverServings'
-import discoverMinistries from '@/components/discoverWindows/discoverMinistries'
+import discoverSmallGroups from '@/components/discover/discoverSmallGroups'
+import discoverServings from '@/components/discover/discoverServings'
+import discoverMinistries from '@/components/discover/discoverMinistries'
 
 const {smAndDown} = useDisplay()
 

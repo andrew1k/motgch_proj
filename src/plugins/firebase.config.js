@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import {getAuth} from 'firebase/auth'
 import {getFirestore} from 'firebase/firestore'
+import {getStorage} from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
@@ -20,7 +21,10 @@ auth.languageCode = 'ru'
 
 const db = getFirestore()
 
+const storage = getStorage()
+
 export {
   auth,
-  db
+  db,
+  storage
 }

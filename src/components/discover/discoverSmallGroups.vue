@@ -22,8 +22,8 @@
 
 <script setup>
 import {ref} from 'vue'
-import listOfLeaders from '@/components/discoverWindows/discoverSmallGroupsComponents/listOfLeaders'
-import mapOfLeaders from '@/components/discoverWindows/discoverSmallGroupsComponents/mapOfLeaders'
+import listOfLeaders from '@/components/discover/discoverSmallGroupsComponents/listOfLeaders'
+import mapOfLeaders from '@/components/discover/discoverSmallGroupsComponents/mapOfLeaders'
 
 const listOrMap = ref('list')
 const sgTabs = ref([

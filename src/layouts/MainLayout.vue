@@ -1,6 +1,7 @@
 <template>
-  <TheAppBar/>
-  <TheBottomNavigation />
+  <TheAppBar />
+  <TheNavDrawer />
+  <TheBottomNavigation v-if="mdAndDown"/>
   <v-main>
       <routerView/>
   </v-main>
@@ -9,8 +10,8 @@
 <script setup>
 import TheAppBar from '@/components/navigations/TheAppBar'
 import TheBottomNavigation from '@/components/navigations/TheBottomNavigation'
-// import {useDisplay} from 'vuetify'
-//
-// const {smAndDown} = useDisplay()
+import TheNavDrawer from '@/components/navigations/TheNavDrawer.vue'
+import {useDisplay} from 'vuetify'
 
+const {mdAndDown} = useDisplay()
 </script>

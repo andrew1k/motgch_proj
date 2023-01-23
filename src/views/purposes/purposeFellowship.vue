@@ -1,7 +1,5 @@
 <template>
-  <v-main>
-      <router-view/>
-  </v-main>
+  <div>fellowship.vue</div>
 </template>
 
 <script setup>

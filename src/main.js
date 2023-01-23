@@ -6,7 +6,7 @@ import {SetupCalendar} from 'v-calendar'
 import 'v-calendar/dist/style.css'
 import vuetify from './plugins/vuetify'
 import {loadFonts} from './plugins/webfontloader'
-import {auth } from '@/firebase/firebase.config'
+import {auth } from '@/plugins/firebase.config'
 import {onAuthStateChanged} from 'firebase/auth'
 
 loadFonts()

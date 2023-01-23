@@ -16,14 +16,16 @@ import {computed} from 'vue'
 import {useRoute} from 'vue-router'
 import MainLayout from '@/layouts/MainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
-import SettingsLayout from '@/layouts/SettingsLayout'
-import {useSnackbarMessages} from '@/stores/snackbarMessages'
+import ProfileLayout from '@/layouts/ProfileLayout.vue'
+import CardLayout from '@/layouts/CardLayout.vue'
+import {useSnackbarMessages} from '@/stores/appState'
 import {storeToRefs} from 'pinia'
 
 export default {
   setup() {
     const messagesStore = useSnackbarMessages()
     const {snackbarMessage} = storeToRefs(messagesStore)
+
 
     const route = useRoute()
     return {
@@ -34,7 +36,8 @@ export default {
   components: {
     MainLayout,
     AuthLayout,
-    SettingsLayout,
+    ProfileLayout,
+    CardLayout,
   },
 }
 </script>

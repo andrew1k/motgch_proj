@@ -1,13 +1,5 @@
 export default [
-  {
-    path: '/settings',
-    name: 'accountSettings',
-    component: () => import('@/views/profilePage/appProfilePage.vue'),
-    meta: {
-      layout:  'settings',
-      auth: true,
-    }
-  },{
+ {
     path: '/auth',
     name: 'appAuth',
     component: () => import('@/views/appAuth/appAuth'),
@@ -17,7 +9,7 @@ export default [
     }
   },{
     path: '/restorePassword',
-    name: 'RestorePassword',
+    name: 'restorePassword',
     component: () => import('@/views/appAuth/RestorePassword'),
     meta: {
       layout:  'auth',

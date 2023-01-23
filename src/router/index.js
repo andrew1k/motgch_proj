@@ -1,11 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import homePage from '@/views/home/homePage'
 import auth from '@/router/routes/auth'
-import homePageRoutes from '@/router/routes/homePage'
-import discoverPage from '@/router/routes/discoverPage'
-import homePage from '@/views/homePage/homePage'
+import navDrawer from '@/router/routes/navDrawer'
 import { useAuthStore } from '@/stores/authStore'
 import {storeToRefs} from 'pinia'
-
 
 
 const routes = [
@@ -14,21 +12,47 @@ const routes = [
     name: 'home',
     component: homePage,
     meta: {
+      title: 'Главная',
       layout: 'main',
       auth: true
     }
-  }, {
+  },{
     path: '/privacyPolicy',
     name: 'privacyPolicy',
     component: () => import('@/views/policies/privacyPolicy'),
     meta: {
-      layout: 'main', // Debug needed
+      title: 'Приваси полиси',
+      layout: 'card', // Debug needed
+      auth: true,
+    }
+  },{
+    path: '/profile',
+    name: 'profile',
+    component: () => import('@/views/profile/appProfilePage.vue'),
+    meta: {
+      title: 'Аккаунт',
+      layout:  'profile',
+      auth: true,
+    }
+  },{
+    path: '/connection',
+    name: 'connection',
+    component: () => import('@/views/home/connectionCard.vue'),
+    meta: {
+      layout: 'card',
+      auth: true,
+    }
+  },{
+    path: '/giving',
+    name: 'giving',
+    component: () => import('@/views/home/givingCard'),
+    meta: {
+      layout: 'card',
       auth: true,
     }
   },
+  ...navDrawer,
   ...auth,
-  ...homePageRoutes,
-  ...discoverPage,
   // catchall 404
   {
     path: '/:catchAll(.*)',

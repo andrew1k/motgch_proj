@@ -32,3 +32,12 @@ export const useSnackbarMessages = defineStore('snackbarMessages', () => {
     setMessage,
   }
 })
+
+export const useAppState = defineStore('appState', () => {
+  const drawer = ref(null)
+  const theme = ref('light')
+  return {
+    drawer,
+    theme
+  }
+})

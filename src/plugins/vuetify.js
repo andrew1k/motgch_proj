@@ -24,16 +24,16 @@ export default createVuetify({
             primary: '#7c7dc0', // primary color from logo
             secondary: '#ffcd7c', // secondary color from logo
             error: '#de4e53', //  worship color
-            info: '#74b4ef', // gospel color
-            success: '#5fc08e', // learning color
-            warning: '#daa274', // communication color
+            info: '#74b4ef', // evangelism color
+            success: '#5fc08e', // discipleship color
+            warning: '#daa274', // fellowship color
         },
       },
       mbvDarkTheme: {
         dark: true,
         colors: {
-          background: '#16161d',
-          surface: '#999',
+          background: '#999',
+          surface: '#16161d',
           primary: '#0023d2', // primary color from logo
           secondary: '#ffa10d', // secondary color from logo
           error: '#ee1f26', //  worship color

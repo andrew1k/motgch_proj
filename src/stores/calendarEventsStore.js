@@ -1,15 +1,13 @@
 import {defineStore} from 'pinia'
-import {computed, ref} from 'vue'
-import {collection, onSnapshot} from 'firebase/firestore'
-import {db} from '@/firebase/firebase.config'
+import {ref} from 'vue'
+import {collection, onSnapshot, doc, updateDoc} from 'firebase/firestore'
+import {db} from '@/plugins/firebase.config'
 
 export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
   const allCalendarEvents = ref([])
   const weekCalendarEvents = ref([])
-  const allCalEvnts = (computed(() => allCalendarEvents.value))
-  const wCalEvnts = (computed(() => weekCalendarEvents.value))
 
-async function getCalendarEvents() {
+  async function getCalendarEvents() {
     const colRef = await collection(db, 'calendar')
 
     await onSnapshot(colRef, snapshot => {
@@ -52,12 +50,29 @@ async function getCalendarEvents() {
     })
   }
 
+  async function saveEventToDB(payload) {
+    const id = Date.now()
+    const eventToDB = {}
+    eventToDB[id] = {
+      title: payload.eventTitle,
+      text: payload.eventText,
+      color: payload.eventColor,
+      start: `${payload.eventDate}T${payload.eventTime}`,
+      id: id
+    }
+    await updateDoc(doc(db, 'calendar', payload.eventDate), eventToDB)
+      .then(() => {
+        alert('message saved successfully')
+      })
+
+  }
+
+
 
   return {
     allCalendarEvents,
     weekCalendarEvents,
     getCalendarEvents,
-    allCalEvnts,
-    wCalEvnts
+    saveEventToDB,
   }
 })

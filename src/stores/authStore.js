@@ -9,10 +9,10 @@ import {
   updatePassword,
   deleteUser,
 } from 'firebase/auth'
-import {auth, db} from '@/firebase/firebase.config'
+import {auth, db} from '@/plugins/firebase.config'
 import {doc, setDoc, updateDoc, onSnapshot, getDoc, deleteDoc} from 'firebase/firestore'
 import router from '@/router'
-import {useSnackbarMessages} from '@/stores/snackbarMessages'
+import {useSnackbarMessages} from '@/stores/appState'
 
 export const useAuthStore = defineStore('authStore', () => {
   const {setMessage} = useSnackbarMessages() // messages for errors to user

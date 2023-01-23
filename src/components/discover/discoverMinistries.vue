@@ -12,5 +12,5 @@
 </template>
 
 <script setup>
-import ListOfMinistries from '@/components/discoverWindows/discoverMinistriesComponents/listOfMinistries.vue'
+import ListOfMinistries from '@/components/discover/discoverMinistriesComponents/listOfMinistries.vue'
 </script>

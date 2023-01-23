@@ -81,18 +81,18 @@
 <!--</script>-->
 
 <template>
-  <v-card max-width="1000" class="mx-auto pa-1" variant="text">
-    <v-card-title>Some welcome text</v-card-title>
-  </v-card>
-  <v-card max-width="1000" class="mx-auto my-1">
-    <SundayPage />
-  </v-card>
-  <v-card max-width="1000" class="mx-auto my-1">
+  <v-card max-width="1000" class="mx-auto my-2" variant="text" rounded="1">
+    <SundayCard />
+    <WeekEvents />
+    <PurposesCard />
     <ConnectionCard />
   </v-card>
+
 </template>
 
 <script setup>
-import SundayPage from '@/components/forHomePage/sundayPage.vue'
-import ConnectionCard from '@/components/forHomePage/connectionCard.vue'
+import SundayCard from '@/components/home/sundayCard.vue'
+import WeekEvents from '@/components/calendar/weekEvents.vue'
+import PurposesCard from '@/components/home/purposesCard.vue'
+import ConnectionCard from '@/components/home/connectionCard.vue'
 </script>
