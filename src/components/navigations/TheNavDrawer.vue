@@ -2,30 +2,28 @@
   <v-navigation-drawer
     v-model="drawer"
   >
-    <v-list density="comfortable" nav v-model:opened="open">
-      <VListItem
+    <v-list density="comfortable" nav>
+      <v-list-item
         v-for="(listItem, i) in navList"
         :key="i"
-        :prepend-icon="listItem.icon"
         :title="listItem.title"
         :to="listItem.routeTo"
-      />
-      <v-list-group value="purposes">
-        <template v-slot:activator="{ props }">
-          <v-list-item
-            v-bind="props"
-            prepend-icon="mdi-account-circle"
-            title="Цели"
-          ></v-list-item>
+      >
+        <template v-slot:prepend>
+          <v-icon :icon="listItem.icon" :color="listItem.color" />
         </template>
-        <VListItem
+      </v-list-item>
+      <VDivider />
+        <v-list-item
           v-for="(purposeItem, i) in purposeNavList"
           :key="i"
-          :append-icon="purposeItem.icon"
           :title="purposeItem.title"
           :to="purposeItem.routeTo"
-        />
-      </v-list-group>
+        >
+          <template v-slot:prepend>
+            <v-icon :icon="purposeItem.icon" :color="purposeItem.color" />
+          </template>
+        </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -38,24 +36,26 @@ import {ref} from 'vue'
 const appState = useAppState()
 const {drawer} = storeToRefs(appState)
 
-const open = ref(['purposes'])
-
 const navList = ref([
   {
     icon: 'mdi-home',
+    color: 'black',
     title: 'Главная',
     routeTo: '/',
   }, {
     icon: 'mdi-calendar',
+    color:  'pink',
     title: 'Календарь',
     routeTo: '/calendar',
   }, {
     icon: 'mdi-compass',
+    color: 'indigo',
     title: 'Открой для себя церковь',
     routeTo: '/discover',
   }, {
     icon: 'mdi-clock',
-    title: 'Этим воскресеньем',
+    color: 'cyan',
+    title: 'В это воскресенье',
     routeTo: '/sunday',
   },
 ])
@@ -63,27 +63,33 @@ const navList = ref([
 const purposeNavList = ref([
   {
     icon: 'mdi-heart',
+    color: 'red',
     title: 'Поклонение',
     routeTo: '/purposes/worship'
   },{
     icon: 'mdi-account-multiple',
+    color: 'orange',
     title: 'Общение',
     routeTo: '/purposes/fellowship'
   },{
     icon: 'mdi-school',
+    color: 'green',
     title: 'Ученичество',
     routeTo: '/purposes/discepleship'
   },{
     icon: 'mdi-hand-heart',
+    color: 'brown',
     title: 'Служение',
     routeTo: '/purposes/ministry'
   },{
     icon: 'mdi-earth',
+    color: 'blue',
     title: 'Благовестие',
     routeTo: '/purposes/evangelism'
   },{
     icon: 'mdi-run',
-    title: 'Youth',
+    color: 'purple',
+    title: 'МБВ.Youth',
     routeTo: '/purposes/youth'
   },
 ])

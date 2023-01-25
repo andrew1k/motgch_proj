@@ -1,11 +1,12 @@
 import {defineStore} from 'pinia'
 import {ref} from 'vue'
-import {collection, onSnapshot, doc, updateDoc} from 'firebase/firestore'
+import {collection, onSnapshot, doc, updateDoc, setDoc} from 'firebase/firestore'
 import {db} from '@/plugins/firebase.config'
 
 export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
   const allCalendarEvents = ref([])
   const weekCalendarEvents = ref([])
+  const docIds = ref([])
 
   async function getCalendarEvents() {
     const colRef = await collection(db, 'calendar')
@@ -17,6 +18,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       // get data from collection
       snapshot.docs.forEach(doc => {
         // doc.data() method to get data from docs
+        docIds.value.push(doc.id)
         let docData = doc.data()
         let dayEvents = Object.values(docData)
         // make it one array of all events
@@ -60,14 +62,18 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       start: `${payload.eventDate}T${payload.eventTime}`,
       id: id
     }
-    await updateDoc(doc(db, 'calendar', payload.eventDate), eventToDB)
-      .then(() => {
-        alert('message saved successfully')
-      })
-
+    if (docIds.value.includes(payload.eventDate)) {
+      await updateDoc(doc(db, 'calendar', payload.eventDate), eventToDB)
+        .then(() => {
+          alert('event updated successfully')
+        })
+    } else {
+      await setDoc(doc(db, 'calendar', payload.eventDate), eventToDB)
+        .then(() => {
+          alert('event saved successfully')
+        })
+    }
   }
-
-
 
   return {
     allCalendarEvents,

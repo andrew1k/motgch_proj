@@ -1,9 +1,10 @@
 <template>
-  <v-card max-width="800" class="mx-auto" variant="text">
+  <v-card-title class="text-center" v-text="`Календарь`" />
+  <v-card max-width="800" class="mx-auto ma-2" elevation="3">
     <CalendarComponent />
   </v-card>
   <v-card max-width="800" class="mx-auto py-2" variant="text">
-    <v-tabs v-model="tab" >
+    <v-tabs v-model="tab" align-tabs="center">
       <v-tab value="weekEvents">Week</v-tab>
       <v-tab value="userEvents">User</v-tab>
       <v-tab value="allEvents">All</v-tab>

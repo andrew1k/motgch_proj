@@ -2,7 +2,7 @@
   <v-toolbar density="comfortable" elevation="0" :color="toolbarColor">
     <v-btn prepend-icon="mdi-chevron-left"  @click="$router.back()">{{ toolbarTitle }}</v-btn>
     <VSpacer />
-    <slot name="rightSpace"></slot>
+    <slot name="rightSpace" />
   </v-toolbar>
 </template>
 
@@ -16,7 +16,6 @@ defineProps({
   },
   toolbarColor: {
     type: String,
-    default: 'white'
   }
 })
 </script>

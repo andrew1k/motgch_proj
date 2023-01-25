@@ -1,35 +1,31 @@
 <template>
-  <v-card max-width="1000" class="mx-auto" variant="text">
-  <v-row>
-    <v-col cols="12">
-      <v-responsive class="bg-red-accent-1 ma-1" :aspect-ratio="16/9">
-        <v-card-text>
-          Video
-        </v-card-text>
-      </v-responsive>
-      <v-card-text>
-        <v-card-actions>
-          Notes here:
-          <vSpacer />
-          <v-btn @click="saveNotes" @keydown.enter="saveNotes">Сохранить себе</v-btn>
-        </v-card-actions>
-      </v-card-text>
-      <v-textarea
-        outlined
-        auto-grow
-        density="comfortable"
-        v-model="sundayText"
-        variant="outlined"
-      >
-
-      </v-textarea>
-    </v-col>
-  </v-row>
+  <TheCardToolbar toolbar-title="В это воскресенье"/>
+  <v-card-title class="text-center" v-text="`В это воскресенье`"/>
+  <v-card max-width="1000" class="mx-auto ma-1" elevation="3">
+    <v-img src="https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2FsundayCard.png?alt=media&token=ed68b420-fb14-4946-b6da-84b628399244"/>
   </v-card>
+  <v-card max-width="1000" class="mx-auto" variant="text">
+  <v-card-text class="text-center">Конспект проповеди, который вы можете изменять и сохранять себе:</v-card-text>
+
+    <v-textarea
+      outlined
+      auto-grow
+      density="comfortable"
+      v-model="sundayText"
+      variant="solo"
+      class="ma-1"
+    />
+    <v-card-actions class="mb-6">
+      <vSpacer/>
+      <v-btn @click="saveNotes" @keydown.enter="saveNotes" v-text="`Сохранить себе`"/>
+    </v-card-actions>
+  </v-card>
+
 </template>
 
 <script setup>
 import {ref} from 'vue'
+import TheCardToolbar from '@/components/navigations/TheCardToolbar.vue'
 
 const sundayText = ref(`Lorem ipsum dolor sit amet,
 consectetur adipisicing elit. Accusantium, assumenda at

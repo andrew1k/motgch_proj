@@ -1,12 +1,11 @@
 <template>
   <v-card
     class="ma-2"
-    elevation="5"
+    elevation="3"
     @click="show = !show"
-    variant="outlined"
-    :color="eventColor"
   >
     <v-card-actions>
+      <VIcon icon="mdi-circle" :color="eventColor" />
       <v-card-title class="text-black">{{eventTitle}}</v-card-title>
     <v-spacer></v-spacer>
     <VBtn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
@@ -16,10 +15,11 @@
     <v-card
       v-show="show"
       variant="text"
-      class="ma-2 mx-auto"
+      class="mx-auto"
       max-width="500"
     >
-      <v-card-actions>
+      <v-card-actions class="mx-2">
+        <VIcon icon="mdi-circle" :color="eventColor" />
         <VCardItem :title="eventTitle" :subtitle="eventTime" />
         <VSpacer />
         <v-btn variant="outlined" @click="$emit('signToEvent')">Записаться</v-btn>

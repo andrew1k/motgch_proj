@@ -1,7 +1,7 @@
 <template>
   <v-card-title class="text-center">Purposes</v-card-title>
   <v-card
-    elevation="5"
+    elevation="3"
     class="ma-2"
     v-for="(card, i) in purposesCards"
     :key="i"
@@ -16,11 +16,11 @@
 <script setup>
 const purposesCards = [
   {
-    title: 'УЧЕНИЧЕСТВО',
-    img: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2Fpurposes%2Fdiscepleship.png?alt=media&token=318454a8-4e6e-4018-b18e-cff794280db5',
-    text: 'И они постоянно пребывали в учении Апостолов. Деяния 2:42',
-    routerTo: '/purposes/discepleship',
-    color: 'success'
+    title: 'ПОКЛОНЕНИЕ',
+    img: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2Fpurposes%2Fworship.png?alt=media&token=88855cad-98bd-4add-adee-489d318c4231',
+    text: 'Возлюби Господа Бога твоего всем сердцем твоим. Матфея 22:37',
+    routerTo: '/purposes/worship',
+    color: 'error'
   },{
     title: 'ОБЩЕНИЕ',
     img: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2Fpurposes%2Ffellowship.png?alt=media&token=063bb60f-3dbf-4202-9ee0-21872d2442df',
@@ -28,11 +28,11 @@ const purposesCards = [
     routerTo: '/purposes/fellowship',
     color: 'warning'
   },{
-    title: 'ПОКЛОНЕНИЕ',
-    img: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2Fpurposes%2Fworship.png?alt=media&token=88855cad-98bd-4add-adee-489d318c4231',
-    text: 'Возлюби Господа Бога твоего всем сердцем твоим. Матфея 22:37',
-    routerTo: '/purposes/worship',
-    color: 'error'
+    title: 'УЧЕНИЧЕСТВО',
+    img: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2Fpurposes%2Fdiscepleship.png?alt=media&token=318454a8-4e6e-4018-b18e-cff794280db5',
+    text: 'И они постоянно пребывали в учении Апостолов. Деяния 2:42',
+    routerTo: '/purposes/discepleship',
+    color: 'success'
   },{
     title: 'СЛУЖЕНИЕ',
     img: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2Fpurposes%2Fministry.png?alt=media&token=5ad78d21-f2cb-4dc5-af96-79ff4bee8021',
