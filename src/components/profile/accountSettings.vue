@@ -6,8 +6,7 @@
         :rules="textFieldRules"
         type="text"
         label="Ваше имя"
-        density="comfortable"
-        variant="underlined"
+        variant="outlined"
         class="my-3"
       />
       <VTextField
@@ -15,13 +14,12 @@
         :rules="textFieldRules"
         type="text"
         label="Ваша фамилия"
-        density="comfortable"
-        variant="underlined"
+        variant="outlined"
         class="my-3"
       />
       <VTextField
         type="date"
-        variant="underlined"
+        variant="outlined"
         label="Дата рождения"
         v-model="dbUser.birthDate"
         :rules="[v => !!v || 'Это поле обязательно']"
@@ -32,7 +30,7 @@
         :rules="[v => v && v.length === 10 || 'Это поле должно иметь 10 символов', v => !!+v || 'Должно быть число',]"
         prefix="+7"
         counter="10"
-        variant="underlined"
+        variant="outlined"
         type="text"
         label="Ваш номер телефона"
       />

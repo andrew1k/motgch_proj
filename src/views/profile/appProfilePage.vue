@@ -1,22 +1,20 @@
 <template>
   <v-card max-width="800" class="mx-auto" variant="text">
-    <v-row>
-      <v-col cols="3">
-        <VAvatar icon="mdi-account" color="orange" size="90" class="my-1 mx-3" @click="changeAvatar"/>
-      </v-col>
-      <v-col cols="9">
-        <v-card-title class="mt-2" @click="accSettingsToggler = !accSettingsToggler">
-          {{ dbUser.firstName + ' ' + dbUser.secondName }}
-          <VIcon icon="mdi-pencil" size="x-small"/>
-        </v-card-title>
-        <v-card-subtitle>
-          {{ dbUser.birthDate }}
-        </v-card-subtitle>
-        <v-card-subtitle>
-          {{ '+7' + dbUser.phoneNumber }}
-        </v-card-subtitle>
-      </v-col>
-    </v-row>
+    <v-card-actions>
+        <VAvatar icon="mdi-account" color="black" size="90" class="my-1 mx-2" @click="changeAvatar" variant="outlined"/>
+        <v-card-item>
+          <v-card-title class="mt-2" @click="accSettingsToggler = !accSettingsToggler">
+            {{ dbUser.firstName + ' ' + dbUser.secondName }}
+            <VIcon icon="mdi-pencil" size="x-small"/>
+          </v-card-title>
+          <v-card-subtitle>
+            {{ dbUser.birthDate }}
+          </v-card-subtitle>
+          <v-card-subtitle>
+            {{ '+7' + dbUser.phoneNumber }}
+          </v-card-subtitle>
+        </v-card-item>
+    </v-card-actions>
     <v-slide-y-transition>
       <AccountSettings v-if="accSettingsToggler"/>
     </v-slide-y-transition>
@@ -27,7 +25,8 @@
     </v-tabs>
     <v-window v-model="tab">
       <v-window-item value="events">
-        <UserEvents />
+<!--        <UserEvents />-->
+        <WeekEvents />
       </v-window-item>
       <v-window-item value="saves">
         <UserSaves />
@@ -45,8 +44,9 @@ import {storeToRefs} from 'pinia'
 import AccountSettings from '@/components/profile/accountSettings.vue'
 import AuthSettings from '@/components/profile/authSettings.vue'
 import {ref} from 'vue'
-import UserEvents from '@/components/calendar/userEvents.vue'
+// import UserEvents from '@/components/calendar/userEvents.vue'
 import UserSaves from '@/components/profile/userSaves.vue'
+import WeekEvents from '@/components/calendar/weekEvents.vue'
 
 const authStore = useAuthStore()
 const { dbUser } = storeToRefs(authStore)

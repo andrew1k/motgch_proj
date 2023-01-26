@@ -1,6 +1,6 @@
 <template>
   <v-card-title class="text-center">Purposes</v-card-title>
-  <v-card
+  <VCard
     elevation="3"
     class="ma-2"
     v-for="(card, i) in purposesCards"
@@ -9,8 +9,7 @@
     @click="$router.push(card.routerTo)"
     :prepend-avatar="card.img"
     :text="card.text"
-  >
-  </v-card>
+  />
 </template>
 
 <script setup>

@@ -8,7 +8,7 @@
         v-model="email"
         :rules="emailRules"
         label="Введите новый email"
-        variant="underlined"
+        variant="outlined"
         type="email"
         required
         class="my-3"
@@ -33,7 +33,7 @@
         v-model="newPasswordValue"
         :rules="passwordRules"
         label="Новый пароль"
-        variant="underlined"
+        variant="outlined"
         :append-inner-icon="showPassword ?'mdi-eye-off' : 'mdi-eye'"
         :type="showPassword ? 'text' : 'password'"
         @click:append-inner="showPassword = !showPassword"

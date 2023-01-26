@@ -25,6 +25,21 @@
           </template>
         </v-list-item>
     </v-list>
+    <template v-slot:append>
+      <v-card-actions>
+        <VSpacer />
+        <v-btn variant="tonal"  color="gray" prepend-icon="mdi-gift" class="px-4">Пожертвовать</v-btn>
+        <VSpacer/>
+      </v-card-actions>
+      <VDivider />
+      <v-card-actions>
+        <VSpacer/>
+        <v-btn icon="mdi-instagram" color="purple"></v-btn>
+        <v-btn icon="mdi-youtube" color="red"></v-btn>
+        <v-btn icon="mdi-telegram" color="blue"></v-btn>
+        <VSpacer/>
+      </v-card-actions>
+    </template>
   </v-navigation-drawer>
 </template>
 
