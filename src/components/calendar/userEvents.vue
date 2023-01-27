@@ -1,28 +1,23 @@
 <template>
-  <v-card-text>user</v-card-text>
-  <v-card
-    v-for="event in allCalEvnts"
-    :key="event.id"
-    variant="outlined"
-    :title="event.title"
-    :subtitle="event.start.slice(0, 10)"
-    :text="event.text"
-  >
-    <v-card-actions>
-      <VSpacer />
-      <v-btn @click="signToEvent(event)">Октрыть</v-btn>
-    </v-card-actions>
-  </v-card>
+  <v-card-title v-if="userCalendarEvents.length" class="text-center">События на которые вы записаны</v-card-title>
+  <v-card-title v-if="!userCalendarEvents.length" class="text-center">Нет событий, на которые вы записаны</v-card-title>
+  <CalendarEventCard
+    v-for="evnt in userCalendarEvents"
+    :key="evnt.id"
+    :event-title="evnt.title"
+    :event-text="evnt.text"
+    :event-time="evnt.start"
+    :event-color="evnt.color"
+    :event-id="evnt.id"
+  />
 </template>
 
 <script setup>
-import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
-
-const {allCalEvnts} = useCalendarEventsStore()
-
-
-const signToEvent = (event) => {
-  console.log(event.id)
-}
-
+import {useCalendarEventsStore} from '@/stores/calendarStore'
+import {storeToRefs} from 'pinia'
+import CalendarEventCard from '@/components/calendar/calendarEventCard.vue'
+const calendarEventsStore = useCalendarEventsStore()
+const { userCalendarEvents } = storeToRefs(calendarEventsStore)
+const { getUserEvents } = calendarEventsStore
+getUserEvents()
 </script>

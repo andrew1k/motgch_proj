@@ -1,11 +1,18 @@
-import {defineStore} from 'pinia'
+import {defineStore, storeToRefs} from 'pinia'
 import {ref} from 'vue'
-import {collection, onSnapshot, doc, updateDoc, setDoc} from 'firebase/firestore'
+import {collection, onSnapshot, doc, updateDoc, setDoc, arrayUnion} from 'firebase/firestore'
 import {db} from '@/plugins/firebase.config'
+import {useAuthStore} from '@/stores/authStore'
+import {auth} from '@/plugins/firebase.config'
 
 export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
+
+  const authStore = useAuthStore()
+  const {signedEvents, signedEventsIds} = storeToRefs(authStore)
+
   const allCalendarEvents = ref([])
   const weekCalendarEvents = ref([])
+  const userCalendarEvents = ref([])
   const docIds = ref([])
 
   async function getCalendarEvents() {
@@ -17,10 +24,14 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       let filteredEvents = []
       // get data from collection
       snapshot.docs.forEach(doc => {
-        // doc.data() method to get data from docs
+
+        // get doc ID to docIds Array
         docIds.value.push(doc.id)
+
+        // doc.data() method to get data from docs
         let docData = doc.data()
         let dayEvents = Object.values(docData)
+
         // make it one array of all events
         events.push(...dayEvents)
 
@@ -60,8 +71,10 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       text: payload.eventText,
       color: payload.eventColor,
       start: `${payload.eventDate}T${payload.eventTime}`,
-      id: id
+      id: id,
     }
+
+    // проверка на существование в бд записи на этот день, тогда обнавляет док
     if (docIds.value.includes(payload.eventDate)) {
       await updateDoc(doc(db, 'calendar', payload.eventDate), eventToDB)
         .then(() => {
@@ -75,10 +88,46 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     }
   }
 
+  async function signToEvent(evnt) {
+    const eventDay = evnt.start.slice(0, 10)
+    const docRef = doc(db, 'calendar', eventDay)
+    const eventId = evnt.id
+    const userLink = `users/${auth.currentUser.uid}`
+
+    // Проверка на существование записи
+
+    if (!signedEventsIds.value.includes(eventId)) {
+      await updateDoc(docRef, {
+        [eventId + '.signedAccounts']: arrayUnion({id: auth.currentUser.uid, userLink: userLink}),
+      })
+      await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+        signedEvents: arrayUnion({eventDay, eventId}),
+      })
+    }
+  }
+
+  async function getUserEvents() {
+    // Для проверки на существование
+    const evntIds = []
+    userCalendarEvents.value.forEach(evt => {
+      evntIds.push(evt.id)
+    })
+
+    signedEvents.value.forEach(evnt => {
+      onSnapshot(doc(db, 'calendar', evnt.eventDay), (doc) => {
+        const docData = doc.data()
+        if (!evntIds.includes(evnt.eventId)) userCalendarEvents.value.push(docData[evnt.eventId])
+      })
+    })
+  }
+
   return {
     allCalendarEvents,
     weekCalendarEvents,
+    userCalendarEvents,
     getCalendarEvents,
     saveEventToDB,
+    signToEvent,
+    getUserEvents,
   }
 })

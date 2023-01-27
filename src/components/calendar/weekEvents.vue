@@ -1,8 +1,6 @@
 <template>
-  <v-card-title class="text-center">События на этой неделе</v-card-title>
-  <v-card class="ma-2" v-if="weekCalendarEvents.length === 0" elevation="5">
-    <v-card-title class="text-center">На этой неделе нет событий</v-card-title>
-  </v-card>
+  <v-card-title v-if="weekCalendarEvents.length" class="text-center">События на этой неделе</v-card-title>
+  <v-card-title v-if="!weekCalendarEvents.length" class="text-center">На этой неделе нет событий</v-card-title>
   <CalendarEventCard
     v-for="evnt in weekCalendarEvents"
     :key="evnt.id"
@@ -10,36 +8,23 @@
     :event-text="evnt.text"
     :event-time="evnt.start"
     :event-color="evnt.color"
-    @sign-to-event="signToEvent(evnt)"
+    :event-id="evnt.id"
+    @sign-btn="signToEvent(evnt)"
   />
 </template>
 
 <script setup>
-import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
 import {onBeforeMount} from 'vue'
 import CalendarEventCard from '@/components/calendar/calendarEventCard.vue'
 const calendarEventsStore = useCalendarEventsStore()
-const {getCalendarEvents} = calendarEventsStore
+const {getCalendarEvents, signToEvent, } = calendarEventsStore
 onBeforeMount(() => {
   getCalendarEvents()
 })
 
 const {weekCalendarEvents} = storeToRefs(calendarEventsStore)
 
-// eslint-disable-next-line no-unused-vars
-const signToEvent = (evnt) => {
-  console.log(evnt.id)
-}
+
 </script>
-
-
-
-
-
-
-
-
-
-<!--    :title="evnt.title"-->
-<!--    :subtitle="`${evnt.start.slice(0, 10)} В ${evnt.start.slice(11)}`"-->

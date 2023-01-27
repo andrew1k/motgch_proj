@@ -25,8 +25,7 @@
     </v-tabs>
     <v-window v-model="tab">
       <v-window-item value="events">
-<!--        <UserEvents />-->
-        <WeekEvents />
+        <UserEvents />
       </v-window-item>
       <v-window-item value="saves">
         <UserSaves />
@@ -44,9 +43,8 @@ import {storeToRefs} from 'pinia'
 import AccountSettings from '@/components/profile/accountSettings.vue'
 import AuthSettings from '@/components/profile/authSettings.vue'
 import {ref} from 'vue'
-// import UserEvents from '@/components/calendar/userEvents.vue'
+import UserEvents from '@/components/calendar/userEvents.vue'
 import UserSaves from '@/components/profile/userSaves.vue'
-import WeekEvents from '@/components/calendar/weekEvents.vue'
 
 const authStore = useAuthStore()
 const { dbUser } = storeToRefs(authStore)

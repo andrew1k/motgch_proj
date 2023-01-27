@@ -50,7 +50,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+import {useCalendarEventsStore} from '@/stores/calendarStore'
 
 const {saveEventToDB} = useCalendarEventsStore()
 

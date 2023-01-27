@@ -1,33 +1,34 @@
-
 <template>
-
-  <v-text-field v-model="searchText" label="search"/>
+  <VTextField
+    prepend-inner-icon="mdi-magnify"
+    v-model="searchText"
+    label="Поиск по ведущему, метро, возрасту"
+    variant="outlined"
+    class="ma-2"
+  />
   <VDataTable
     fixed-header
     :headers="tableHeader"
-    :items="data"
+    :items="sgLeadersData"
     :search="searchText"
     items-per-page="25"
     must-sort
-  >
-  </VDataTable>
-
-
-
+  />
 </template>
 
 <script setup>
 import {ref} from 'vue'
+import {useSGLeadersTable} from '@/stores/dataTablesStore'
+import {storeToRefs} from 'pinia'
+const sgLeadersTable = useSGLeadersTable()
+const {getSGLeaders} = sgLeadersTable
+getSGLeaders()
+const {sgLeadersData} = storeToRefs(sgLeadersTable)
 
 const searchText = ref()
 
-// const write = (raw) => {
-//   console.log(raw)
-// }
-
 const tableHeader = ref([
   {
-    fixed: true,
     title: 'Метро',
     align: 'start',
     sortable: true,
@@ -52,31 +53,6 @@ const tableHeader = ref([
     align: 'start',
     sortable: true,
     key: 'type'
-  },
-])
-
-const data = ref([
-  {
-    id: 1,
-    subway: 'Дыбенко',
-    day: 'Понедельник',
-    ageVal: '21-35',
-    type: 'Общая',
-    leader: 'Я',
-  },{
-    id: 2,
-    subway: 'Большевиков',
-    day: 'Вторник',
-    ageVal: '35',
-    type: 'Женская',
-    leader: 'Ты',
-  },{
-    id: 3,
-    subway: 'Большевиков',
-    day: 'Четверг',
-    ageVal: '',
-    type: 'Молодежная',
-    leader: 'Он',
   },
 ])
 </script>

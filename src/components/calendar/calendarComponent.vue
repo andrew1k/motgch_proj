@@ -12,7 +12,7 @@
 <script setup>
 import {Calendar} from 'v-calendar'
 import {ref} from 'vue'
-import {useCalendarEventsStore} from '@/stores/calendarEventsStore'
+import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
 
 const calendarEventsStore = useCalendarEventsStore()
