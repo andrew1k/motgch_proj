@@ -1,6 +1,6 @@
 import {defineStore, storeToRefs} from 'pinia'
 import {ref} from 'vue'
-import {collection, onSnapshot, doc, updateDoc, setDoc, arrayUnion} from 'firebase/firestore'
+import {collection, onSnapshot, doc, updateDoc, setDoc, arrayUnion, arrayRemove, deleteField} from 'firebase/firestore'
 import {db} from '@/plugins/firebase.config'
 import {useAuthStore} from '@/stores/authStore'
 import {auth} from '@/plugins/firebase.config'
@@ -95,15 +95,28 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     const userLink = `users/${auth.currentUser.uid}`
 
     // Проверка на существование записи
-
     if (!signedEventsIds.value.includes(eventId)) {
       await updateDoc(docRef, {
-        [eventId + '.signedAccounts']: arrayUnion({id: auth.currentUser.uid, userLink: userLink}),
+        [eventId + '.signedAccounts']: arrayUnion({id: auth.currentUser.uid, userLink}),
       })
       await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-        signedEvents: arrayUnion({eventDay, eventId}),
+        signedEvents: arrayUnion({eventDay, eventId})
       })
     }
+  }
+
+  async function unsignToEvent(evnt) {
+    const eventDay = evnt.start.slice(0, 10)
+    const docRef = doc(db, 'calendar', eventDay)
+    const eventId = evnt.id
+    const userLink = `users/${auth.currentUser.uid}`
+
+    await updateDoc(docRef, {
+      [eventId + '.signedAccounts'] : arrayRemove( {id: auth.currentUser.uid, userLink})
+    })
+    await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+      signedEvents: arrayRemove({eventDay, eventId})
+    })
   }
 
   async function getUserEvents() {
@@ -121,6 +134,20 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     })
   }
 
+
+  async function deleteEvent(evnt) {
+    const eventDay = evnt.start.slice(0, 10)
+    const docRef = doc(db, 'calendar', eventDay)
+    const eventId = evnt.id
+
+    await evnt.signedAccounts.forEach(usr => {
+      updateDoc(doc(db, 'users', usr.id), {
+        signedEvents: arrayRemove({eventDay, eventId})
+      })
+    })
+    await updateDoc(docRef, { [eventId] : deleteField() })
+  }
+
   return {
     allCalendarEvents,
     weekCalendarEvents,
@@ -129,5 +156,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     saveEventToDB,
     signToEvent,
     getUserEvents,
+    unsignToEvent,
+    deleteEvent,
   }
 })

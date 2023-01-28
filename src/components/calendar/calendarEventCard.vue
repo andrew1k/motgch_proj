@@ -1,6 +1,7 @@
 <template>
   <v-card
     class="ma-2"
+    :color="show ? 'background' : 'white'"
     :elevation="show ? 0 : 3"
     @click="show = !show"
   >
@@ -16,11 +17,12 @@
       v-show="show"
       variant="text"
     >
-      <VCardText v-text="eventText + 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti eaque ipsam quisquam, reiciendis sapiente vel.'" />
+      <VCardText v-text="eventText" />
       <v-card-actions class="mx-2">
         <VSpacer />
-        <v-btn v-if="!signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('signBtn')">Записаться</v-btn>
-        <v-btn v-if="signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('unsignBtn')">Отписаться</v-btn>
+          <slot name="deleteBtnSpace"/>
+        <v-btn color="purple" v-if="!signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('signBtn')">Записаться</v-btn>
+        <v-btn color="error" v-if="signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('unsignBtn')">Отменить запись</v-btn>
       </v-card-actions>
 
     </v-card>

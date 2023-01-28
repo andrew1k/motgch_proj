@@ -10,6 +10,7 @@
     :event-color="evnt.color"
     :event-id="evnt.id"
     @sign-btn="signToEvent(evnt)"
+    @unsign-btn="unsignToEvent(evnt)"
   />
 </template>
 
@@ -19,7 +20,7 @@ import {storeToRefs} from 'pinia'
 import {onBeforeMount} from 'vue'
 import CalendarEventCard from '@/components/calendar/calendarEventCard.vue'
 const calendarEventsStore = useCalendarEventsStore()
-const {getCalendarEvents, signToEvent, } = calendarEventsStore
+const {getCalendarEvents, signToEvent, unsignToEvent} = calendarEventsStore
 onBeforeMount(() => {
   getCalendarEvents()
 })
