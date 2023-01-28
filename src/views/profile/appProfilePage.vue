@@ -19,14 +19,10 @@
       <AccountSettings v-if="accSettingsToggler"/>
     </v-slide-y-transition>
     <v-tabs v-model="tab" align-tabs="center">
-      <v-tab value="events">События</v-tab>
       <v-tab value="saves">Сохранения</v-tab>
       <v-tab value="auth">Настройки</v-tab>
     </v-tabs>
     <v-window v-model="tab">
-      <v-window-item value="events">
-        <UserEvents />
-      </v-window-item>
       <v-window-item value="saves">
         <UserSaves />
       </v-window-item>
@@ -43,7 +39,6 @@ import {storeToRefs} from 'pinia'
 import AccountSettings from '@/components/profile/accountSettings.vue'
 import AuthSettings from '@/components/profile/authSettings.vue'
 import {ref} from 'vue'
-import UserEvents from '@/components/calendar/userEvents.vue'
 import UserSaves from '@/components/profile/userSaves.vue'
 
 const authStore = useAuthStore()
@@ -51,7 +46,7 @@ const { dbUser } = storeToRefs(authStore)
 
 let accSettingsToggler = ref(false)
 
-const tab = ref('events')
+const tab = ref('auth')
 
 const changeAvatar = () => {
   alert('comming soon')

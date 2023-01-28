@@ -9,6 +9,7 @@
       <VIcon icon="mdi-circle" :color="eventColor" />
       <VCardItem class="text-black" :title="eventTitle" :subtitle="show ? `${eventTime.slice(0,10)}  в ${eventTime.slice(11)}`  : null" />
     <VSpacer/>
+      <v-chip v-if="signedEventsIds.includes(eventId)" variant="outlined" color="success" >вы записаны</v-chip>
     <VIcon class="mx-2" :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
   </v-card-actions>
   </v-card>

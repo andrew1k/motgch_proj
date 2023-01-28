@@ -21,9 +21,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const uid = computed(() => user.value.uid)
   const email = computed(() => user.value.email)
   const isAuthed = computed(() => user.value ? !!user.value : null)
-
   // calendar part
-  const signedEvents = ref(computed(() => dbUser.value.signedEvents))
   const signedEventsIds = ref(computed(() => dbUser.value.signedEvents?.map(e => e.eventId)))
   const appSignup = async (payload) => {  // ------------------------------------------------------------------------------------------------------------------------------------ Done: tests needed
     try {
@@ -156,7 +154,6 @@ export const useAuthStore = defineStore('authStore', () => {
     dbUser,
     email,
     isAuthed,
-    signedEvents,
     signedEventsIds,
     appLogin,
     appSignup,
