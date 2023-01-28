@@ -1,8 +1,27 @@
 <template>
   <v-card-title v-if="allCalendarEvents.length" class="text-center">Все события в найшей церкви</v-card-title>
   <v-card-title v-if="!allCalendarEvents.length" class="text-center">Пока что нет новых событий</v-card-title>
+  <v-card variant="text" max-width="800" class="mx-auto">
+    <v-chip-group
+      variant="flat"
+      multiple
+      v-model="selectedChips"
+      filter
+      column
+      class="mx-1"
+    >
+      <v-chip
+        v-for="chip in eventsChips"
+        :key="chip.title"
+        :color="chip.color"
+        :text="chip.title"
+        :value="chip.value"
+        filter
+      ></v-chip>
+    </v-chip-group>
+  </v-card>
   <CalendarEventCard
-    v-for="evnt in allCalendarEvents"
+    v-for="evnt in filteredEvents"
     :key="evnt.id"
     :event-title="evnt.title"
     :event-text="evnt.text"
@@ -13,7 +32,8 @@
     @unsign-btn="unsignToEvent(evnt)"
   >
     <template #deleteBtnSpace>
-      <v-btn prepend-icon="mdi-close" color="error" v-if="uid === 'BtjBK22cDLNULFOqNUbLYH2jzCn2'" variant="flat" @click="deleteEvent(evnt)">Delete</v-btn>
+      <v-btn prepend-icon="mdi-close" color="error" v-if="isAdmin" variant="flat" @click="deleteEvent(evnt)">Delete
+      </v-btn>
     </template>
   </CalendarEventCard>
 </template>
@@ -23,10 +43,59 @@ import CalendarEventCard from '@/components/calendar/calendarEventCard.vue'
 import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
 import {useAuthStore} from '@/stores/authStore'
+import {watch, ref} from 'vue'
 
 const calendarEventsStore = useCalendarEventsStore()
 const {allCalendarEvents} = storeToRefs(calendarEventsStore)
+const filteredEvents = ref([])
 const {signToEvent, unsignToEvent, deleteEvent} = calendarEventsStore
 
-const {uid} = useAuthStore()
+const {isAdmin} = useAuthStore()
+
+const eventsChips = ref([
+  {
+    value: 'pray',
+    title: 'молитва',
+    color: 'cyan',
+  }, {
+    value: 'ministry',
+    title: 'служение',
+    color: 'brown',
+  }, {
+    value: 'fellowship',
+    title: 'общение',
+    color: 'orange',
+  }, {
+    value: 'discepleship',
+    title: 'ученичество',
+    color: 'green',
+  }, {
+    value: 'evangelism',
+    title: 'благовестие',
+    color: 'blue',
+  }, {
+    value: 'worship',
+    title: 'поклонение',
+    color: 'red',
+  }, {
+    value: 'youth',
+    title: 'молодежное',
+    color: 'purple',
+  },
+])
+
+const selectedChips = ref([])
+
+watch(selectedChips, () => {
+  if (selectedChips.value.length) {
+    selectedChips.value.forEach(chip => {
+      filteredEvents.value = allCalendarEvents.value.filter(evnt => {
+        if (evnt.chipValues.includes(chip)) return evnt
+      })
+    })
+  } else {
+    filteredEvents.value = allCalendarEvents.value
+  }
+})
+
 </script>

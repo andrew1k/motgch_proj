@@ -1,6 +1,6 @@
 <template>
   <Calendar
-    :columns="$screens({ default: 1, lg: 2 })"
+    :columns="$screens({ default: 1, lg: 2, md: 2 })"
     :rows="$screens({ default: 1, lg: 2 })"
     is-expanded
     :attributes="attrs"
