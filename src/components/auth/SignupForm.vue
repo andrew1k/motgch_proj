@@ -78,11 +78,30 @@
       <vRadio label="Мужской" value="male" class="ma-2"/>
       <vRadio label="Женский" value="female" class="ma-2"/>
     </v-radio-group>
-    <vCheckbox
+    <v-checkbox
       density="comfortable"
-      label="Я даю своё согласие на обработку и хранение своих персональных данных в соответсвии с Федеральным законом РФ № 152-ФЗ Местной религиозной организации христиан  веры евангельской(пятидесятников) 'Церкви евангельских христиан в духе апостолов 'Миссия Благая весть'' ОГРН 1037858004964 от 30 января 2003г."
       v-model="acceptCheckbox"
-    />
+    >
+      <template v-slot:label>
+        <div>
+          Я согласен с
+          <v-tooltip location="bottom">
+            <template v-slot:activator="{ props }">
+              <a
+                target="_blank"
+                href="https://mbv.spb.ru/agreement/"
+                v-bind="props"
+                @click.stop
+              >
+                правилами обработки
+              </a>
+            </template>
+            Откроется в новом браузерном окне
+          </v-tooltip>
+          персональных данных
+        </div>
+      </template>
+    </v-checkbox>
 
     <v-card-actions>
       <vSpacer/>
@@ -143,4 +162,6 @@ const onSignup = async () => {
     phoneNumber: phoneNumberValue.value
   })
 }
+
+// Я даю своё согласие на обработку и хранение своих персональных данных в соответсвии с Федеральным законом РФ № 152-ФЗ Местной религиозной организации христиан  веры евангельской(пятидесятников) 'Церкви евангельских христиан в духе апостолов 'Миссия Благая весть'' ОГРН 1037858004964 от 30 января 2003г.
 </script>
