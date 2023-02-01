@@ -2,7 +2,7 @@
   <v-app-bar
     height="50"
     prominent
-    elevation="1"
+    elevation="3"
     flat
   >
     <VAppBarNavIcon @click="drawer = !drawer"/>

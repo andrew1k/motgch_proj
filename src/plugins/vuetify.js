@@ -4,14 +4,28 @@ import 'vuetify/styles'
 
 // Vuetify
 import { createVuetify,  } from 'vuetify'
-import {VDataTable} from 'vuetify/lib/labs/VDataTable'
-
+import {VDataTable, VDataTableVirtual} from 'vuetify/lib/labs/VDataTable'
+import { md3 } from 'vuetify/blueprints'
 
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
+  blueprint: md3,
+  defaults: {
+    global: {
+
+    },
+    VCard: {
+      elevation: 5
+    },
+    VBtn: {
+      elevation: 0,
+      color: 'black',
+    },
+  },
   components: {
-    VDataTable
+    VDataTable, // Не забыть убрать, если с Virtual будет все ок
+    VDataTableVirtual
   },
   theme:  {
     defaultTheme: 'mbvLightTheme',

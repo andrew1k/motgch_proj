@@ -2,8 +2,9 @@
   <v-card
     class="ma-2"
     :color="show ? 'background' : 'white'"
-    :elevation="show ? 0 : 3"
+    :elevation="show ? 0 : 5"
     @click="show = !show"
+    rounded="lg"
   >
     <v-card-actions>
       <VIcon icon="mdi-circle" :color="eventColor" />
@@ -17,6 +18,8 @@
     <v-card
       v-show="show"
       variant="text"
+      elevation="0"
+      class="mx-2"
     >
       <VCardText v-text="eventText" />
       <v-card-actions class="mx-2">

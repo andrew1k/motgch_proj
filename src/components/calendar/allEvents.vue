@@ -1,14 +1,14 @@
 <template>
   <v-card-title v-if="allCalendarEvents.length" class="text-center">Все события в найшей церкви</v-card-title>
   <v-card-title v-if="!allCalendarEvents.length" class="text-center">Пока что нет новых событий</v-card-title>
-  <v-card variant="text" max-width="800" class="mx-auto">
+  <v-card variant="text" max-width="800" class="mx-auto" elevation="0">
     <v-chip-group
       variant="flat"
       multiple
       v-model="selectedChips"
       filter
       column
-      class="mx-1"
+      class="mx-2"
     >
       <v-chip
         v-for="chip in eventsChips"
@@ -21,7 +21,7 @@
     </v-chip-group>
   </v-card>
   <CalendarEventCard
-    v-for="evnt in filteredEvents"
+    v-for="evnt in filteredEvents.length ? filteredEvents : allCalendarEvents"
     :key="evnt.id"
     :event-title="evnt.title"
     :event-text="evnt.text"

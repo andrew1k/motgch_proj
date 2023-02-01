@@ -1,12 +1,12 @@
 <template>
   <v-bottom-navigation
     density="comfortable"
-    elevation="2"
+    elevation="3"
     grow
   >
-    <vBtn icon="mdi-home" to="/"/>
-    <vBtn icon="mdi-calendar" to="/calendar"/>
-    <vBtn icon="mdi-compass" to="/discover"/>
+    <v-btn to="/"><v-icon>mdi-home</v-icon>Главная</v-btn>
+    <v-btn to="/calendar"><v-icon>mdi-calendar</v-icon>Календарь</v-btn>
+    <v-btn to="/discover"><v-icon>mdi-compass</v-icon>Открой церковь</v-btn>
   </v-bottom-navigation>
 </template>
 

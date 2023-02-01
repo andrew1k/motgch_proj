@@ -1,25 +1,25 @@
 <template>
-  <v-card-title class="text-center" v-text="`Календарь`" />
-  <v-card max-width="800" class="mx-auto ma-2" elevation="3">
-    <CalendarComponent />
-  </v-card>
-  <v-card max-width="800" class="mx-auto py-2" variant="text">
-    <v-tabs v-model="tab" align-tabs="center">
-      <v-tab value="allEvents">Все события</v-tab>
-      <v-tab value="weekEvents">На неделю</v-tab>
-      <v-tab v-if="isAdmin" value="createEvent">Creale Event</v-tab>
-    </v-tabs>
-    <v-window v-model="tab">
-      <v-window-item value="allEvents">
-        <AllEvents />
-      </v-window-item>
-      <v-window-item value="weekEvents">
-        <WeekEvents />
-      </v-window-item>
-      <v-window-item value="createEvent">
-        <CreateEventCard />
-      </v-window-item>
-    </v-window>
+  <v-card max-width="800" variant="text" elevation="0" class="mx-auto">
+    <v-card-title class="text-center" v-text="`Календарь`"/>
+    <v-card class="ma-2" elevation="5" variant="elevated">
+      <CalendarComponent/>
+    </v-card>
+      <v-tabs v-model="tab" align-tabs="center">
+        <v-tab value="allEvents">Все события</v-tab>
+        <v-tab value="weekEvents">На неделю</v-tab>
+        <v-tab v-if="isAdmin" value="createEvent">Creale Event</v-tab>
+      </v-tabs>
+      <v-window v-model="tab">
+        <v-window-item value="allEvents">
+          <AllEvents/>
+        </v-window-item>
+        <v-window-item value="weekEvents">
+          <WeekEvents/>
+        </v-window-item>
+        <v-window-item value="createEvent">
+          <CreateEventCard/>
+        </v-window-item>
+      </v-window>
   </v-card>
 </template>
 
