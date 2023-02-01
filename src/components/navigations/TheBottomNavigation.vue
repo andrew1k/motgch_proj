@@ -3,6 +3,7 @@
     density="comfortable"
     elevation="3"
     grow
+    color="primary"
   >
     <v-btn to="/"><v-icon>mdi-home</v-icon>Главная</v-btn>
     <v-btn to="/calendar"><v-icon>mdi-calendar</v-icon>Календарь</v-btn>

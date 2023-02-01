@@ -5,13 +5,13 @@
       <v-list>
         <v-list-item :title="`${dbUser.firstName} ${dbUser.secondName}`" :subtitle="email" to="/profile">
           <template v-slot:append>
-            <VIcon icon="mdi-account"/>
+            <VIcon icon="mdi-account" color="primary"/>
           </template>
         </v-list-item>
         <vDivider/>
         <v-list-item title="Уведомления" density="comfortable">
           <template v-slot:append>
-            <VIcon icon="mdi-bell"/>
+            <VIcon icon="mdi-bell" color="secondary"/>
           </template>
         </v-list-item>
         <VDivider />

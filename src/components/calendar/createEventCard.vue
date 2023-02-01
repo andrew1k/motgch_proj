@@ -1,6 +1,6 @@
 <template>
   <v-card-title class="text-center">Create Event</v-card-title>
-  <v-card class="my-2" variant="text">
+  <v-card class="my-2" variant="text" elevation="0">
     <VTextField
       class="ma-1"
       density="comfortable"
@@ -41,9 +41,19 @@
       label="Text"
       type="string"
     />
+    <VSelect
+      v-model="chipValues"
+      variant="solo"
+      class="ma-1"
+      density="comfortable"
+      :items="chipItems"
+      chips
+      label="Chips"
+      multiple
+    />
     <v-card-actions>
       <VSpacer/>
-      <v-btn variant="outlined" @click="saveEventToDB({eventTitle,eventText,eventDate,eventColor,eventTime})">Save</v-btn>
+      <v-btn variant="outlined" @click="saveEventToDB({eventTitle,eventText,eventDate,eventColor,eventTime, chipValues})">Save</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -54,6 +64,8 @@ import {useCalendarEventsStore} from '@/stores/calendarStore'
 
 const {saveEventToDB} = useCalendarEventsStore()
 
+const chipItems = ref(['pray', 'ministry', 'fellowship', 'discepleship', 'evangelism', 'worship', 'youth'])
+const chipValues = ref([])
 const eventDate = ref('')
 const eventTime = ref('')
 const eventColor = ref('gray')

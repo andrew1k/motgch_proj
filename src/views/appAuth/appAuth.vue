@@ -1,16 +1,22 @@
 <template>
-  <v-card max-width="500" class="mx-auto">
-    <v-tabs v-model="toggleForm" density="comfortable" align-tabs="center">
-      <v-tab value="login">Войти</v-tab>
-      <v-tab value="signup">Создать аккаунт</v-tab>
-    </v-tabs>
-    <vDivider />
-    <v-card-text>
-      <v-window v-model="toggleForm">
-        <v-window-item value="login"><LoginForm /></v-window-item>
-        <v-window-item value="signup"><SignupForm /></v-window-item>
-      </v-window>
-    </v-card-text>
+  <v-card variant="text" max-width="500" class="mx-auto h-screen" elevation="0">
+    <v-card class="ma-2">
+      <v-tabs v-model="toggleForm" density="comfortable" align-tabs="center">
+        <v-tab value="login">Войти</v-tab>
+        <v-tab value="signup">Создать аккаунт</v-tab>
+      </v-tabs>
+      <vDivider/>
+      <v-card-text>
+        <v-window v-model="toggleForm">
+          <v-window-item value="login">
+            <LoginForm/>
+          </v-window-item>
+          <v-window-item value="signup">
+            <SignupForm/>
+          </v-window-item>
+        </v-window>
+      </v-card-text>
+    </v-card>
   </v-card>
 </template>
 

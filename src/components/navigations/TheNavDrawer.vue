@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-model="drawer"
   >
-    <v-list density="comfortable" nav>
+    <v-list density="comfortable" nav color="primary">
       <v-list-item
         v-for="(listItem, i) in navList"
         :key="i"
@@ -28,15 +28,15 @@
     <template v-slot:append>
       <v-card-actions>
         <VSpacer />
-        <v-btn variant="tonal"  color="gray" prepend-icon="mdi-gift" class="px-4">Пожертвовать</v-btn>
+        <v-btn variant="tonal"  color="primary" prepend-icon="mdi-gift" class="px-4">Пожертвовать</v-btn>
         <VSpacer/>
       </v-card-actions>
       <VDivider />
       <v-card-actions>
         <VSpacer/>
-        <v-btn icon="mdi-instagram" color="purple"></v-btn>
-        <v-btn icon="mdi-youtube" color="red"></v-btn>
-        <v-btn icon="mdi-telegram" color="blue"></v-btn>
+        <v-btn icon="mdi-instagram" color="success"></v-btn>
+        <v-btn icon="mdi-youtube" color="error"></v-btn>
+        <v-btn icon="mdi-telegram" color="info"></v-btn>
         <VSpacer/>
       </v-card-actions>
     </template>

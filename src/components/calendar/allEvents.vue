@@ -1,7 +1,7 @@
 <template>
-  <v-card-title v-if="allCalendarEvents.length" class="text-center">Все события в найшей церкви</v-card-title>
-  <v-card-title v-if="!allCalendarEvents.length" class="text-center">Пока что нет новых событий</v-card-title>
-  <v-card variant="text" max-width="800" class="mx-auto" elevation="0">
+  <v-card-title v-if="allCalendarEvents.length" class="mt-4">Все события в найшей церкви</v-card-title>
+  <v-card-title v-if="!allCalendarEvents.length" class="mt-4">Пока что нет новых событий</v-card-title>
+  <v-card variant="text" elevation="0">
     <v-chip-group
       variant="flat"
       multiple

@@ -1,7 +1,7 @@
 <template>
-  <v-card max-width="800" variant="text" elevation="0" class="mx-auto">
-    <v-card-title class="text-center" v-text="`Календарь`"/>
-    <v-card class="ma-2" elevation="5" variant="elevated">
+  <v-card max-width="900" variant="text" elevation="0" class="mx-auto">
+    <v-card-title class="mt-4" v-text="`Календарь`"/>
+    <v-card class="ma-2">
       <CalendarComponent/>
     </v-card>
       <v-tabs v-model="tab" align-tabs="center">

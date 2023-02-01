@@ -16,6 +16,7 @@ defineProps({
   },
   toolbarColor: {
     type: String,
+    default: 'background'
   }
 })
 </script>

@@ -12,6 +12,7 @@
         type="email"
         required
         class="my-3"
+        hide-details
       />
     </v-form>
   </v-card-text>
@@ -38,6 +39,7 @@
         :type="showPassword ? 'text' : 'password'"
         @click:append-inner="showPassword = !showPassword"
         class="my-3"
+        hide-details
       />
     </v-form>
   </v-card-text>
@@ -58,6 +60,7 @@
     <vCheckbox
       v-model="deleteAccountCheckbox"
       label="Я действительно хочу удалить аккаунт"
+      hide-details
     />
   </v-card-actions>
   <v-card-actions>

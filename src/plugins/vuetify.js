@@ -16,11 +16,12 @@ export default createVuetify({
 
     },
     VCard: {
-      elevation: 5
+      elevation: 5,
+      rounded: 'xl',
     },
     VBtn: {
       elevation: 0,
-      color: 'black',
+      variant: 'flat'
     },
   },
   components: {
@@ -33,14 +34,22 @@ export default createVuetify({
       mbvLightTheme: {
         dark: false,
         colors: {
-            background: '#f6f6f6',
-            surface: '#fff', //
-            primary: '#7c7dc0', // primary color from logo
-            secondary: '#ffcd7c', // secondary color from logo
-            error: '#de4e53', //  worship color
-            info: '#74b4ef', // evangelism color
-            success: '#5fc08e', // discipleship color
-            warning: '#daa274', // fellowship color
+            // background: '#f6f6f6',
+            // surface: '#fff', //
+            // primary: '#7c7dc0', // primary color from logo
+            // secondary: '#ffcd7c', // secondary color from logo
+            // error: '#de4e53', //  worship color
+            // info: '#74b4ef', // evangelism color
+            // success: '#5fc08e', // discipleship color
+            // warning: '#daa274', // fellowship color
+          background: '#f6f6f6',
+          surface: '#ffffff',
+          primary:  '#032A49',
+          secondary: '#CB9821',
+          error: '#D28782',
+          info: '#1B78AF',
+          success: '#8B9D77',
+          warning: '#EBC678'
         },
       },
       mbvDarkTheme: {

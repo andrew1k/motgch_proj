@@ -79,6 +79,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       color: payload.eventColor,
       start: `${payload.eventDate}T${payload.eventTime}`,
       id: id,
+      chipValues: payload.chipValues
     }
 
     // проверка на существование в бд записи на этот день, тогда обнавляет док

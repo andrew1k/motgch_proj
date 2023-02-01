@@ -1,31 +1,33 @@
 <template>
   <TheCardToolbar toolbar-title="В это воскресенье"/>
-  <v-card-title class="text-center" v-text="`В это воскресенье`"/>
-  <v-card max-width="1000" class="mx-auto ma-1" elevation="3">
-    <v-img src="https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/images%2FsundayCard.png?alt=media&token=ed68b420-fb14-4946-b6da-84b628399244"/>
-  </v-card>
-  <v-card max-width="1000" class="mx-auto" variant="text">
-  <v-card-text class="text-center">Конспект проповеди, который вы можете изменять и сохранять себе:</v-card-text>
+  <v-card max-width="900" elevation="0" variant="text" class="mx-auto h-screen">
 
-    <v-textarea
-      outlined
-      auto-grow
-      density="comfortable"
-      v-model="sundayText"
-      variant="solo"
-      class="ma-1"
-    />
-    <v-card-actions class="mb-6">
-      <vSpacer/>
-      <v-btn @click="saveNotes" @keydown.enter="saveNotes" v-text="`Сохранить себе`"/>
-    </v-card-actions>
-  </v-card>
+<!--    <v-card-title class="" v-text="`В это воскресенье`"/>-->
+    <v-card class="ma-2">
+      <v-img
+        :src="youtube"/>
+      <v-card-text>Конспект проповеди, который вы можете изменять и сохранять себе:</v-card-text>
 
+      <v-textarea
+        outlined
+        auto-grow
+        density="comfortable"
+        v-model="sundayText"
+        variant="underlined"
+        class="ma-1"
+      />
+      <v-card-actions>
+        <vSpacer/>
+        <v-btn @click="saveNotes" @keydown.enter="saveNotes" variant="flat" v-text="`Сохранить себе`"/>
+      </v-card-actions>
+    </v-card>
+  </v-card>
 </template>
 
 <script setup>
 import {ref} from 'vue'
 import TheCardToolbar from '@/components/navigations/TheCardToolbar.vue'
+import youtube from '@/assets/appPics/mainYoutube.png'
 
 const sundayText = ref(`Lorem ipsum dolor sit amet,
 consectetur adipisicing elit. Accusantium, assumenda at
