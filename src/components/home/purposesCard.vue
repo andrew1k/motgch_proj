@@ -1,5 +1,5 @@
 <template>
-  <v-card-title class="text-center">Purposes</v-card-title>
+  <v-card-title class="mt-6">Purposes</v-card-title>
   <v-card
     elevation="5"
     class="ma-2 "

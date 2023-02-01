@@ -7,7 +7,7 @@
     :item-title="title"
     label="Откуда вы узнали о малых группах?"
     variant="outlined"
-    class="ma-2"
+    class="mx-2 mt-4"
   />
   <VTextField
     v-model="ageToSign"
@@ -44,7 +44,7 @@
   <v-card-actions>
     <VBtn icon="mdi-chevron-left" density="comfortable" color="orange" variant="flat" @click="$emit('goBack')"/>
     <VSpacer />
-    <v-btn variant="flat" color="orange" rounded="lg" elevation="0">Присоединиться</v-btn>
+    <v-btn variant="flat" color="orange"  elevation="0">Присоединиться</v-btn>
   </v-card-actions>
 </template>
 

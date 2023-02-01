@@ -5,7 +5,7 @@
   <VCardText v-for="(txt, i) in text" :key="i" v-text="txt"/>
   <v-card-actions>
     <VSpacer/>
-    <VBtn variant="flat" elevation="0" rounded="lg" :color="color" @click="$emit('togglerBtn')" v-text="btn"/>
+    <VBtn variant="flat" elevation="0"  :color="color" @click="$emit('togglerBtn')" v-text="btn"/>
 
   </v-card-actions>
 </template>

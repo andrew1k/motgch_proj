@@ -1,5 +1,5 @@
 <template>
-  <v-card-title class="text-center">В это воскресенье</v-card-title>
+  <v-card-title class="mt-2">В это воскресенье</v-card-title>
   <v-card
     @click="$router.push('/sunday')"
     class="ma-2"

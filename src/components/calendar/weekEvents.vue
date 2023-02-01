@@ -1,5 +1,5 @@
 <template>
-  <v-card-title v-if="weekCalendarEvents.length" class="text-center">События на этой неделе</v-card-title>
+  <v-card-title v-if="weekCalendarEvents.length" class="mt-6">События на этой неделе</v-card-title>
   <v-card-title v-if="!weekCalendarEvents.length" class="text-center">На этой неделе нет событий</v-card-title>
   <CalendarEventCard
     v-for="evnt in weekCalendarEvents"

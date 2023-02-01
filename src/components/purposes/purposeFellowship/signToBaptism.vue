@@ -1,6 +1,6 @@
 <template>
     <v-form class="ma-2">
-      <v-radio-group class="my-1" label="Где вы произнесли молитву покаяния?" density="comfortable" color="purple" hide-details>
+      <v-radio-group class="mt-4" label="Где вы произнесли молитву покаяния?" density="comfortable" color="purple" hide-details>
         <VRadio label="в Церкви Миссия Благая Весть" value="MBVchurch" />
         <VRadio label="в другой Церкви" value="otherChurch" />
         <VRadio label="еще не произносил (а)" value="none" />
@@ -25,7 +25,7 @@
   <v-card-actions>
     <VBtn icon="mdi-chevron-left" color="blue" density="comfortable" variant="flat" @click="$emit('goBack')"/>
     <VSpacer/>
-    <v-btn variant="flat" color="blue" rounded="lg" @click="signToBaptism">Занисаться на крещение</v-btn>
+    <v-btn variant="flat" color="blue" @click="signToBaptism">Занисаться на крещение</v-btn>
   </v-card-actions>
 </template>
 
