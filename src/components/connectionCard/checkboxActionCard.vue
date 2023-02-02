@@ -12,8 +12,7 @@
     <v-card
       v-show="checked"
       variant="text"
-      class="mx-auto"
-      max-width="900"
+      elevation="0"
     >
       <slot name="bottomCard" />
     </v-card>

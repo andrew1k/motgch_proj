@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="900" variant="text">
+  <v-card class="ma-2">
     <v-card-subtitle>
       <VIcon icon="mdi-heart" color="red" />
       Я впервые помолился сам или с пастором, что это значит?

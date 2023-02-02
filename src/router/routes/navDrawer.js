@@ -22,6 +22,7 @@ export default [
     meta: {
       layout: 'card',
       auth: true,
+      title: 'В это воскресенье'
     }
   },{
     path: '/purposes/worship',
@@ -29,7 +30,9 @@ export default [
     component: () => import('@/views/purposes/purposeWorship.vue'),
     meta: {
       layout: 'card',
-      auth: true
+      auth: true,
+      title: 'Поклонение',
+      color: 'secondary',
     }
   },{
     path: '/purposes/fellowship',
@@ -37,7 +40,9 @@ export default [
     component: () => import('@/views/purposes/purposeFellowship.vue'),
     meta: {
       layout: 'card',
-      auth: true
+      auth: true,
+      title: 'Общение',
+      color: 'secondary',
     }
   },{
     path: '/purposes/discepleship',
@@ -45,7 +50,9 @@ export default [
     component: () => import('@/views/purposes/purposeDiscepleship.vue'),
     meta: {
       layout: 'card',
-      auth: true
+      auth: true,
+      title: 'Ученичество',
+      color: 'secondary',
     }
   },{
     path: '/purposes/ministry',
@@ -53,7 +60,9 @@ export default [
     component: () => import('@/views/purposes/purposeMinistry.vue'),
     meta: {
       layout: 'card',
-      auth: true
+      auth: true,
+      title: 'Служение',
+      color: 'secondary',
     }
   },{
     path: '/purposes/evangelism',
@@ -61,7 +70,9 @@ export default [
     component: () => import('@/views/purposes/purposeEvangelism.vue'),
     meta: {
       layout: 'card',
-      auth: true
+      auth: true,
+      title: 'Благовестие',
+      color: 'secondary',
     }
   },{
     path: '/purposes/youth',
@@ -69,7 +80,9 @@ export default [
     component: () => import('@/views/purposes/purposeYouth.vue'),
     meta: {
       layout: 'card',
-      auth: true
+      auth: true,
+      title: 'MBVYouth',
+      color: 'secondary',
     }
   }
 ]

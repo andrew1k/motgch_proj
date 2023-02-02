@@ -42,9 +42,9 @@
     must-sort
   />
   <v-card-actions>
-    <VBtn icon="mdi-chevron-left" density="comfortable" color="orange" variant="flat" @click="$emit('goBack')"/>
+    <VBtn icon="mdi-chevron-left" density="comfortable" color="secondary" variant="flat" @click="$emit('goBack')"/>
     <VSpacer />
-    <v-btn variant="flat" color="orange"  elevation="0">Присоединиться</v-btn>
+    <v-btn variant="flat" color="secondary"  elevation="0">Присоединиться</v-btn>
   </v-card-actions>
 </template>
 

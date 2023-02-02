@@ -1,13 +1,10 @@
 <template>
-  <TheCardToolbar toolbar-title="В это воскресенье"/>
-  <v-card max-width="900" elevation="0" variant="text" class="mx-auto h-screen">
-
-<!--    <v-card-title class="" v-text="`В это воскресенье`"/>-->
     <v-card class="ma-2">
       <v-img
         :src="youtube"/>
-      <v-card-text>Конспект проповеди, который вы можете изменять и сохранять себе:</v-card-text>
-
+    </v-card>
+  <v-card class="ma-2">
+  <v-card-text>Конспект проповеди, который вы можете изменять и сохранять себе:</v-card-text>
       <v-textarea
         outlined
         auto-grow
@@ -21,12 +18,11 @@
         <v-btn @click="saveNotes" @keydown.enter="saveNotes" variant="flat" v-text="`Сохранить себе`"/>
       </v-card-actions>
     </v-card>
-  </v-card>
+
 </template>
 
 <script setup>
 import {ref} from 'vue'
-import TheCardToolbar from '@/components/navigations/TheCardToolbar.vue'
 import youtube from '@/assets/appPics/mainYoutube.png'
 
 const sundayText = ref(`Lorem ipsum dolor sit amet,

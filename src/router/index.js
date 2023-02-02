@@ -41,6 +41,7 @@ const routes = [
     meta: {
       layout: 'card',
       auth: true,
+      title: 'Связаться с церковью'
     }
   },{
     path: '/giving',

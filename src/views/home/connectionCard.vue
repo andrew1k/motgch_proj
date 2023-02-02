@@ -1,18 +1,12 @@
 <template>
-  <TheCardToolbar toolbar-title="Связаться с церковью"/>
-  <v-card
-    max-width="1000"
-    class="mx-auto ma-1"
-    variant="text"
-  >
     <v-card-actions >
       <VCardTitle v-text="`Связаться с церковью`"/>
       <VSpacer />
-      <VBtn href="https://www.youtube.com/@120SPD" color="red" icon="mdi-youtube"/>
       <VBtn href="https://instagram.com" color="purple" icon="mdi-instagram"/>
       <VBtn href="" color="blue" icon="mdi-telegram"/>
       <VBtn href="" color="black" icon="mdi-phone"/>
     </v-card-actions>
+
     <CheckboxActionCard
       v-for="(check, i) in selectableItems"
       :key="i"
@@ -36,15 +30,14 @@
       </v-textarea>
       <v-card-actions>
         <VSpacer />
-        <v-btn variant="outlined" @click="sendConnectionForm(connectionFinalQuestion)">Отправить</v-btn>
+        <v-btn variant="flat" @click="sendConnectionForm(connectionFinalQuestion)">Отправить</v-btn>
       </v-card-actions>
     </v-form>
-  </v-card>
+
 </template>
 
 <script setup>
 import {ref} from 'vue'
-import TheCardToolbar from '@/components/navigations/TheCardToolbar.vue'
 import CheckboxActionCard from '@/components/connectionCard/checkboxActionCard.vue'
 import ConnectionFirstPray from '@/components/connectionCard/connectionFirstPray.vue'
 import ConnectionWannaBaptism from '@/components/connectionCard/connectionWannaBaptism.vue'

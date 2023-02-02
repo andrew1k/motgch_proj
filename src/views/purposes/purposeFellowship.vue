@@ -1,36 +1,32 @@
 <template>
-  <TheCardToolbar toolbar-color="orange" toolbar-title="Общение"/>
-  <v-card max-width="900" variant="text" class="mx-auto" elevation="0">
-
     <!------------------------------------------------------------------------------------------------------------------------------    Small Group-->
     <VCardTitle class="mt-6" v-text="'МАЛЫЕ ГРУППЫ'"/>
     <v-card elevation="5" class="ma-2" rounded="xl">
-      <FellowshipCards v-if="!togglerSG" title="Малые группы - это место силы" btn="Найти Малую Группу" :img="SG" :text="sgText" color="orange" @toggler-btn="togglerSG = !togglerSG"/>
+      <FellowshipCards v-if="!togglerSG" title="Малые группы - это место силы" btn="Найти Малую Группу" :img="SG" :text="sgText" color="secondary" @toggler-btn="togglerSG = !togglerSG"/>
       <SignToSG v-if="togglerSG" @go-back="togglerSG = !togglerSG"/>
     </v-card>
     <!------------------------------------------------------------------------------------------------------------------------------ Baptism-->
     <VCardTitle v-text="'КРЕЩЕНИЕ'" class="mt-6"/>
     <v-card elevation="5" class="ma-2" rounded="xl">
-      <FellowshipCards v-if="!baptismToggler" title="Водное крещение" btn="Хочу креститься" :img="baptism" :text="textBaptism" color="blue" @toggler-btn="baptismToggler = !baptismToggler" />
+      <FellowshipCards v-if="!baptismToggler" title="Водное крещение" btn="Хочу креститься" :img="baptism" :text="textBaptism" color="secondary" @toggler-btn="baptismToggler = !baptismToggler" />
       <SignToBaptism @goBack="baptismToggler = !baptismToggler" v-if="baptismToggler"/>
     </v-card>
 
     <!---------------------------------------------------------------------------------------------------------------------------  First Meeting-->
     <VCardTitle class=" mt-6" v-text="'ВСТРЕЧА-ЗНАКОМСТВО'"/>
     <v-card elevation="5" class="ma-2" rounded="xl">
-      <FellowshipCards title="Встреча-знакомство" btn="Записаться" :img="firstMeeting" :text="textFirstMeeting" color="cyan" @toggler-btn="signToFirstMeeting" />
+      <FellowshipCards title="Встреча-знакомство" btn="Записаться" :img="firstMeeting" :text="textFirstMeeting" color="secondary" @toggler-btn="signToFirstMeeting" />
     </v-card>
 
     <!----------------------------------------------------------------------------------------------------------------------------  One Plus One -->
     <VCardTitle class=" mt-6" v-text="'ИНДИВИДУАЛЬНОЕ НАСТАВНИЧЕСТВО'"/>
     <v-card elevation="5" class=" ma-2" rounded="xl">
-      <FellowshipCards title="Программа «1+1»" btn="Найти мне наставника" :img="onePlusOne" :text="textOnePlusOne" color="brown" @toggler-btn="signToOnePlusOne" />
+      <FellowshipCards title="Программа «1+1»" btn="Найти мне наставника" :img="onePlusOne" :text="textOnePlusOne" color="secondary" @toggler-btn="signToOnePlusOne" />
     </v-card>
-  </v-card>
+
 </template>
 
 <script setup>
-import TheCardToolbar from '@/components/navigations/TheCardToolbar.vue'
 import baptism from '@/assets/fellowshipPics/baptism.png'
 import firstMeeting from '@/assets/fellowshipPics/firstMeeting.png'
 import SG from '@/assets/fellowshipPics/SG.png'
