@@ -32,7 +32,7 @@ export default [
       layout: 'card',
       auth: true,
       title: 'Поклонение',
-      color: 'secondary',
+      color: 'worship', // error
     }
   },{
     path: '/purposes/fellowship',
@@ -42,7 +42,7 @@ export default [
       layout: 'card',
       auth: true,
       title: 'Общение',
-      color: 'secondary',
+      color: 'fellowship', // warning
     }
   },{
     path: '/purposes/discepleship',
@@ -52,7 +52,7 @@ export default [
       layout: 'card',
       auth: true,
       title: 'Ученичество',
-      color: 'secondary',
+      color: 'discepleship', // success
     }
   },{
     path: '/purposes/ministry',
@@ -62,7 +62,7 @@ export default [
       layout: 'card',
       auth: true,
       title: 'Служение',
-      color: 'secondary',
+      color: 'ministry', // secondary
     }
   },{
     path: '/purposes/evangelism',
@@ -72,7 +72,7 @@ export default [
       layout: 'card',
       auth: true,
       title: 'Благовестие',
-      color: 'secondary',
+      color: 'evangelism', // info
     }
   },{
     path: '/purposes/youth',

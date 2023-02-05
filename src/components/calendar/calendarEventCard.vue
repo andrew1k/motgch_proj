@@ -3,15 +3,15 @@
     class="ma-2"
     :color="show ? 'background' : 'surface'"
     :elevation="show ? 0 : 5"
-    :rounded="show ? 0 : 'lg'"
+    rounded="pill"
     @click="show = !show"
 
   >
     <v-card-actions>
-      <VIcon icon="mdi-circle" :color="eventColor" />
-      <VCardItem class="text-black" :title="eventTitle" :subtitle="show ? `${eventTime.slice(0,10)}  в ${eventTime.slice(11)}`  : null" />
+<!--      <VIcon icon="mdi-circle" :color="eventColor" />-->
+      <VCardItem :title="eventTitle" :subtitle="show ? `${eventTime.slice(0,10)}  в ${eventTime.slice(11)}`  : null" />
     <VSpacer/>
-      <v-chip v-if="signedEventsIds.includes(eventId)"  color="success" >вы записаны</v-chip>
+      <v-chip v-if="signedEventsIds.includes(eventId)" rounded="pill" color="success" >вы записаны</v-chip>
     <VIcon class="mx-3" :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
   </v-card-actions>
   </v-card>

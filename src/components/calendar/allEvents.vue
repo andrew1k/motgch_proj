@@ -54,10 +54,6 @@ const {isAdmin} = useAuthStore()
 
 const eventsChips = ref([
   {
-    value: 'pray',
-    title: 'молитва',
-    color: 'cyan',
-  }, {
     value: 'ministry',
     title: 'служение',
     color: 'brown',
@@ -80,7 +76,7 @@ const eventsChips = ref([
   }, {
     value: 'youth',
     title: 'молодежное',
-    color: 'purple',
+    color: 'indigo',
   },
 ])
 

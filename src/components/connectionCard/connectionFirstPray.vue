@@ -1,7 +1,7 @@
 <template>
-  <v-card class="ma-2">
+  <v-card class="ma-2 py-2">
     <v-card-subtitle>
-      <VIcon icon="mdi-heart" color="red" />
+      <VIcon icon="mdi-heart" color="error" />
       Я впервые помолился сам или с пастором, что это значит?
     </v-card-subtitle>
     <v-card-text>
@@ -15,7 +15,7 @@
       </v-row>
     </v-card-text>
     <v-card-subtitle>
-      <VIcon icon="mdi-heart" color="red" />
+      <VIcon icon="mdi-heart" color="error" />
        Найти наставника и малую группу
     </v-card-subtitle>
     <v-card-text>
@@ -23,7 +23,7 @@
     </v-card-text>
 
     <v-card-subtitle>
-      <VIcon icon="mdi-heart" color="red" />
+      <VIcon icon="mdi-heart" color="error" />
       Если остались вопросы, напишите их под формой
     </v-card-subtitle>
   </v-card>

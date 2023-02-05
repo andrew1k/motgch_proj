@@ -64,7 +64,7 @@ import {useCalendarEventsStore} from '@/stores/calendarStore'
 
 const {saveEventToDB} = useCalendarEventsStore()
 
-const chipItems = ref(['pray', 'ministry', 'fellowship', 'discepleship', 'evangelism', 'worship', 'youth'])
+const chipItems = ref(['ministry', 'fellowship', 'discepleship', 'evangelism', 'worship', 'youth'])
 const chipValues = ref([])
 const eventDate = ref('')
 const eventTime = ref('')

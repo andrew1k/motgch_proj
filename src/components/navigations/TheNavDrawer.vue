@@ -8,6 +8,7 @@
         :key="i"
         :title="listItem.title"
         :to="listItem.routeTo"
+        rounded="pill"
       >
         <template v-slot:prepend>
           <v-icon :icon="listItem.icon" :color="listItem.color" />
@@ -19,6 +20,7 @@
           :key="i"
           :title="purposeItem.title"
           :to="purposeItem.routeTo"
+          rounded="pill"
         >
           <template v-slot:prepend>
             <v-icon :icon="purposeItem.icon" :color="purposeItem.color" />
@@ -28,7 +30,7 @@
     <template v-slot:append>
       <v-card-actions>
         <VSpacer />
-        <v-btn variant="tonal"  color="primary" prepend-icon="mdi-gift" class="px-4">Пожертвовать</v-btn>
+        <v-card variant="tonal" elevation="0" density="compact" to="/" color="primary" prepend-icon="mdi-gift" title="Пожертвовать"/>
         <VSpacer/>
       </v-card-actions>
       <VDivider />
