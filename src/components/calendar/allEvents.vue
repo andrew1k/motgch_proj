@@ -16,6 +16,7 @@
         :color="chip.color"
         :text="chip.title"
         :value="chip.value"
+        rounded="pill"
         filter
       ></v-chip>
     </v-chip-group>

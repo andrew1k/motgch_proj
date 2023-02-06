@@ -11,5 +11,5 @@
 </template>
 
 <script setup>
-import youtubePic from '@/assets/appPics/mainYoutube.png'
+import youtubePic from '@/assets/appPics/youtube.png'
 </script>

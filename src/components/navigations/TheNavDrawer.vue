@@ -30,7 +30,7 @@
     <template v-slot:append>
       <v-card-actions>
         <VSpacer />
-        <v-card variant="tonal" elevation="0" density="compact" to="/" color="primary" prepend-icon="mdi-gift" title="Пожертвовать"/>
+        <v-btn variant="tonal" elevation="0" class="px-4" to="/" color="primary" prepend-icon="mdi-gift">Пожертвовать</v-btn>
         <VSpacer/>
       </v-card-actions>
       <VDivider />
@@ -99,7 +99,7 @@ const purposeNavList = ref([
     title: 'Служение',
     routeTo: '/purposes/ministry'
   },{
-    icon: 'mdi-earth',
+    icon: 'mdi-torch',
     color: 'blue',
     title: 'Благовестие',
     routeTo: '/purposes/evangelism'

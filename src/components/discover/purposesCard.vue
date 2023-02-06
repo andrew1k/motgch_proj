@@ -16,11 +16,11 @@
 </template>
 
 <script setup>
-import worship from '@/assets/icons/worship.png'
-import evangelism from '@/assets/icons/evangelism.png'
-import discepleship from '@/assets/icons/discepleship.png'
-import ministry from '@/assets/icons/ministry.png'
-import fellowship from '@/assets/icons/fellowship.png'
+import worship from '@/assets/icons/worship.svg'
+import evangelism from '@/assets/icons/evangelism.svg'
+import discepleship from '@/assets/icons/discepleship.svg'
+import ministry from '@/assets/icons/ministry.svg'
+import fellowship from '@/assets/icons/fellowship.svg'
 const purposesCards = [
   {
     title: 'ПОКЛОНЕНИЕ',

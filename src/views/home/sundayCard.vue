@@ -23,7 +23,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import youtube from '@/assets/appPics/mainYoutube.png'
+import youtube from '@/assets/appPics/youtube.png'
 
 const sundayText = ref(`Lorem ipsum dolor sit amet,
 consectetur adipisicing elit. Accusantium, assumenda at
