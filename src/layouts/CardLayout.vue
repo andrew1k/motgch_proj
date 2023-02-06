@@ -1,7 +1,7 @@
 <template>
   <TheCardToolbar :toolbar-title="title" :toolbar-color="color" />
   <v-main>
-    <v-card max-width="900" variant="text" class="mx-auto" elevation="0">
+    <v-card max-width="600" variant="text" class="mx-auto" elevation="0">
     <router-view />
     </v-card>
   </v-main>

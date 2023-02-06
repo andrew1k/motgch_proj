@@ -5,7 +5,7 @@
     </template>
   </the-card-toolbar>
   <v-main>
-    <v-card elevation="0" variant="text" class="mx-auto h-screen" max-width="900">
+    <v-card elevation="0" variant="text" class="mx-auto h-screen" max-width="600">
       <router-view/>
     </v-card>
   </v-main>
