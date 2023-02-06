@@ -5,6 +5,7 @@
     is-expanded
     :attributes="attrs"
     locale="ru"
+    :min-date="new Date()"
   />
 
 </template>

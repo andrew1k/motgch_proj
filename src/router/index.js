@@ -37,7 +37,7 @@ const routes = [
   },{
     path: '/connection',
     name: 'connection',
-    component: () => import('@/views/home/connectionCard.vue'),
+    component: () => import('@/views/discover/connectionCard.vue'),
     meta: {
       layout: 'card',
       auth: true,

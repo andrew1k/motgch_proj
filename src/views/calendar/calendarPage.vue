@@ -1,5 +1,4 @@
 <template>
-  <v-card max-width="900" variant="text" elevation="0" class="mx-auto">
     <v-card-title class="mt-4" v-text="`Календарь`"/>
     <v-card class="ma-2">
       <CalendarComponent/>
@@ -20,7 +19,6 @@
           <CreateEventCard/>
         </v-window-item>
       </v-window>
-  </v-card>
 </template>
 
 <script setup>

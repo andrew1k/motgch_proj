@@ -3,7 +3,6 @@
   <v-card
     @click="$router.push('/sunday')"
     class="ma-2"
-    elevation="7"
     rounded="xl"
   >
     <VImg :src="youtubePic"/>

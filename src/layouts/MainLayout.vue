@@ -3,7 +3,9 @@
   <TheNavDrawer />
   <TheBottomNavigation v-if="mdAndDown"/>
   <v-main>
-      <routerView/>
+    <v-card max-width="900" class="mx-auto mt-2 mb-6" variant="text" elevation="0">
+      <RouterView/>
+    </v-card>
   </v-main>
 </template>
 
