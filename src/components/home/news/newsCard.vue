@@ -1,23 +1,20 @@
 <template>
-  <v-card variant="text" elevation="0" rounded="0" max-width="600" class="mx-auto">
-    <v-card class="ma-2">
+    <v-card class="ma-2" @click="show = !show">
       <v-img :src="img" class="align-end">
         <VCardTitle class="text-white" v-text="title"/>
       </v-img>
-      <v-card-actions @click="show = !show">
-        <VCardText v-text="subtitle"/>
+      <v-card-actions>
+        <VCardTitle v-text="subtitle"/>
         <VSpacer/>
         <VIcon class="mx-4" :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"/>
-        <!--      <VBtn :append-icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show">{{ show ? 'меньше' : 'больше'}}</VBtn>-->
       </v-card-actions>
       <v-expand-transition>
         <div v-show="show">
-          <VDivider/>
-          <VCardText>{{text}}</VCardText>
+          <VDivider />
+          <v-card-text>{{text}}</v-card-text>
         </div>
       </v-expand-transition>
     </v-card>
-  </v-card>
 </template>
 
 <script setup>

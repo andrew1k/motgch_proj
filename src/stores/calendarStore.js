@@ -10,9 +10,8 @@ import {
   arrayRemove,
   deleteField,
 } from 'firebase/firestore'
-import {db} from '@/plugins/firebase.config'
+import {db, auth} from '@/plugins/firebase.config'
 import {useAuthStore} from '@/stores/authStore'
-import {auth} from '@/plugins/firebase.config'
 
 export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
 
@@ -24,7 +23,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
   const docIds = ref([])
 
   async function getCalendarEvents() {
-    const colRef = await collection(db, 'calendar')
+    const colRef = collection(db, 'calendar')
 
     await onSnapshot(colRef, snapshot => {
       let events = []
@@ -141,7 +140,6 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
   return {
     allCalendarEvents,
     weekCalendarEvents,
-
     getCalendarEvents,
     saveEventToDB,
     signToEvent,
