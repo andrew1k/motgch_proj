@@ -1,4 +1,5 @@
 <template>
+  <StoryCreationCard v-if="isAdmin" />
   <v-slide-group selected-class="bg-primary">
     <v-slide-group-item
       v-for="n in 5"
@@ -27,5 +28,7 @@
 </template>
 
 <script setup>
-
+import { useAuthStore } from '@/stores/authStore'
+import StoryCreationCard from '@/components/home/stories/storyCreationCard.vue'
+const { isAdmin } = useAuthStore()
 </script>
