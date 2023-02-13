@@ -1,20 +1,20 @@
 <template>
-  <VCard v-if="!showCard" @click="showCard = !showCard" class="ma-2" append-icon="mdi-pen" title="Create story" />
-  <v-card class="ma-2" v-if="showCard">
+  <v-card v-if="!showCard" @click="showCard = !showCard" class="ma-2 " height="100" width="100" >
+    <div class="d-flex fill-height align-center justify-center">
+      <VIcon  icon="mdi-plus" />
+    </div>
+  </v-card>
+  <v-card class="ma-2" v-if="showCard" elevation="0" rounded="0" variant="text">
     <VFileInput
       clearable
-      variant="solo"
       label="Preview pic"
       hide-details
-      class="ma-2"
       v-model="previewIgm"
     />
     <VFileInput
       multiple
       clearable
       chips
-      variant="solo"
-      class="ma-2"
       hide-details
       label="Story pics"
       v-model="storyImgs"

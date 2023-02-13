@@ -1,12 +1,12 @@
 <template>
-  <StoryCreationCard v-if="isAdmin" />
+
   <v-slide-group selected-class="bg-primary">
     <v-slide-group-item
       v-for="story in stories"
       :key="story.id"
-
     >
-      <StoryCard :prev-img="story.previewImgUrl" />
+      <StoryCreationCard v-if="isAdmin" />
+      <StoryCard  :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" />
     </v-slide-group-item>
   </v-slide-group>
 </template>
