@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 import {db, storage} from '@/plugins/firebase.config'
-import {doc, setDoc, collection, onSnapshot} from 'firebase/firestore'
-import {uploadBytes, ref as sref, getDownloadURL} from 'firebase/storage'
+import {doc, setDoc, collection, onSnapshot, deleteDoc} from 'firebase/firestore'
+import {uploadBytes, ref as sref, getDownloadURL, deleteObject} from 'firebase/storage'
 import {ref} from 'vue'
 
 export const useNewsfeedStore = defineStore('newsfeedStore', () => {
@@ -51,6 +51,12 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
         }
       })
     })
+  }
+
+  async function deleteNewsItem(newsId) {
+    await deleteObject(sref(storage, `newsfeed/${newsId}`))
+    await deleteDoc(doc(db, 'newsfeed', newsId))
+    await alert('all done')
   }
 
   async function getStories() {
@@ -108,6 +114,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
     uploadStory,
     uploadNews,
     getNews,
+    deleteNewsItem,
     news,
     stories,
   }

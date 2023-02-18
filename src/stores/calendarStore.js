@@ -70,7 +70,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     })
   }
   async function saveEventToDB(payload) {
-    const id = Date.now()
+    const id = Date.now().toString()
     const eventToDB = {}
     eventToDB[id] = {
       title: payload.eventTitle,

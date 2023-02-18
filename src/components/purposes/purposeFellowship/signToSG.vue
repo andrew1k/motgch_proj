@@ -41,6 +41,7 @@
     height="300"
     must-sort
   />
+  <AddNewSGLeader v-if="isAdmin" />
   <v-card-actions>
     <VBtn icon="mdi-chevron-left" density="comfortable" color="secondary" variant="flat" @click="$emit('goBack')"/>
     <VSpacer />
@@ -52,10 +53,16 @@
 import {ref, defineEmits} from 'vue'
 import {useSGLeadersTable} from '@/stores/dataTablesStore'
 import {storeToRefs} from 'pinia'
+import AddNewSGLeader from '@/components/purposes/purposeFellowship/addNewSGLeader.vue'
+import {useAuthStore} from '@/stores/authStore'
+
+const {isAdmin} = useAuthStore()
+
 const sgLeadersTable = useSGLeadersTable()
 const {getSGLeaders} = sgLeadersTable
 getSGLeaders()
 const {sgLeadersData} = storeToRefs(sgLeadersTable)
+
 
 const searchText = ref()
 

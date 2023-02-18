@@ -36,6 +36,7 @@ export const useAuthStore = defineStore('authStore', () => {
         birthDate: payload.birthDate,
         phoneNumber: payload.phoneNumber,
         servTeam: [],
+        signedEvents: [],
       }
       await setDoc(doc(db, 'users', res.user.uid), dbData)
       await onSnapshot(doc(db, 'users', res.user.uid), (snapshot) => {
