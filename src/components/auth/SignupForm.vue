@@ -1,85 +1,59 @@
 <template>
-  <v-form ref="signupForm" v-model="isValid" lazy-validation>
+  <VProgressLinear indeterminate v-if="isSubmitting"/>
+  <v-form @submit.prevent="submit">
     <vTextField
-      required
-      v-model="firstNameValue"
-      :rules="textFieldRules"
-      type="text"
       label="Имя"
-      hint="Как вас зовут?"
-      density="comfortable"
-      variant="outlined"
-      class="my-4"
+      v-model="firstName"
+      :error-messages="firstNameError"
+      @blur="firstNameBlur"
     />
     <vTextField
-      required
-      v-model="secondNameValue"
-      :rules="textFieldRules"
-      type="text"
       label="Фамилия"
-      hint="Скажите вашу фамилию?"
-      density="comfortable"
-      variant="outlined"
-      class="my-4"
+      v-model="secondName"
+      :error-messages="secondNameError"
+      @blur="secondNameBlur"
     />
     <VTextField
-      required
-      v-model="phoneNumberValue"
-      :rules="[
-        v => v && v.length === 10 || 'Это поле должно иметь 10 символов',
-        v => !!+v || 'Должно быть число']"
+      label="Ваш номер телефона"
+      v-model="phoneNumber"
+      :error-messages="phoneNumberError"
+      @blur="phoneNumberBlur"
       prefix="+7"
       counter="10"
-      variant="outlined"
-      density="comfortable"
-      type="text"
-      label="Ваш номер телефона"
-      hint="Без идентификатора страны(+7)"
     />
     <vTextField
-      required
-      v-model="birthDateValue"
-      type="date"
       label="День рождения"
-      hint="Когда вы родитись?"
-      density="comfortable"
-      variant="outlined"
-      class="my-4"
+      v-model="birthDate"
+      :error-messages="birthDateError"
+      @blur="birthDateBlur"
+      type="date"
     />
     <vTextField
-      required
-      v-model="emailValue"
-      :rules="emailRules"
-      type="email"
       label="Email"
-      hint="Напишите ваш действующий email"
-      density="comfortable"
-      variant="outlined"
-      class="my-4"
-    />
+      v-model="email"
+      :error-messages="eError"
+      @blur="eBlur"
+      />
     <vTextField
-      density="comfortable"
-      v-model="passwordValue"
-      :rules="passwordRules"
       label="Пароль"
-      hint="Придумайте пароль"
-      variant="outlined"
-      :append-inner-icon="showPassword ?'mdi-eye-off' : 'mdi-eye'"
+      v-model="password"
+      :error-messages="pError"
+      @blur="pBlur"
       :type="showPassword ? 'text' : 'password'"
+      :append-inner-icon="showPassword ?'mdi-eye-off' : 'mdi-eye'"
       @click:append-inner="showPassword = !showPassword"
-      class="my-4"
     />
     <v-radio-group
-      density="compact"
-      inline
-      v-model="personGenderValue"
       label="Ваш пол"
+      v-model="personGender"
+      :error-messages="personGenderError"
+      @blur="personGenderBlur"
+      inline
     >
-      <vRadio label="Мужской" value="male" class="ma-2"/>
-      <vRadio label="Женский" value="female" class="ma-2"/>
+      <vRadio label="Мужской" value="male" />
+      <vRadio label="Женский" value="female" />
     </v-radio-group>
     <v-checkbox
-      density="comfortable"
       v-model="acceptCheckbox"
     >
       <template v-slot:label>
@@ -93,7 +67,7 @@
                 v-bind="props"
                 @click.stop
               >
-                правилами обработки
+                Политикой конфиденциальности
               </a>
             </template>
             Откроется в новом браузерном окне
@@ -102,18 +76,9 @@
         </div>
       </template>
     </v-checkbox>
-
     <v-card-actions>
       <vSpacer/>
-      <v-btn
-        :disabled="!acceptCheckbox || !isValid"
-        @click="onSignup"
-        @keydown.enter="onSignup"
-        color="primary"
-        variant="flat"
-      >
-        Создать Аккаунт
-      </v-btn>
+      <v-btn type="submit" :disabled="!acceptCheckbox">Создать Аккаунт</v-btn>
     </v-card-actions>
   </v-form>
 </template>
@@ -121,47 +86,60 @@
 <script setup>
 import {ref} from 'vue'
 import {useAuthStore} from '@/stores/authStore'
+import {useField, useForm} from 'vee-validate'
+import * as yup from 'yup'
 
-const { appSignup } = useAuthStore()
+const {appSignup} = useAuthStore()
 
-const signupForm = ref()
-const isValid = ref(true)
 let showPassword = ref(false)
-
-const emailRules = [
-  v => !!v || 'Поле Email обязательно',
-  v => /.+@.+\..+/.test(v) || 'Введите правельный Email',
-  v => (v && v.length <= 32) || 'Поле email не может содержать больше 32 символов',
-]
-const textFieldRules = [
-  v => !!v || 'Это поле обязательно',
-  v => (v && v.length <= 32) || 'Это поле не может содержать больше 32 символов',
-]
-const passwordRules = [
-  v => !!v || 'Поле Email обязательно',
-  v => (v && v.length <= 32) || 'Поле для пароля не может содержать больше 32 символов',
-  v => (v && v.length >= 6) || 'Пароль должен иметь не менее 6 символов',
-]
-
-let firstNameValue = ref('')
-let secondNameValue = ref('')
-let phoneNumberValue = ref('')
-let birthDateValue = ref('')
-let emailValue = ref('')
-let passwordValue = ref('')
-let personGenderValue = ref()
 let acceptCheckbox = ref(false)
-const onSignup = async () => {
-  await appSignup({
-    firstName: firstNameValue.value,
-    secondName: secondNameValue.value,
-    birthDate: birthDateValue.value,
-    email: emailValue.value,
-    password: passwordValue.value,
-    personGender: personGenderValue.value,
-    phoneNumber: phoneNumberValue.value
-  })
-}
 
-// Я даю своё согласие на обработку и хранение своих персональных данных в соответсвии с Федеральным законом РФ № 152-ФЗ Местной религиозной организации христиан веры евангельской(пятидесятников) 'Церкви евангельских христиан в духе апостолов 'Миссия Благая весть'' ОГРН 1037858004964 от 30 января 2003г.
+
+const {handleSubmit, isSubmitting} = useForm()
+const {value: firstName, errorMessage: firstNameError, handleBlur: firstNameBlur} = useField('firstName',
+  yup
+    .string()
+    .min(2)
+    .required('Это поле обязательно')
+    .max(32)
+)
+const {value: secondName, errorMessage: secondNameError, handleBlur: secondNameBlur} = useField('secondName',
+  yup
+    .string()
+    .min(2)
+    .required('Это поле обязательно')
+    .max(32)
+)
+const {value: phoneNumber, errorMessage: phoneNumberError, handleBlur: phoneNumberBlur} = useField('phoneNumber',
+  yup
+    .number()
+    .required('Это поле обязательно')
+)
+const {value: birthDate, errorMessage: birthDateError, handleBlur: birthDateBlur} = useField('birthDate',
+  yup
+    .date()
+    .required('Это поле обязательно')
+)
+const {value: email, errorMessage: eError, handleBlur: eBlur} = useField('email',
+  yup
+    .string()
+    .trim()
+    .required('Поле email должно быть заполненно')
+    .email('Введите валдный email')
+)
+const {value: password, errorMessage: pError, handleBlur: pBlur} = useField('password',
+  yup
+    .string()
+    .trim()
+    .required('Это поле должно быть заполненно')
+    .min(6,'Это поле должно иметь не менее 6 символов')
+    .max(32, 'Не должно иметь более 32 символов')
+)
+const {value: personGender, errorMessage: personGenderError, handleBlur: personGenderBlur} = useField('personGender',
+  yup.string().required('Это поле обязательно')
+)
+
+const submit = handleSubmit(async values => {
+  await appSignup({...values})
+})
 </script>

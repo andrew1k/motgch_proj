@@ -1,69 +1,57 @@
 <template>
-  <v-form
-    ref="loginForm"
-    v-model="isValid"
-    lazy-validation
-    @submit="appLogin({email: emailValue, password: passwordValue})"
-    @keydown.enter="appLogin({email: emailValue, password: passwordValue})">
+  <VProgressLinear indeterminate v-if="isSubmitting"/>
+  <v-form @submit.prevent="submit">
     <vTextField
-      density="comfortable"
-      v-model="emailValue"
-      :rules="emailRules"
       label="Email"
-      variant="outlined"
       type="email"
-      required
-      class="my-3"
-      hint="Введите ваш email"
+      v-model="email"
+      :error-messages="eError"
+      @blur="eBlur"
     />
     <vTextField
-      density="comfortable"
-      v-model="passwordValue"
-      :rules="passwordRules"
       label="Пароль"
-      variant="outlined"
-      :append-inner-icon="passwordEye ?'mdi-eye-off' : 'mdi-eye'"
       :type="passwordEye ? 'text' : 'password'"
+      v-model="password"
+      :error-messages="pError"
+      @blur="pBlur"
+      :append-inner-icon="passwordEye ?'mdi-eye-off' : 'mdi-eye'"
       @click:append-inner="passwordEye = !passwordEye"
-      class="my-3"
-      hint="Введите ваш пароль"
     />
+    <v-card-actions>
+      <VListItem to="/restorePassword" subtitle="забыли пароль?"/>
+      <vSpacer/>
+      <v-btn type="submit">Войти</v-btn>
+    </v-card-actions>
   </v-form>
-  <v-card-actions>
-    <v-list-item density="comfortable" to="/restorePassword">
-      забыли пароль?
-    </v-list-item>
-    <vSpacer/>
-    <v-btn
-      variant="flat"
-      @click.prevent="appLogin({email: emailValue, password: passwordValue})"
-      color="primary"
-      type="submit"
-      :disabled="!isValid"
-    >
-      Войти
-    </v-btn>
-  </v-card-actions>
 </template>
 
 <script setup>
 import {ref} from 'vue'
+import {useField, useForm} from 'vee-validate'
+import * as yup from 'yup'
 import {useAuthStore} from '@/stores/authStore'
 const { appLogin } = useAuthStore()
 
-let passwordEye = ref(false)
-const loginForm = ref()
-const isValid = ref(true)
-let emailValue = ref(''.trim())
-const emailRules = [
-  v => !!v || 'Поле Email обязательно',
-  v => /.+@.+\..+/.test(v) || 'Введите правельный Email',
-  v => (v && v.length <= 32) || 'Поле email не может содержать больше 32 символов',
-]
-let passwordValue = ref(''.trim())
-const passwordRules = [
-  v => !!v || 'Это поле обязательно',
-  v => (v && v.length <= 32) || 'Поле для пароля не может содержать больше 32 символов',
-  v => (v && v.length >= 6) || 'Пароль должен иметь не менее 6 символов',
-]
+const passwordEye = ref(false)
+
+const {handleSubmit, isSubmitting} = useForm()
+const {value: email, errorMessage: eError, handleBlur: eBlur} = useField('email',
+  yup
+    .string()
+    .trim()
+    .required('Поле email должно быть заполненно')
+    .email('Введите валдный email')
+)
+const {value: password, errorMessage: pError, handleBlur: pBlur} = useField('password',
+  yup
+    .string()
+    .trim()
+    .required('Это поле должно быть заполненно')
+    .min(6,'Это поле должно иметь не менее 6 символов')
+    .max(32, 'Не должно иметь более 32 символов')
+)
+
+const submit = handleSubmit(async values => {
+   await appLogin({...values})
+})
 </script>

@@ -1,68 +1,95 @@
 <template>
-  <v-form ref="accountSettings" v-model="isValid" lazy-validation validate-on="blur">
+  <VProgressLinear indeterminate v-if="isSubmitting"/>
+  <v-form @submit.prevent="submit">
     <v-card-text>
       <VTextField
-        v-model="dbUser.firstName"
-        :rules="textFieldRules"
-        type="text"
         label="Ваше имя"
-        variant="outlined"
-        class="my-3"
+        v-model="firstName"
+        :error-messages="firstNameError"
+        @blur="firstNameBlur"
       />
       <VTextField
-        v-model="dbUser.secondName"
-        :rules="textFieldRules"
-        type="text"
         label="Ваша фамилия"
-        variant="outlined"
-        class="my-3"
+        v-model="secondName"
+        :error-messages="secondNameError"
+        @blur="secondNameBlur"
       />
       <VTextField
-        type="date"
-        variant="outlined"
         label="Дата рождения"
-        v-model="dbUser.birthDate"
-        :rules="[v => !!v || 'Это поле обязательно']"
-        class="my-3"
+        type="date"
+        v-model="birthDate"
+        :error-messages="birthDateError"
+        @blur="birthDateBlur"
       />
       <VTextField
-        v-model="dbUser.phoneNumber"
-        :rules="[v => v && v.length === 10 || 'Это поле должно иметь 10 символов', v => !!+v || 'Должно быть число',]"
+        label="Ваш номер телефона"
+        v-model="phoneNumber"
         prefix="+7"
         counter="10"
-        variant="outlined"
-        type="text"
-        label="Ваш номер телефона"
+        :error-messages="phoneNumberError"
+        @blur="phoneNumberBlur"
       />
     </v-card-text>
     <v-card-actions class="my-2">
       <VSpacer/>
-      <v-btn
-        @click.prevent="appUpdateUserData({
-        firstName: dbUser.firstName,
-        secondName: dbUser.secondName,
-        birthDate: dbUser.birthDate,
-        phoneNumber: dbUser.phoneNumber})"
-        type="submit"
-        :disabled="!isValid"
-      >Сохранить
-      </v-btn>
+      <v-btn type="submit">Сохранить</v-btn>
     </v-card-actions>
   </v-form>
 </template>
 
 <script setup>
-import {ref} from 'vue'
 import {storeToRefs} from 'pinia'
 import {useAuthStore} from '@/stores/authStore'
+import {useField, useForm} from 'vee-validate'
+import * as yup from 'yup'
 const authStore = useAuthStore()
 const {dbUser} = storeToRefs(authStore)
 const {appUpdateUserData} = authStore
 
-const textFieldRules = [
-  v => !!v || 'Это поле обязательно',
-  v => (v && v.length <= 32) || 'Это поле не может содержать больше 32 символов',
-]
-const accountSettings = ref()
-const isValid = ref(true)
+const {handleSubmit, isSubmitting} = useForm()
+
+const {value: firstName, errorMessage: firstNameError, handleBlur: firstNameBlur} = useField('firstName',
+  yup
+    .string()
+    .min(2)
+    .required('Это поле обязательно')
+    .max(32),
+  {
+    validateOnValueUpdate:true,
+    initialValue: dbUser.value.firstName
+  }
+)
+const {value: secondName, errorMessage: secondNameError, handleBlur: secondNameBlur} = useField('secondName',
+  yup
+    .string()
+    .min(2)
+    .required('Это поле обязательно')
+    .max(32),
+  {
+    validateOnValueUpdate:true,
+    initialValue: dbUser.value.secondName
+  }
+)
+const {value: phoneNumber, errorMessage: phoneNumberError, handleBlur: phoneNumberBlur} = useField('phoneNumber',
+  yup
+    .number()
+    .required('Это поле обязательно'),
+  {
+    validateOnValueUpdate:true,
+    initialValue: dbUser.value.phoneNumber
+  }
+)
+const {value: birthDate, errorMessage: birthDateError, handleBlur: birthDateBlur} = useField('birthDate',
+  yup
+    .date()
+    .required('Это поле обязательно'),
+  {
+    validateOnValueUpdate:true,
+    initialValue: dbUser.value.birthDate
+  }
+)
+
+const submit = handleSubmit(async values => {
+  await appUpdateUserData({...values})
+})
 </script>
