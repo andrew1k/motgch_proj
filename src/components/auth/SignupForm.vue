@@ -1,6 +1,6 @@
 <template>
   <VProgressLinear indeterminate v-if="isSubmitting"/>
-  <v-form @submit.prevent="submit">
+  <v-form @submit.prevent="submit" class="mt-2">
     <vTextField
       label="Имя"
       v-model="firstName"

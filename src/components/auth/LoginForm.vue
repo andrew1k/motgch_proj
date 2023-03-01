@@ -1,6 +1,6 @@
 <template>
   <VProgressLinear indeterminate v-if="isSubmitting"/>
-  <v-form @submit.prevent="submit">
+  <v-form @submit.prevent="submit" class="mt-2">
     <vTextField
       label="Email"
       type="email"
@@ -20,7 +20,7 @@
     <v-card-actions>
       <VListItem to="/restorePassword" subtitle="забыли пароль?"/>
       <vSpacer/>
-      <v-btn type="submit">Войти</v-btn>
+      <v-btn type="submit" :disabled="eError || pError">Войти</v-btn>
     </v-card-actions>
   </v-form>
 </template>
@@ -40,7 +40,7 @@ const {value: email, errorMessage: eError, handleBlur: eBlur} = useField('email'
     .string()
     .trim()
     .required('Поле email должно быть заполненно')
-    .email('Введите валдный email')
+    .email('Введите валдный email'),
 )
 const {value: password, errorMessage: pError, handleBlur: pBlur} = useField('password',
   yup

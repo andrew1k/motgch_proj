@@ -11,34 +11,29 @@
         rounded="pill"
       >
         <template v-slot:prepend>
-          <v-icon :icon="listItem.icon" :color="listItem.color" />
+          <v-icon :icon="listItem.icon" :color="listItem.color"/>
         </template>
       </v-list-item>
-      <VDivider />
-        <v-list-item
-          v-for="(purposeItem, i) in purposeNavList"
-          :key="i"
-          :title="purposeItem.title"
-          :to="purposeItem.routeTo"
-          rounded="pill"
-        >
-          <template v-slot:prepend>
-            <v-icon :icon="purposeItem.icon" :color="purposeItem.color" />
-          </template>
-        </v-list-item>
+      <VDivider/>
+      <v-list-item
+        v-for="(purposeItem, i) in purposeNavList"
+        :key="i"
+        :title="purposeItem.title"
+        :to="purposeItem.routeTo"
+        rounded="pill"
+      >
+        <template v-slot:prepend>
+          <v-icon :icon="purposeItem.icon" :color="purposeItem.color"/>
+        </template>
+      </v-list-item>
     </v-list>
     <template v-slot:append>
-      <v-card-actions>
-        <VSpacer />
-        <v-btn variant="tonal" elevation="0" class="px-4" to="/" color="primary" prepend-icon="mdi-gift">Пожертвовать</v-btn>
-        <VSpacer/>
-      </v-card-actions>
-      <VDivider />
+      <VListItem variant="tonal" to="/" title="Пожертвовать" class="text-center ma-1" color="primary" rounded="lg"/>
+      <VDivider/>
       <v-card-actions>
         <VSpacer/>
-        <v-btn icon="mdi-instagram" color="success"></v-btn>
-        <v-btn icon="mdi-youtube" color="error"></v-btn>
-        <v-btn icon="mdi-telegram" color="info"></v-btn>
+        <VBtn icon="mdi-youtube" color="error"/>
+        <VBtn icon="mdi-telegram" color="info"/>
         <VSpacer/>
       </v-card-actions>
     </template>
@@ -61,7 +56,7 @@ const navList = ref([
     routeTo: '/',
   }, {
     icon: 'mdi-calendar',
-    color:  'pink',
+    color: 'pink',
     title: 'Календарь',
     routeTo: '/calendar',
   }, {
@@ -82,32 +77,32 @@ const purposeNavList = ref([
     icon: 'mdi-heart',
     color: 'red',
     title: 'Поклонение',
-    routeTo: '/purposes/worship'
-  },{
+    routeTo: '/purposes/worship',
+  }, {
     icon: 'mdi-account-multiple',
     color: 'orange',
     title: 'Общение',
-    routeTo: '/purposes/fellowship'
-  },{
+    routeTo: '/purposes/fellowship',
+  }, {
     icon: 'mdi-school',
     color: 'green',
     title: 'Ученичество',
-    routeTo: '/purposes/discepleship'
-  },{
+    routeTo: '/purposes/discepleship',
+  }, {
     icon: 'mdi-hand-heart',
     color: 'brown',
     title: 'Служение',
-    routeTo: '/purposes/ministry'
-  },{
+    routeTo: '/purposes/ministry',
+  }, {
     icon: 'mdi-torch',
     color: 'blue',
     title: 'Благовестие',
-    routeTo: '/purposes/evangelism'
-  },{
+    routeTo: '/purposes/evangelism',
+  }, {
     icon: 'mdi-run',
     color: 'purple',
     title: 'МБВ.Youth',
-    routeTo: '/purposes/youth'
+    routeTo: '/purposes/youth',
   },
 ])
 </script>

@@ -12,13 +12,16 @@ export default createVuetify({
     defaults: {
       global: {},
       VCard: {
-        elevation: 3       ,
+        elevation: 3,
         rounded: 'xl',
       },
       VBtn: {
         elevation: 0,
         variant: 'flat',
       },
+      VTextField: {
+        variant: 'outlined',
+      }
     },
     components: {
       VDataTable, // Не забыть убрать, если с Virtual будет все ок
