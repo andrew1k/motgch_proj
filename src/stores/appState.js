@@ -36,8 +36,10 @@ export const useSnackbarMessages = defineStore('snackbarMessages', () => {
 export const useAppState = defineStore('appState', () => {
   const drawer = ref(null)
   const theme = ref('light')
+  const isPending = ref(false)
   return {
     drawer,
-    theme
+    theme,
+    isPending,
   }
 })

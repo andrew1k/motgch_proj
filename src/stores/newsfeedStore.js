@@ -1,8 +1,9 @@
-import {defineStore} from 'pinia'
+import {defineStore, storeToRefs} from 'pinia'
 import {db, storage} from '@/plugins/firebase.config'
 import {doc, setDoc, collection, onSnapshot, deleteDoc} from 'firebase/firestore'
 import {uploadBytes, ref as sref, getDownloadURL, deleteObject} from 'firebase/storage'
 import {ref} from 'vue'
+import {useAppState} from '@/stores/appState'
 
 export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   const news = ref([])
@@ -11,6 +12,8 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   const storiesIds = ref([])
   const newsItem = ref()
 
+  const appState = useAppState()
+  const {isPending} = storeToRefs(appState)
   async function uploadNews(imgs, payload) {
     const newsId = Date.now().toString()
     let filePath
@@ -41,6 +44,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   }
 
   async function getNews() {
+    isPending.value = true
     const colRef = collection(db, 'newsfeed')
     await onSnapshot(colRef, snapshot => {
       snapshot.docs.forEach(doc => {
@@ -50,6 +54,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
           newsIds.value.push(id)
           news.value.push({...data, id})
         }
+        isPending.value = false
       })
     })
   }
@@ -67,6 +72,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   }
 
   async function getStories() {
+    isPending.value = true
     const colRef = collection(db, 'stories')
     await onSnapshot(colRef, snapshot => {
       snapshot.docs.forEach(doc => {
@@ -76,6 +82,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
           storiesIds.value.push(id)
           stories.value.push({id, ...data})
         }
+        isPending.value = false
       })
     })
   }
