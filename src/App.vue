@@ -18,6 +18,7 @@ import MainLayout from '@/layouts/MainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
 import ProfileLayout from '@/layouts/ProfileLayout.vue'
 import CardLayout from '@/layouts/CardLayout.vue'
+import NewsLayout from '@/layouts/NewsLayout.vue'
 import {useSnackbarMessages} from '@/stores/appState'
 import {storeToRefs} from 'pinia'
 
@@ -38,6 +39,7 @@ export default {
     AuthLayout,
     ProfileLayout,
     CardLayout,
+    NewsLayout,
   },
 }
 </script>

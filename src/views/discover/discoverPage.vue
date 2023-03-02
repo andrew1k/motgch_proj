@@ -4,6 +4,6 @@
 </template>
 
 <script setup>
-import ConnectionCard from '@/components/discover/connectionCard.vue'
-import PurposesCard from '@/components/discover/purposesCard.vue'
+import ConnectionCard from '@/views/discover/components/connectionCard.vue'
+import PurposesCard from '@/views/discover/components/purposesCard.vue'
 </script>

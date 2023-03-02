@@ -20,8 +20,8 @@
 </template>
 
 <script setup>
-import LoginForm from '@/components/auth/LoginForm'
-import SignupForm from '@/components/auth/SignupForm'
+import LoginForm from '@/views/auth/components/LoginForm.vue'
+import SignupForm from '@/views/auth/components/SignupForm.vue'
 import {ref} from 'vue'
 
 const toggleForm = ref('login')

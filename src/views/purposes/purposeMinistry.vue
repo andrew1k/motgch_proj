@@ -44,7 +44,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import DescriptionsCard from '@/components/purposes/purposeMinistry/descriptionsCard.vue'
+import DescriptionsCard from '@/views/purposes/components/purposeMinistry/descriptionsCard.vue'
 
 
 const ourServs = ref([

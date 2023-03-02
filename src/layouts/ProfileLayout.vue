@@ -13,5 +13,5 @@
 
 <script setup>
 import TheCardToolbar from '@/components/navigations/TheCardToolbar.vue'
-import LogoutBtn from '@/components/auth/logoutBtn.vue'
+import LogoutBtn from '@/views/auth/components/LogoutBtn.vue'
 </script>

@@ -13,12 +13,12 @@
 </template>
 
 <script setup>
-import StoryCreationCard from '@/components/home/stories/storyCreationCard.vue'
+import StoryCreationCard from '@/views/home/components/stories/storyCreationCard.vue'
 import { useAuthStore } from '@/stores/authStore'
 import { useNewsfeedStore } from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
 import {onBeforeMount} from 'vue'
-import StoryCard from '@/components/home/stories/storyCard.vue'
+import StoryCard from '@/views/home/components/stories/storyCard.vue'
 
 const { isAdmin } = useAuthStore()
 const newsfeedStore = useNewsfeedStore()

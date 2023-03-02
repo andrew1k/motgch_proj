@@ -23,10 +23,10 @@
 
 <script setup>
 import {ref} from 'vue'
-import WeekEvents from '@/components/calendar/weekEvents.vue'
-import CalendarComponent from '@/components/calendar/calendarComponent.vue'
-import CreateEventCard from '@/components/calendar/createEventCard.vue'
-import AllEvents from '@/components/calendar/allEvents.vue'
+import WeekEvents from '@/views/calendar/components/weekEvents.vue'
+import CalendarComponent from '@/views/calendar/components/calendarComponent.vue'
+import CreateEventCard from '@/views/calendar/components/createEventCard.vue'
+import AllEvents from '@/views/calendar/components/allEvents.vue'
 import {useAuthStore} from '@/stores/authStore'
 
 const {isAdmin} = useAuthStore()

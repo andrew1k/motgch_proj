@@ -9,6 +9,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   const newsIds = ref([])
   const stories = ref([])
   const storiesIds = ref([])
+  const newsItem = ref()
 
   async function uploadNews(imgs, payload) {
     const newsId = Date.now().toString()
@@ -50,6 +51,12 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
           news.value.push({...data, id})
         }
       })
+    })
+  }
+
+  async function getNewsItem(newsId) {
+    await onSnapshot(doc(db, 'newsfeed', newsId), (doc) => {
+      newsItem.value = doc.data()
     })
   }
 
@@ -114,8 +121,10 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
     uploadStory,
     uploadNews,
     getNews,
+    getNewsItem,
     deleteNewsItem,
     news,
     stories,
+    newsItem,
   }
 })

@@ -53,7 +53,7 @@
 import {ref, defineEmits} from 'vue'
 import {useSGLeadersTable} from '@/stores/dataTablesStore'
 import {storeToRefs} from 'pinia'
-import AddNewSGLeader from '@/components/purposes/purposeFellowship/addNewSGLeader.vue'
+import AddNewSGLeader from '@/views/purposes/components/purposeFellowship/addNewSGLeader.vue'
 import {useAuthStore} from '@/stores/authStore'
 
 const {isAdmin} = useAuthStore()

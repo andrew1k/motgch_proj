@@ -1,6 +1,5 @@
 <template>
-    <v-card-actions >
-      <VCardTitle v-text="`Связаться с церковью`"/>
+    <v-card-actions>
       <VSpacer />
       <VBtn href="https://instagram.com" color="purple" icon="mdi-instagram"/>
       <VBtn href="" color="blue" icon="mdi-telegram"/>
@@ -20,14 +19,12 @@
     </CheckboxActionCard>
 
     <v-form >
-      <v-textarea
+      <VTextarea
         class="ma-1"
         variant="outlined"
         label="Ваш вопрос, молитвенная нужда, просьба"
         v-model="connectionFinalQuestion"
-      >
-
-      </v-textarea>
+      />
       <v-card-actions>
         <VSpacer />
         <v-btn variant="flat" @click="sendConnectionForm(connectionFinalQuestion)">Отправить</v-btn>
@@ -38,9 +35,9 @@
 
 <script setup>
 import {ref} from 'vue'
-import CheckboxActionCard from '@/components/connectionCard/checkboxActionCard.vue'
-import ConnectionFirstPray from '@/components/connectionCard/connectionFirstPray.vue'
-import ConnectionWannaBaptism from '@/components/connectionCard/connectionWannaBaptism.vue'
+import CheckboxActionCard from '@/views/discover/views/connection/components/checkboxActionCard.vue'
+import ConnectionFirstPray from '@/views/discover/views/connection/components/connectionFirstPray.vue'
+import ConnectionWannaBaptism from '@/views/discover/views/connection/components/connectionWannaBaptism.vue'
 
 
 const selectableItems = ref([

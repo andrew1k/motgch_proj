@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import SundayCard from '@/components/home/sundayCard.vue'
-import WeekEvents from '@/components/calendar/weekEvents.vue'
-import NewsFeed from '@/components/home/news/newsFeed.vue'
-import StoriesFeed from '@/components/home/stories/storiesFeed.vue'
+import SundayCard from '@/views/home/components/sunday/sundayCard.vue'
+import WeekEvents from '@/views/calendar/components/weekEvents.vue'
+import NewsFeed from '@/views/home/components/news/newsFeed.vue'
+import StoriesFeed from '@/views/home/components/stories/storiesFeed.vue'
 </script>

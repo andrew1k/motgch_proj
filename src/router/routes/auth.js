@@ -2,7 +2,7 @@ export default [
  {
     path: '/auth',
     name: 'appAuth',
-    component: () => import('@/views/appAuth/appAuth'),
+    component: () => import('@/views/auth/appAuth'),
     meta: {
       layout:  'auth',
       auth: false,
@@ -10,7 +10,7 @@ export default [
   },{
     path: '/restorePassword',
     name: 'restorePassword',
-    component: () => import('@/views/appAuth/RestorePassword'),
+    component: () => import('@/views/auth/RestorePassword'),
     meta: {
       layout:  'auth',
       auth: false,

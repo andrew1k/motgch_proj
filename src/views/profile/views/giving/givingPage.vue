@@ -1,5 +1,5 @@
 <template>
-  <div>privacyPolicy</div>
+  <div>givingPage.vue</div>
 </template>
 
 <script setup>

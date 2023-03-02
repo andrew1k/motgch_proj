@@ -1,9 +1,9 @@
 <template>
-  <vBtn
+  <v-btn
     append-icon="mdi-logout"
     flat
     @click="appLogout"
-  >Выйти</vBtn>
+  >Выйти</v-btn>
 </template>
 
 <script setup>

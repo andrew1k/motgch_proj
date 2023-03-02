@@ -18,7 +18,7 @@
 import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
 import {onBeforeMount} from 'vue'
-import CalendarEventCard from '@/components/calendar/calendarEventCard.vue'
+import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue'
 const calendarEventsStore = useCalendarEventsStore()
 const {getCalendarEvents, signToEvent, unsignToEvent} = calendarEventsStore
 onBeforeMount(() => {

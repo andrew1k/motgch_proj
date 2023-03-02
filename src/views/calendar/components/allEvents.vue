@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import CalendarEventCard from '@/components/calendar/calendarEventCard.vue'
+import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue'
 import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
 import {useAuthStore} from '@/stores/authStore'

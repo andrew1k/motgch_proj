@@ -16,13 +16,49 @@ export default [
       auth: true,
     },
   },{
+    path: '/connection',
+    name: 'connection',
+    component: () => import('@/views/discover/views/connection/connectionPage.vue'),
+    meta: {
+      layout: 'card',
+      auth: true,
+      title: 'Связаться с церковью'
+    }
+  },{
     path: '/sunday',
     name: 'sunday',
-    component: () => import('@/views/home/sundayCard.vue'),
+    component: () => import('@/views/home/views/sunday/sundayPage.vue'),
     meta: {
       layout: 'card',
       auth: true,
       title: 'В это воскресенье'
+    }
+  },{
+    path: '/profile',
+    name: 'profile',
+    component: () => import('@/views/profile/profilePage.vue'),
+    meta: {
+      title: 'Аккаунт',
+      layout:  'profile',
+      auth: true,
+    }
+  },{
+    path: '/giving',
+    name: 'giving',
+    component: () => import('@/views/profile/views/giving/givingPage.vue'),
+    meta: {
+      title: 'Пожертвование',
+      layout: 'card',
+      auth: true,
+    }
+  },{
+    path: '/notifications',
+    name: 'notifications',
+    component: () => import('@/views/profile/views/notifications/notificationsPage.vue'),
+    meta: {
+      title: 'Уведомления',
+      layout: 'card',
+      auth: true,
     }
   },{
     path: '/purposes/worship',
