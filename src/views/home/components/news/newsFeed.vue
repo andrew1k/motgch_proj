@@ -1,6 +1,5 @@
 <template>
   <v-card-title class="mt-6">Новости церкви</v-card-title>
-  <NewsCreationCard v-if="isAdmin" />
   <NewsCard
     v-for="item in news"
     :key="item.id"
@@ -12,10 +11,8 @@
 
 <script setup>
 import NewsCard from '@/views/home/components/news/newsCard.vue'
-import NewsCreationCard from '@/views/home/components/news/newsCreationCard.vue'
 import {useNewsfeedStore} from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
-import {useAuthStore} from '@/stores/authStore'
 import {onBeforeMount} from 'vue'
 
 const newsfeedStore = useNewsfeedStore()
@@ -26,5 +23,4 @@ onBeforeMount(() => {
 
 const {news} = storeToRefs(newsfeedStore)
 
-const {isAdmin} = useAuthStore()
 </script>

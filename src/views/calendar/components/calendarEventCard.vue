@@ -22,10 +22,9 @@
       elevation="0"
       class="mx-2"
     >
-      <VCardText v-text="eventText" />
+      <VCardText v-html="eventText" />
       <v-card-actions class="mx-2">
         <VSpacer />
-          <slot name="deleteBtnSpace"/>
         <v-btn color="secondary" v-if="!signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('signBtn')">Записаться</v-btn>
         <v-btn color="error" v-if="signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('unsignBtn')">Отменить запись</v-btn>
       </v-card-actions>

@@ -1,9 +1,7 @@
 <template>
   <router-link :to="{ name: 'newsPage', params: { id }}">
     <v-card class="ma-2">
-      <v-img :src="img" class="align-end">
-        <VCardTitle class="text-white" v-text="title"/>
-      </v-img>
+      <VImg :src="img" />
     </v-card>
   </router-link>
 </template>

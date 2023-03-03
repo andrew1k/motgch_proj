@@ -31,27 +31,20 @@
     :event-id="evnt.id"
     @sign-btn="signToEvent(evnt)"
     @unsign-btn="unsignToEvent(evnt)"
-  >
-    <template #deleteBtnSpace>
-      <v-btn prepend-icon="mdi-close" color="error" v-if="isAdmin" variant="flat" @click="deleteEvent(evnt)">Delete
-      </v-btn>
-    </template>
-  </CalendarEventCard>
+  />
 </template>
 
 <script setup>
 import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue'
 import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
-import {useAuthStore} from '@/stores/authStore'
 import {watch, ref} from 'vue'
 
 const calendarEventsStore = useCalendarEventsStore()
 const {allCalendarEvents} = storeToRefs(calendarEventsStore)
 const filteredEvents = ref([])
-const {signToEvent, unsignToEvent, deleteEvent} = calendarEventsStore
+const {signToEvent, unsignToEvent} = calendarEventsStore
 
-const {isAdmin} = useAuthStore()
 
 const eventsChips = ref([
   {

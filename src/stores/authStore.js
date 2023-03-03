@@ -21,7 +21,6 @@ export const useAuthStore = defineStore('authStore', () => {
   const uid = computed(() => user.value.uid)
   const email = computed(() => user.value.email)
   const isAuthed = computed(() => !!user.value)
-  const isAdmin = computed(() => user.value.uid === process.env.VUE_APP_ADMIN_ID)
   // calendar part
   const signedEventsIds = ref(computed(() => dbUser.value.signedEvents?.map(e => e.eventId)))
   const appSignup = async (payload) => {  // ------------------------------------------------------------------------------------------------------------------------------------ Done: tests needed
@@ -157,7 +156,6 @@ export const useAuthStore = defineStore('authStore', () => {
     email,
     isAuthed,
     signedEventsIds,
-    isAdmin,
     appLogin,
     appSignup,
     appLogout,

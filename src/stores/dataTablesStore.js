@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia'
 import {ref} from 'vue'
-import {collection, doc, onSnapshot, setDoc} from 'firebase/firestore'
+import {collection, onSnapshot,} from 'firebase/firestore'
 import {db} from '@/plugins/firebase.config'
 
 export const useSGLeadersTable = defineStore('SGLeaders', () => {
@@ -18,16 +18,9 @@ export const useSGLeadersTable = defineStore('SGLeaders', () => {
     })
   }
 
-  async function createNewSGLeader (payload) {
-    const leaderId = Date.now().toString()
-    await setDoc(doc(db, 'sgLeaders', leaderId), {...payload})
-    await alert('all done')
-  }
-
 
   return {
     getSGLeaders,
-    createNewSGLeader,
     sgLeadersData,
   }
 })
