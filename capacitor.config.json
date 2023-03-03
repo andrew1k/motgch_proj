@@ -1,0 +1,6 @@
+{
+  "appId": "mbv.spb.ru.motgch.proj",
+  "appName": "Миссия Благая Весть",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
