@@ -1,10 +1,8 @@
 <template>
     <v-card class="ma-2">
-      <v-img
-        :src="youtube"/>
+      <LiteYouTubeEmbed id="NlmMjY86g80" />
     </v-card>
-  <v-card class="ma-2">
-  <v-card-text>Конспект проповеди, который вы можете изменять и сохранять себе:</v-card-text>
+  <v-card class="ma-2 pa-2">
       <v-textarea
         outlined
         auto-grow
@@ -23,7 +21,8 @@
 
 <script setup>
 import {ref} from 'vue'
-import youtube from '@/assets/appPics/youtube.png'
+import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
+import 'vue-lite-youtube-embed/style.css'
 
 const sundayText = ref(`Lorem ipsum dolor sit amet,
 consectetur adipisicing elit. Accusantium, assumenda at
