@@ -2,9 +2,9 @@
   <v-card class="ma-2" elevation="3">
     <v-img :src="newsItem?.url">
       <v-card-actions class="ma-2">
-        <VBtn variant="outlined" elevation="3" icon="mdi-chevron-left" @click="$router.push('/')"/>
+        <VBtn variant="flat" color="surface" elevation="3" icon="mdi-chevron-left" @click="$router.push('/')"/>
         <VSpacer/>
-        <VBtn variant="outlined" elevation="3" icon="mdi-bookmark-outline"/>
+        <VBtn variant="flat" color="surface" elevation="3" icon="mdi-bookmark-outline"/>
       </v-card-actions>
     </v-img>
     <VCardTitle class="text-indigo-darken-2 font-weight-bold" v-html="newsItem?.subtitle"/>
