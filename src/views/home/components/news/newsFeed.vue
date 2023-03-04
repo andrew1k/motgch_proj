@@ -5,6 +5,8 @@
     :key="item.id"
     :title="item.title"
     :img="item.url"
+    :leader-name="item.leaderName"
+    :leader-url="item.leaderUrl"
     :id="item.id"
   />
 </template>

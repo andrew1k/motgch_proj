@@ -1,14 +1,16 @@
 <template>
-  <v-card class="ma-2" elevation="3">
-    <v-img :src="newsItem?.url">
-      <v-card-actions class="ma-2">
-        <VBtn variant="flat" color="surface" elevation="3" icon="mdi-chevron-left" @click="$router.push('/')"/>
-        <VSpacer/>
-        <VBtn variant="flat" color="surface" elevation="3" icon="mdi-bookmark-outline"/>
-      </v-card-actions>
-    </v-img>
-    <VCardTitle class="text-indigo-darken-2 font-weight-bold" v-html="newsItem?.subtitle"/>
-    <VCardItem :prepend-avatar="newsItem?.url" title="Даниил Шатров" subtitle="25 мин назад"/>
+  <v-card-actions class="ma-2">
+    <VBtn variant="text" prepend-icon="mdi-chevron-left" @click="$router.push('/')">Назад</VBtn>
+    <VSpacer/>
+    <VBtn variant="text" append-icon="mdi-bookmark-outline">Сохранить</VBtn>
+  </v-card-actions>
+  <v-card class="ma-2">
+    <VImg :src="newsItem?.url"/>
+  </v-card>
+  <v-card class="ma-2">
+    <VCardTitle class="text-indigo-darken-2 font-weight-bold" v-html="newsItem?.title"/>
+    <VCardSubtitle v-html="newsItem?.subtitle" />
+    <VCardItem :prepend-avatar="newsItem?.leaderUrl" :title="newsItem?.leaderName" subtitle="25 мин назад"/>
     <VCardText v-html="newsItem?.text"/>
   </v-card>
 </template>
