@@ -1,9 +1,9 @@
 <template>
-  <v-card-actions class="ma-2">
+  <v-toolbar color="background" density="compact">
     <VBtn variant="text" prepend-icon="mdi-chevron-left" @click="$router.push('/')">Назад</VBtn>
     <VSpacer/>
     <VBtn variant="text" append-icon="mdi-bookmark-outline">Сохранить</VBtn>
-  </v-card-actions>
+  </v-toolbar>
   <v-card class="ma-2">
     <VImg :src="newsItem?.url"/>
   </v-card>

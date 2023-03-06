@@ -2,7 +2,8 @@
   <v-app-bar
     density="compact"
     prominent
-    elevation="3"
+    color="background"
+    elevation="0"
     flat
   >
     <VBtn icon="mdi-menu" @click="drawer = !drawer" />

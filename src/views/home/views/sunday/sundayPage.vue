@@ -13,7 +13,7 @@
       />
       <v-card-actions>
         <vSpacer/>
-        <v-btn @click="saveNotes" @keydown.enter="saveNotes" variant="flat" v-text="`Сохранить себе`"/>
+        <v-btn @click="saveNotes" @keydown.enter="saveNotes" variant="text" append-icon="mdi-bookmark-outline">Сохранить</v-btn>
       </v-card-actions>
     </v-card>
 

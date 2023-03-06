@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar density="comfortable" elevation="0" :color="toolbarColor">
-    <v-btn prepend-icon="mdi-chevron-left"  @click="$router.back()">{{ toolbarTitle }}</v-btn>
+  <v-toolbar density="compact" elevation="0" color="background">
+    <v-btn prepend-icon="mdi-chevron-left" :color="toolbarColor" @click="$router.back()">{{ toolbarTitle }}</v-btn>
     <VSpacer />
     <slot name="rightSpace" />
   </v-toolbar>

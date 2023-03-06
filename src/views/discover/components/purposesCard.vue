@@ -1,5 +1,5 @@
 <template>
-  <v-card-title class="mt-6">Purposes</v-card-title>
+  <v-card-title>Открой для себя церковь</v-card-title>
   <v-card
     class="mx-2 my-4"
     v-for="(card, i) in purposesCards"

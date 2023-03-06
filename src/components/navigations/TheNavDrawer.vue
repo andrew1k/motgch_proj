@@ -1,6 +1,8 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
+    elevation="0"
+    color="background"
   >
     <v-list density="comfortable" nav color="primary">
       <v-list-item
@@ -28,12 +30,13 @@
       </v-list-item>
     </v-list>
     <template v-slot:append>
-      <VListItem variant="tonal" to="/" title="Пожертвовать" class="text-center ma-1" color="primary" rounded="lg"/>
+      <VListItem variant="tonal" to="/giving" title="Пожертвовать" class="text-center ma-1" color="primary" rounded="xl"/>
       <VDivider/>
       <v-card-actions>
         <VSpacer/>
-        <VBtn icon="mdi-youtube" color="error"/>
-        <VBtn icon="mdi-telegram" color="info"/>
+        <VBtn density="compact" icon="mdi-youtube" color="error" to="https://www.youtube.com/@120SPD"/>
+        <VSpacer />
+        <VBtn icon="mdi-telegram" density="compact" color="info" />
         <VSpacer/>
       </v-card-actions>
     </template>

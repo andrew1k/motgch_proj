@@ -1,5 +1,5 @@
 <template>
-  <the-card-toolbar :toolbarTitle="$route.meta.title">
+  <the-card-toolbar :toolbarTitle="$route.meta.title" :toolbar-color="'primary'">
     <template #rightSpace>
       <LogoutBtn />
     </template>

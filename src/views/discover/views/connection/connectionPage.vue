@@ -1,11 +1,5 @@
 <template>
-    <v-card-actions>
-      <VSpacer />
-      <VBtn href="https://instagram.com" color="purple" icon="mdi-instagram"/>
-      <VBtn href="" color="blue" icon="mdi-telegram"/>
-      <VBtn href="" color="black" icon="mdi-phone"/>
-    </v-card-actions>
-
+  <v-card class="ma-2 pa-2">
     <CheckboxActionCard
       v-for="(check, i) in selectableItems"
       :key="i"
@@ -18,19 +12,8 @@
       </template>
     </CheckboxActionCard>
 
-    <v-form >
-      <VTextarea
-        class="ma-1"
-        variant="outlined"
-        label="Ваш вопрос, молитвенная нужда, просьба"
-        v-model="connectionFinalQuestion"
-      />
-      <v-card-actions>
-        <VSpacer />
-        <v-btn variant="flat" @click="sendConnectionForm(connectionFinalQuestion)">Отправить</v-btn>
-      </v-card-actions>
-    </v-form>
 
+  </v-card>
 </template>
 
 <script setup>
@@ -38,6 +21,7 @@ import {ref} from 'vue'
 import CheckboxActionCard from '@/views/discover/views/connection/components/checkboxActionCard.vue'
 import ConnectionFirstPray from '@/views/discover/views/connection/components/connectionFirstPray.vue'
 import ConnectionWannaBaptism from '@/views/discover/views/connection/components/connectionWannaBaptism.vue'
+import connectionOtherThings from '@/views/discover/views/connection/components/connectionOtherThings.vue'
 
 
 const selectableItems = ref([
@@ -83,6 +67,11 @@ const selectableItems = ref([
     title: 'Молитвенная нужда',
     value: 'prayNeeded',
     color: 'error',
+  }, {
+    title: 'Дргуое',
+    value: 'prayNeeded',
+    color: 'error',
+    component: connectionOtherThings
   },
 ])
 </script>

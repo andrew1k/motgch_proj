@@ -9,7 +9,7 @@
         </div>
         <div class="d-flex flex-column">
           <VCardTitle class="align-start" v-html="title" />
-          <VCardItem class="mt-auto" :prepend-avatar="leaderUrl" :title="leaderName" subtitle="21.02 в 12:30"/>
+          <VCardItem density="compact" class="mt-auto" :prepend-avatar="leaderUrl" :subtitle="leaderName" />
         </div>
       </div>
     </v-card>

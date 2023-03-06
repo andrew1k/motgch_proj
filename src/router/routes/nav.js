@@ -38,13 +38,15 @@ export default [
     meta: {
       layout: 'card',
       auth: true,
-      title: 'Связаться с церковью'
+      title: 'Связаться с церковью',
+      color: 'primary'
     }
   },{
     path: '/sunday',
     name: 'sunday',
     component: sundayPage,
     meta: {
+      color: 'primary',
       layout: 'card',
       auth: true,
       title: 'В это воскресенье'
@@ -63,6 +65,7 @@ export default [
     name: 'giving',
     component: givingPage,
     meta: {
+      color: 'primary',
       title: 'Пожертвование',
       layout: 'card',
       auth: true,
@@ -72,6 +75,7 @@ export default [
     name: 'notifications',
     component: notificationsPage,
     meta: {
+      color: 'primary',
       title: 'Уведомления',
       layout: 'card',
       auth: true,
