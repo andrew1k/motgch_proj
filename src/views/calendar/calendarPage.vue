@@ -1,5 +1,4 @@
 <template>
-  <v-card-title v-text="`Календарь`"/>
   <v-card class="ma-2">
     <CalendarComponent />
   </v-card>

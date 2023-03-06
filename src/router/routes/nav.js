@@ -20,6 +20,7 @@ export default [
     name: 'calendar',
     component: calendarPage,
     meta:  {
+      title: 'Календарь',
       layout: 'main',
       auth: true,
     }
@@ -28,6 +29,7 @@ export default [
     name: 'discover',
     component: discoverPage,
     meta: {
+      title: 'Открой для себя церковь',
       layout: 'main',
       auth: true,
     },

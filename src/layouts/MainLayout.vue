@@ -1,5 +1,5 @@
 <template>
-  <TheAppBar />
+  <TheAppBar :appbar-title="$route.meta.title" />
   <TheNavDrawer />
   <TheBottomNavigation v-if="mdAndDown"/>
   <v-main>
