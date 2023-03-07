@@ -1,7 +1,9 @@
 <template>
   <v-card class="ma-2">
     <v-card-actions>
-        <VAvatar icon="mdi-account" color="background" size="90" class="my-1 mx-2" @click="changeAvatar" variant="elevated"/>
+      <v-avatar color="background" size="90" class="my-1 mx-2" @click="changeAvatar">
+        <VIcon size="40" icon="mdi-account"/>
+      </v-avatar>
         <v-card-item>
           <v-card-title class="mt-2" @click="accSettingsToggler = !accSettingsToggler">
             {{ dbUser.firstName + ' ' + dbUser.secondName }}

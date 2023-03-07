@@ -8,8 +8,10 @@
           </v-avatar>
         </div>
         <div class="d-flex flex-column">
-          <VCardTitle class="align-start" v-html="title" />
-          <VCardItem density="compact" class="mt-auto" :prepend-avatar="leaderUrl" :subtitle="leaderName" />
+          <v-card-text class="ma-0 px-0">
+            <h2 class="mx-3" v-html="title"/>
+            <VCardItem :prepend-avatar="leaderUrl" :title="leaderName" subtitle="25 min ago"/>
+          </v-card-text>
         </div>
       </div>
     </v-card>

@@ -8,7 +8,7 @@
   >
     <VBtn icon="mdi-menu" @click="drawer = !drawer" />
     {{ appbarTitle }}
-    <vSpacer />
+    <VSpacer />
     <TheAccountMenu />
   </v-app-bar>
 </template>

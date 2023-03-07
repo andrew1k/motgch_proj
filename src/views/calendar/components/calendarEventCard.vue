@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="ma-2"
-    :color="show ? 'background' : 'surface'"
+    color="surface"
     :elevation="show ? 0 : 3"
     rounded="pill"
     @click="show = !show"
