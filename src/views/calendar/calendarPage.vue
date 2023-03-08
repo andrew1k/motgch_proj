@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-2">
+  <v-card class="ma-2" rounded="xl">
     <CalendarComponent />
   </v-card>
   <AllEvents/>

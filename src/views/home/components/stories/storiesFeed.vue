@@ -4,7 +4,7 @@
       v-for="story in stories"
       :key="story.id"
     >
-      <StoryCard  :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" />
+      <StoryCard :title="story.title" :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" />
     </v-slide-group-item>
   </v-slide-group>
 </template>
