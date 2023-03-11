@@ -6,8 +6,11 @@
     elevation="0"
     flat
   >
-    <VBtn icon="mdi-menu" @click="drawer = !drawer" />
-    {{ appbarTitle }}
+    <VBtn @click="drawer = !drawer">
+      <VIcon icon="mdi-menu" size="20" />
+      {{ appbarTitle }}
+    </VBtn>
+
     <VSpacer />
     <TheAccountMenu />
   </v-app-bar>

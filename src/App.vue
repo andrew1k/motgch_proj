@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :theme="theme">
     <v-snackbar
       v-model="snackbarMessage"
       multi-line
@@ -19,19 +19,22 @@ import AuthLayout from '@/layouts/AuthLayout'
 import ProfileLayout from '@/layouts/ProfileLayout.vue'
 import CardLayout from '@/layouts/CardLayout.vue'
 import NewsLayout from '@/layouts/NewsLayout.vue'
-import {useSnackbarMessages} from '@/stores/appState'
+import {useAppState, useSnackbarMessages} from '@/stores/appState'
 import {storeToRefs} from 'pinia'
 
 export default {
   setup() {
     const messagesStore = useSnackbarMessages()
     const {snackbarMessage} = storeToRefs(messagesStore)
+    const appState = useAppState()
+    const { theme} = storeToRefs(appState)
 
 
     const route = useRoute()
     return {
       layout: computed(() => route.meta.layout),
       snackbarMessage,
+      theme,
     }
   },
   components: {
