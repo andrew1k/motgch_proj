@@ -10,9 +10,27 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   const stories = ref([])
   const storiesIds = ref([])
   const newsItem = ref()
+  const sunday = ref([])
+  const sundayIds = ref([])
 
   const appState = useAppState()
   const {isPending} = storeToRefs(appState)
+
+  async function getSunday() {
+    isPending.value = true
+    const colRef = collection(db, 'sunday')
+    await onSnapshot(colRef, snapshot => {
+      snapshot.docs.forEach(doc => {
+        const id = doc.id
+        const data = doc.data()
+        if (!sundayIds.value.includes(id)) {
+          sundayIds.value.push(id)
+          sunday.value.push({...data})
+        }
+        isPending.value = false
+      })
+    })
+  }
 
   async function getNews() {
     isPending.value = true
@@ -55,11 +73,13 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
 
 
   return {
+    getSunday,
     getStories,
     getNews,
     getNewsItem,
     news,
     stories,
     newsItem,
+    sunday,
   }
 })
