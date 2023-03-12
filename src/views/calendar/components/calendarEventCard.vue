@@ -8,7 +8,7 @@
 
   >
     <v-card-actions>
-<!--      <VIcon icon="mdi-circle" :color="eventColor" />-->
+      <VIcon :icon="eventIcon" :color="eventColor" class="ml-2" />
       <VCardItem :title="eventTitle" :subtitle="show ? `${eventTime.slice(0,10)}  в ${eventTime.slice(11)}`  : null" />
     <VSpacer/>
       <v-chip v-if="signedEventsIds.includes(eventId)" rounded="pill" color="success" >вы записаны</v-chip>
@@ -60,6 +60,9 @@ defineProps({
   eventId: {
     type: Number,
     required: true
+  },
+  eventIcon: {
+    type: String,
   }
 })
 

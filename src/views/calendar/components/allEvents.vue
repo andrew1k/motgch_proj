@@ -28,6 +28,7 @@
     :event-text="evnt.text"
     :event-time="evnt.start"
     :event-color="evnt.color"
+    :event-icon="evnt.icon"
     :event-id="evnt.id"
     @sign-btn="signToEvent(evnt)"
     @unsign-btn="unsignToEvent(evnt)"

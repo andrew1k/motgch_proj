@@ -9,6 +9,7 @@
     :event-time="evnt.start"
     :event-color="evnt.color"
     :event-id="evnt.id"
+    :event-icon="evnt.icon"
     @sign-btn="signToEvent(evnt)"
     @unsign-btn="unsignToEvent(evnt)"
   />
