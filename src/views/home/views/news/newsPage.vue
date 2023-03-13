@@ -10,7 +10,7 @@
   <v-card class="ma-2">
     <VCardTitle class="text-indigo-darken-2 font-weight-bold" v-html="newsItem?.title"/>
     <VCardSubtitle v-html="newsItem?.subtitle" />
-    <VCardItem :prepend-avatar="newsItem?.leaderUrl" :title="newsItem?.leaderName" subtitle="25 мин назад"/>
+    <VCardItem :prepend-avatar="newsItem?.leaderUrl" :title="newsItem?.leaderName" :subtitle="newsItem?.leaderTitle" />
     <VCardText v-html="newsItem?.text"/>
   </v-card>
 </template>

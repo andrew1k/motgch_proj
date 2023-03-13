@@ -2,7 +2,7 @@
   <v-card
     class="ma-2"
     color="surface"
-    :elevation="0"
+    :elevation="show ? 0 : 3"
     rounded="pill"
     @click="show = !show"
 

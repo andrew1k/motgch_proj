@@ -1,4 +1,5 @@
 <template>
+  <v-scale-transition>
   <v-card variant="text" elevation="0" rounded="0" v-for="item in sunday" :key="item.id">
   <v-card class="ma-2">
     <LiteYouTubeEmbed :id="item.id" :title="item.title" />
@@ -21,6 +22,7 @@
     </v-card-actions>
   </v-card>
   </v-card>
+  </v-scale-transition>
 </template>
 
 <script setup>

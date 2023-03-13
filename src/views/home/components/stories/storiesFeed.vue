@@ -18,7 +18,6 @@
       <!--      <StoryCard :title="story.title" :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" />-->
     </v-slide-group-item>
   </v-slide-group>
-  {{ model }}
 </template>
 
 <script setup>

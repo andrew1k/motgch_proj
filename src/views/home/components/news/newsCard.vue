@@ -31,7 +31,7 @@
           <v-card-actions class="mx-0 pa-0 mt-auto">
             <v-card-subtitle class="ma-0 pa-0">25 min ago</v-card-subtitle>
             <VSpacer/>
-            <VBtn icon="mdi-chevron-right"/>
+            <VIcon class="mx-3" icon="mdi-chevron-right"/>
           </v-card-actions>
           <!--      <VCardItem class="mx-0 pa-0 mt-auto" :prepend-avatar="leaderUrl" :subtitle="leaderName" density="compact" />-->
         </v-col>

@@ -23,9 +23,9 @@
       </v-radio-group>
     </v-form>
   <v-card-actions>
-    <VBtn icon="mdi-chevron-left" color="secondary" density="comfortable" variant="flat" @click="$emit('goBack')"/>
+    <VBtn icon="mdi-chevron-left" color="fellowship" density="comfortable" @click="$emit('goBack')"/>
     <VSpacer/>
-    <v-btn variant="flat" color="secondary" @click="signToBaptism">Занисаться на крещение</v-btn>
+    <v-btn color="fellowship" @click="signToBaptism">Занисаться на крещение</v-btn>
   </v-card-actions>
 </template>
 

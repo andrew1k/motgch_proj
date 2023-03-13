@@ -12,8 +12,13 @@ export default createVuetify({
     defaults: {
       global: {},
       VCard: {
-        elevation: 0,
+        elevation: 3,
         rounded: 'xl',
+      },
+      VCardActions:{
+        VBtn: {
+          variant: 'outlined'
+        }
       },
       VBtn: {
         elevation: 0,
@@ -28,9 +33,9 @@ export default createVuetify({
       VDataTableVirtual,
     },
     theme: {
-      defaultTheme: 'dark',
+      defaultTheme: 'light',
       themes: {
-        light: {
+        mbvLight: {
           dark: false,
           colors: {
             background: '#f4f4f4 ', // f5f5f5
@@ -53,7 +58,7 @@ export default createVuetify({
             evangelismSec: '#0cbde8',
           },
         },
-        mbvDarkTheme: {
+        mbvDark: {
           dark: true,
           colors: {
             background: '#282828',
