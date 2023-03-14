@@ -33,7 +33,7 @@ export default createVuetify({
       VDataTableVirtual,
     },
     theme: {
-      defaultTheme: 'light',
+      defaultTheme: 'dark',
       themes: {
         mbvLight: {
           dark: false,
