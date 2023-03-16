@@ -2,5 +2,13 @@
   "appId": "mbv.spb.ru.motgch.proj",
   "appName": "Миссия Благая Весть",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    },
+    "LocalNotifications": {
+
+    }
+  }
 }
