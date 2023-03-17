@@ -21,6 +21,7 @@ import CardLayout from '@/layouts/CardLayout.vue'
 import NewsLayout from '@/layouts/NewsLayout.vue'
 import {useAppState, useSnackbarMessages} from '@/stores/appState'
 import {storeToRefs} from 'pinia'
+import {useNotificationsStore} from '@/stores/notificationsStore'
 
 export default {
   setup() {
@@ -28,7 +29,8 @@ export default {
     const {snackbarMessage} = storeToRefs(messagesStore)
     const appState = useAppState()
     const { theme} = storeToRefs(appState)
-
+    const { scheduleNotifications } = useNotificationsStore()
+    scheduleNotifications()
 
     const route = useRoute()
     return {

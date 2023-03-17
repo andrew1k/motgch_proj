@@ -88,6 +88,7 @@ import {ref} from 'vue'
 import {useAuthStore} from '@/stores/authStore'
 import {useField, useForm} from 'vee-validate'
 import * as yup from 'yup'
+import {useNotificationsStore} from '@/stores/notificationsStore'
 
 const {appSignup} = useAuthStore()
 
@@ -139,7 +140,10 @@ const {value: personGender, errorMessage: personGenderError, handleBlur: personG
   yup.string().required('Это поле обязательно')
 )
 
+const {requestNotificationsPermissons} = useNotificationsStore()
+
 const submit = handleSubmit(async values => {
   await appSignup({...values})
+  await requestNotificationsPermissons()
 })
 </script>

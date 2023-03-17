@@ -30,6 +30,7 @@ import {ref} from 'vue'
 import {useField, useForm} from 'vee-validate'
 import * as yup from 'yup'
 import {useAuthStore} from '@/stores/authStore'
+import {useNotificationsStore} from '@/stores/notificationsStore'
 const { appLogin } = useAuthStore()
 
 const passwordEye = ref(false)
@@ -51,7 +52,10 @@ const {value: password, errorMessage: pError, handleBlur: pBlur} = useField('pas
     .max(32, 'Не должно иметь более 32 символов')
 )
 
+const {requestNotificationsPermissons} = useNotificationsStore()
+
 const submit = handleSubmit(async values => {
-   await appLogin({...values})
+  await appLogin({...values})
+  await requestNotificationsPermissons()
 })
 </script>

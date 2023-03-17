@@ -2,23 +2,19 @@ import {defineStore} from 'pinia'
 import { LocalNotifications } from '@capacitor/local-notifications'
 
 export const useNotificationsStore = defineStore('notificationsStore', () => {
-  const reqOnInit = async () => {
-    await LocalNotifications.requestPermissions()
+  const requestNotificationsPermissons = async () => {
+    const res = await LocalNotifications.checkPermissions()
+    if (res.display === 'denied' || res.display === 'prompt') await LocalNotifications.requestPermissions()
   }
-  const sheduleBasic = async () => {
+  const scheduleNotifications = async (notification) => {
     await LocalNotifications.schedule({
-      notifications: [{
-        title: 'title',
-        id: 1,
-        body: 'Body text',
-        smallIcon: 'mdi-bell',
-        iconColor: 'gray',
-      }]
+      notifications: [{...notification}]
     })
+    console.log(LocalNotifications.getPending())
   }
 
   return {
-    reqOnInit,
-    sheduleBasic
+    requestNotificationsPermissons,
+    scheduleNotifications,
   }
 })

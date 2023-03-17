@@ -10,15 +10,17 @@ import {
 } from 'firebase/firestore'
 import {db, auth} from '@/plugins/firebase.config'
 import {useAuthStore} from '@/stores/authStore'
+import {useNotificationsStore} from '@/stores/notificationsStore'
 
 export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
 
   const authStore = useAuthStore()
-  const { signedEventsIds} = storeToRefs(authStore)
+  const {signedEventsIds} = storeToRefs(authStore)
 
   const allCalendarEvents = ref([])
   const weekCalendarEvents = ref([])
   const docIds = ref([])
+  const {scheduleNotifications} = useNotificationsStore()
 
   async function getCalendarEvents() {
     const colRef = collection(db, 'calendar')
@@ -67,6 +69,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       weekCalendarEvents.value = filteredEvents
     })
   }
+
   async function signToEvent(evnt) {
     const eventDay = evnt.start.slice(0, 10)
     const docRef = doc(db, 'calendar', eventDay)
@@ -81,8 +84,15 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       await updateDoc(doc(db, 'users', auth.currentUser.uid), {
         signedEvents: arrayUnion({eventDay, eventId}),
       })
+      await scheduleNotifications({
+        title: evnt.title,
+        body: evnt.text,
+        id: +eventId.slice(0, 5),
+        schedule: { at: new Date(evnt.start) },
+      })
     }
   }
+
   async function unsignToEvent(evnt) {
     const eventDay = evnt.start.slice(0, 10)
     const docRef = doc(db, 'calendar', eventDay)
