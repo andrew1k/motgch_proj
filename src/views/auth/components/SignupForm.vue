@@ -140,10 +140,10 @@ const {value: personGender, errorMessage: personGenderError, handleBlur: personG
   yup.string().required('Это поле обязательно')
 )
 
-const {requestNotificationsPermissons} = useNotificationsStore()
+const {requestNotificationsPermissions} = useNotificationsStore()
 
 const submit = handleSubmit(async values => {
   await appSignup({...values})
-  await requestNotificationsPermissons()
+  await requestNotificationsPermissions()
 })
 </script>
