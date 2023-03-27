@@ -10,7 +10,6 @@ export const useNotificationsStore = defineStore('notificationsStore', () => {
     await LocalNotifications.schedule({
       notifications: [{...notification}]
     })
-    console.log(LocalNotifications.getPending())
   }
 
   return {
