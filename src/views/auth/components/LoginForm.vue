@@ -20,7 +20,7 @@
     <v-card-actions>
       <VListItem to="/restorePassword" subtitle="забыли пароль?"/>
       <vSpacer/>
-      <v-btn type="submit" :disabled="eError || pError">Войти</v-btn>
+      <v-btn type="submit" :disabled="!!eError || !!pError">Войти</v-btn>
     </v-card-actions>
   </v-form>
 </template>
@@ -52,10 +52,10 @@ const {value: password, errorMessage: pError, handleBlur: pBlur} = useField('pas
     .max(32, 'Не должно иметь более 32 символов')
 )
 
-const {requestNotificationsPermissons} = useNotificationsStore()
+const {requestNotificationsPermissions} = useNotificationsStore()
 
 const submit = handleSubmit(async values => {
   await appLogin({...values})
-  await requestNotificationsPermissons()
+  await requestNotificationsPermissions()
 })
 </script>

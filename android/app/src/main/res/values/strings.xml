@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Миссия Благая Весть</string>
+    <string name="title_activity_main">Миссия Благая Весть</string>
+    <string name="package_name">mbv.spb.ru.motgch.proj</string>
+    <string name="custom_url_scheme">mbv.spb.ru.motgch.proj</string>
+</resources>

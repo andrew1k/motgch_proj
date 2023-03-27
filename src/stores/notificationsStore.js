@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 import { LocalNotifications } from '@capacitor/local-notifications'
 
 export const useNotificationsStore = defineStore('notificationsStore', () => {
-  const requestNotificationsPermissons = async () => {
+  const requestNotificationsPermissions = async () => {
     const res = await LocalNotifications.checkPermissions()
     if (res.display === 'denied' || res.display === 'prompt') await LocalNotifications.requestPermissions()
   }
@@ -14,7 +14,7 @@ export const useNotificationsStore = defineStore('notificationsStore', () => {
   }
 
   return {
-    requestNotificationsPermissons,
+    requestNotificationsPermissions,
     scheduleNotifications,
   }
 })
