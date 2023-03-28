@@ -1,8 +1,8 @@
 <template>
   <Calendar
-    :columns="$screens({ default: 1, lg: 2, md: 2 })"
-    :rows="$screens({ default: 1, lg: 2 })"
-    is-expanded
+    expanded
+    borderless
+    transparent
     :attributes="attrs"
     locale="ru"
     :min-date="new Date()"
@@ -29,7 +29,7 @@ let attrs = ref([])
 allCalendarEvents.value.map(evnt => {
   attrs.value.push({
     key: evnt.id,
-    dates: evnt.start,
+    dates: new Date(evnt.start),
     dot: evnt.color,
     popover: {
       label: evnt.title,

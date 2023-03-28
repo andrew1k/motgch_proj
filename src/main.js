@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import router from './router'
 import {createPinia} from 'pinia'
-import {SetupCalendar} from 'v-calendar'
+import VCalendar from 'v-calendar'
 import 'v-calendar/dist/style.css'
 import vuetify from './plugins/vuetify'
 import {loadFonts} from './plugins/webfontloader'
@@ -19,6 +19,6 @@ onAuthStateChanged(auth, () => {
     .use(pinia)
     .use(router)
     .use(vuetify)
-    .use(SetupCalendar, {})
+    .use(VCalendar, {})
     .mount('#app')
 })
