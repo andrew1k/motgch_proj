@@ -29,7 +29,7 @@
         <v-col cols="8" class="d-flex flex-column">
           <VCardTitle class="ma-0 px-0 pt-1" v-text="title"/>
           <v-card-actions class="mx-0 pa-0 mt-auto">
-            <v-card-subtitle class="ma-0 pa-0">25 min ago</v-card-subtitle>
+            <v-card-subtitle class="ma-0 pa-0">{{ new Date(+id).toLocaleString() }}</v-card-subtitle>
             <VSpacer/>
             <VIcon class="mx-3" icon="mdi-chevron-right"/>
           </v-card-actions>

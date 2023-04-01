@@ -14,7 +14,7 @@
 <!--      >-->
 <!--          <h5 class="text-white ma-2" v-text="story.title" v-if="!isSelected"/>-->
 <!--      </v-card>-->
-            <StoryCard :title="story.title" :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" />
+            <StoryCard :title="story.title" :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" :color="story.color" />
     </v-slide-group-item>
   </v-slide-group>
 </template>

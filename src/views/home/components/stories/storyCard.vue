@@ -11,6 +11,9 @@
         width="100"
         v-bind="props"
         :image="prevImg"
+        :color="color"
+        :variant="color ? 'outlined' : 'elevated'"
+        elevation="3"
       >
         <h6 class="text-white ma-2" v-text="title"/>
       </VCard>
@@ -68,6 +71,10 @@ defineProps({
     required: true,
     type: Array,
   },
+  color: {
+    required: false,
+    type: String,
+  }
 })
 
 const dialog = ref(false)

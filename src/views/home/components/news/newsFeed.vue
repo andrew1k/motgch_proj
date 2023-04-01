@@ -1,5 +1,5 @@
 <template>
-  <v-card-title class="mt-6">Новости церкви</v-card-title>
+  <v-card-title class="mt-6">Жизнь церкви</v-card-title>
   <NewsCard
     v-for="item in news"
     :key="item.id"

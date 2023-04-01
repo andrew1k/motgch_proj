@@ -60,15 +60,15 @@ export default createVuetify({
         mbvDark: {
           dark: true,
           colors: {
-            background: '#282828',
-            surface: '#181818', // 264653
-            primary: '#66707A',
+            background: '#1C1B1F',
+            surface: '#49454F', // 264653
+            primary: '#D0BCFF',
             // primary: '#2a9d8f',
-            secondary: '#505860',
+            secondary: '#CCC2DC',
             // secondary: '#f4a261',
-            error: '#501820',
+            error: '#F2B8B5',
             // error: '#e76f51',
-            info: '#66707A',
+            info: '#4F378B',
             // info: '#0cbde8',
             success: '#97c93d',
             warning: '#e9c46a',
