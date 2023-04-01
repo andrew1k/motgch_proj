@@ -20,6 +20,12 @@
             <VIcon icon="mdi-gift"/>
           </template>
         </v-list-item>
+        <VDivider />
+        <v-list-item title="Тема" @click="handleTheme">
+          <template v-slot:append>
+            <VIcon icon="mdi-lightbulb-on"/>
+          </template>
+        </v-list-item>
       </v-list>
     </v-card>
   </v-menu>
@@ -28,7 +34,9 @@
 <script setup>
 import {useAuthStore} from '@/stores/authStore'
 import {storeToRefs} from 'pinia'
+import {useAppState} from '@/stores/appState'
 
+const {handleTheme} = useAppState()
 const authStore = useAuthStore()
 const {email, dbUser} = storeToRefs(authStore)
 </script>

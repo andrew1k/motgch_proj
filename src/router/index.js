@@ -4,7 +4,7 @@ import auth from '@/router/routes/auth'
 import nav from '@/router/routes/nav'
 import {useAuthStore} from '@/stores/authStore'
 import {storeToRefs} from 'pinia'
-
+import {App} from '@capacitor/app'
 
 const routes = [
   {
@@ -25,6 +25,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
+App.addListener('backButton', () => {router.back()})
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()

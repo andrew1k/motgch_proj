@@ -67,12 +67,13 @@ const navList = ref([
     color: 'indigo',
     title: 'Открой для себя церковь',
     routeTo: '/discover',
-  }, {
-    icon: 'mdi-clock',
-    color: 'cyan',
-    title: 'В это воскресенье',
-    routeTo: '/sunday',
   },
+  // {
+  //   icon: 'mdi-clock',
+  //   color: 'cyan',
+  //   title: 'В это воскресенье',
+  //   routeTo: '/sunday',
+  // },
 ])
 
 const purposeNavList = ref([
