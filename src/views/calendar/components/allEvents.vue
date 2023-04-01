@@ -21,7 +21,7 @@
       ></v-chip>
     </v-chip-group>
   </v-card>
-  <CalendarEventCard
+  <calendar-event-card
     v-for="evnt in filteredEvents.length ? filteredEvents : allCalendarEvents"
     :key="evnt.id"
     :event-title="evnt.title"
@@ -32,7 +32,13 @@
     :event-id="evnt.id"
     @sign-btn="signToEvent(evnt)"
     @unsign-btn="unsignToEvent(evnt)"
-  />
+  >
+    <template #deleteBtnSpace>
+      <v-btn prepend-icon="mdi-close" color="error" v-if="isAdmin" variant="flat" @click="deleteEvent(evnt)">
+        Delete
+      </v-btn>
+    </template>
+  </calendar-event-card>
 </template>
 
 <script setup>
@@ -40,12 +46,13 @@ import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue
 import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
 import {watch, ref} from 'vue'
+import {useAuthStore} from '@/stores/authStore'
 
 const calendarEventsStore = useCalendarEventsStore()
 const {allCalendarEvents} = storeToRefs(calendarEventsStore)
 const filteredEvents = ref([])
-const {signToEvent, unsignToEvent} = calendarEventsStore
-
+const {signToEvent, unsignToEvent, deleteEvent} = calendarEventsStore
+const {isAdmin} = useAuthStore()
 
 const eventsChips = ref([
   {

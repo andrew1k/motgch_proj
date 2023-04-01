@@ -7,6 +7,8 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  setDoc,
+  deleteField,
 } from 'firebase/firestore'
 import {db, auth} from '@/plugins/firebase.config'
 import {useAuthStore} from '@/stores/authStore'
@@ -105,7 +107,45 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     await updateDoc(doc(db, 'users', auth.currentUser.uid), {
       signedEvents: arrayRemove({eventDay, eventId}),
     })
+  }
+  // ------------------------------------------------------------------------------------------------------------------------------------------------ admin funcs
+  async function saveEventToDB(payload) {
+    const id = Date.now().toString()
+    const eventToDB = {}
+    eventToDB[id] = {
+      title: payload.eventTitle,
+      icon: payload.chipIcon,
+      text: payload.eventText,
+      color: payload.eventColor,
+      start: `${payload.eventDate}T${payload.eventTime}`,
+      id: id,
+      chipValues: payload.chipValues
+    }
 
+    // проверка на существование в бд записи на этот день, тогда обнавляет док
+    if (docIds.value.includes(payload.eventDate)) {
+      await updateDoc(doc(db, 'calendar', payload.eventDate), eventToDB)
+        .then(() => {
+          alert('event updated successfully')
+        })
+    } else {
+      await setDoc(doc(db, 'calendar', payload.eventDate), eventToDB)
+        .then(() => {
+          alert('event saved successfully')
+        })
+    }
+  }
+  async function deleteEvent(evnt) {
+    const eventDay = evnt.start.slice(0, 10)
+    const docRef = doc(db, 'calendar', eventDay)
+    const eventId = evnt.id
+
+    await evnt.signedAccounts.forEach(usr => {
+      updateDoc(doc(db, 'users', usr.id), {
+        signedEvents: arrayRemove({eventDay, eventId}),
+      })
+    })
+    await updateDoc(docRef, {[eventId]: deleteField()})
   }
 
   return {
@@ -114,5 +154,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     getCalendarEvents,
     signToEvent,
     unsignToEvent,
+    saveEventToDB,
+    deleteEvent
   }
 })
