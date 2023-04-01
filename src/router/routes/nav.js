@@ -44,7 +44,7 @@ export default [
       color: 'primary'
     }
   },{
-    path: '/sunday/:id',
+    path: '/sunday',
     name: 'sunday',
     component: sundayPage,
     props: true,

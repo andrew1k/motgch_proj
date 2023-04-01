@@ -1,6 +1,6 @@
 import {defineStore, storeToRefs} from 'pinia'
 import {db, storage} from '@/plugins/firebase.config'
-import {doc, collection, onSnapshot, deleteDoc, setDoc} from 'firebase/firestore'
+import {doc, collection, onSnapshot, deleteDoc, setDoc, query, orderBy, limit, getDocs} from 'firebase/firestore'
 import {uploadBytes, ref as sref, getDownloadURL, deleteObject} from 'firebase/storage'
 import {ref} from 'vue'
 import {useAppState} from '@/stores/appState'
@@ -11,25 +11,19 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   const stories = ref([])
   const storiesIds = ref([])
   const newsItem = ref()
-  const sunday = ref([])
-  const sundayIds = ref([])
+  const sunday = ref({docId: '0'})
 
   const appState = useAppState()
   const {isPending} = storeToRefs(appState)
 
   async function getSunday() {
     isPending.value = true
-    const colRef = collection(db, 'sunday')
-    await onSnapshot(colRef, snapshot => {
-      snapshot.docs.forEach(doc => {
-        const id = doc.id
-        const data = doc.data()
-        if (!sundayIds.value.includes(id)) {
-          sundayIds.value.push(id)
-          sunday.value.push({...data})
-        }
-        isPending.value = false
-      })
+    const q = query(collection(db, 'sunday'), orderBy('timeId', "desc"), limit(1))
+    const qSnapshot = await getDocs(q)
+    qSnapshot.forEach(doc => {
+      const docId = doc.id
+      sunday.value = {...doc.data(), docId }
+      isPending.value = false
     })
   }
 
@@ -144,6 +138,11 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
       console.log(e)
     }
   }
+  async function updateSunday(payload) {
+    const timeId =  Date.now().toString()
+    await setDoc(doc(db, 'sunday', timeId), {...payload, timeId})
+    await alert('Обновлено')
+  }
 
   return {
     getSunday,
@@ -158,5 +157,6 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
     uploadNews,
     deleteNewsItem,
     uploadStory,
+    updateSunday,
   }
 })

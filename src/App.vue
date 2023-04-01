@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {computed} from 'vue'
+import {computed, onBeforeMount} from 'vue'
 import {useRoute} from 'vue-router'
 import MainLayout from '@/layouts/MainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
@@ -22,6 +22,7 @@ import NewsLayout from '@/layouts/NewsLayout.vue'
 import {useAppState, useSnackbarMessages} from '@/stores/appState'
 import {storeToRefs} from 'pinia'
 import {useNotificationsStore} from '@/stores/notificationsStore'
+import {useNewsfeedStore} from '@/stores/newsfeedStore'
 
 export default {
   setup() {
@@ -31,6 +32,11 @@ export default {
     const { theme} = storeToRefs(appState)
     const { scheduleNotifications } = useNotificationsStore()
     scheduleNotifications()
+
+    const { getSunday } = useNewsfeedStore()
+    onBeforeMount(() => {
+      getSunday()
+    })
 
     const route = useRoute()
     return {

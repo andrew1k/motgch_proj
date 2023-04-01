@@ -1,34 +1,58 @@
 <template>
-  <v-card
-    v-for="item in sunday"
-    :key="item?.id"
-    variant="text"
-    elevation="0"
-    rounded="0"
-  >
   <v-card-title class="mt-2">В это воскресенье</v-card-title>
   <v-card
-    :to="{name: 'sunday', params: {id: item?.id}}"
+    to="/sunday"
     class="ma-2"
   >
-    <LiteYouTubeEmbed :id="item?.id" :title="item?.title" />
+    <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title" />
   </v-card>
   <v-card-text>
-    <h4 class="font-weight-light" v-html="item?.title"/>
+    <h4 class="font-weight-light" v-html="sunday?.title"/>
   </v-card-text>
-  </v-card>
+<!--   ----------------------------------------------------------------------------------------------------------------------- Admin tool  -->
+    <v-btn class="mx-2" v-if="isAdmin" @click="show = !show">Обновить ВС</v-btn>
+    <v-card v-if="show" class="ma-2">
+      <VTextField
+        class="ma-2"
+        v-model="title"
+        label="Описание"
+        hide-details
+      />
+      <VTextarea
+        class="ma-2"
+        v-model="text"
+        label="Текст"
+        hide-details
+        variant="outlined"
+      />
+      <VTextField
+        class="ma-2"
+        v-model="id"
+        label="ID"
+        hide-details
+      />
+      <v-card-actions>
+        <VSpacer />
+        <v-btn @click="updateSunday({text, title, id})">Обновить</v-btn>
+      </v-card-actions>
+    </v-card>
 </template>
 
 <script setup>
 import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
 import {useNewsfeedStore} from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
-import {onBeforeMount} from 'vue'
+import {ref} from 'vue'
+import {useAuthStore} from '@/stores/authStore'
 const newsfeedStore = useNewsfeedStore()
-const {getSunday} = newsfeedStore
+const {updateSunday} = newsfeedStore
 const {sunday} = storeToRefs(newsfeedStore)
 
-onBeforeMount(async () => {
-  await getSunday()
-})
+
+const title = ref('')
+const text = ref('')
+const id = ref('')
+
+const {isAdmin} = useAuthStore()
+const show = ref(false)
 </script>
