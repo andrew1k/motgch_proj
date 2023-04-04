@@ -3,6 +3,7 @@
   <v-card
     to="/sunday"
     class="ma-2"
+    v-if="!isPending"
   >
     <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title" />
   </v-card>
@@ -44,10 +45,13 @@ import {useNewsfeedStore} from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
 import {ref} from 'vue'
 import {useAuthStore} from '@/stores/authStore'
+import {useAppState} from '@/stores/appState'
 const newsfeedStore = useNewsfeedStore()
 const {updateSunday} = newsfeedStore
 const {sunday} = storeToRefs(newsfeedStore)
 
+const appState = useAppState()
+const {isPending} = storeToRefs(appState)
 
 const title = ref('')
 const text = ref('')
