@@ -1,17 +1,6 @@
 import calendarPage from '@/views/calendar/calendarPage.vue'
 import discoverPage from '@/views/discover/discoverPage'
-import connectionPage from '@/views/discover/views/connection/connectionPage.vue'
 import sundayPage from '@/views/home/views/sunday/sundayPage.vue'
-import profilePage from '@/views/profile/profilePage.vue'
-import givingPage from '@/views/profile/views/giving/givingPage.vue'
-import notificationsPage from '@/views/profile/views/notifications/notificationsPage.vue'
-import purposeWorship from '@/views/purposes/purposeWorship.vue'
-import purposeFellowship from '@/views/purposes/purposeFellowship.vue'
-import purposeDiscepleship from '@/views/purposes/purposeDiscepleship.vue'
-import purposeMinistry from '@/views/purposes/purposeMinistry.vue'
-import purposeEvangelism from '@/views/purposes/purposeEvangelism.vue'
-import purposeYouth from '@/views/purposes/purposeYouth.vue'
-import notfoundPage from '@/views/404/notfoundPage.vue'
 import newsPage from '@/views/home/views/news/newsPage.vue'
 import eventPage from '@/views/calendar/views/event/eventPage.vue'
 export default [
@@ -36,7 +25,7 @@ export default [
   },{
     path: '/connection',
     name: 'connection',
-    component: connectionPage,
+    component: () => import('@/views/discover/views/connection/connectionPage.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -57,7 +46,7 @@ export default [
   },{
     path: '/profile',
     name: 'profile',
-    component: profilePage,
+    component: () => import('@/views/profile/profilePage.vue'),
     meta: {
       title: 'Аккаунт',
       layout:  'profile',
@@ -66,7 +55,7 @@ export default [
   },{
     path: '/giving',
     name: 'giving',
-    component: givingPage,
+    component: () => import('@/views/profile/views/giving/givingPage.vue'),
     meta: {
       color: 'primary',
       title: 'Пожертвование',
@@ -76,7 +65,7 @@ export default [
   },{
     path: '/notifications',
     name: 'notifications',
-    component: notificationsPage,
+    component: () => import('@/views/profile/views/notifications/notificationsPage.vue'),
     meta: {
       color: 'primary',
       title: 'Уведомления',
@@ -86,7 +75,7 @@ export default [
   },{
     path: '/purposes/worship',
     name: 'worship',
-    component: purposeWorship,
+    component: () => import('@/views/purposes/purposeWorship.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -96,7 +85,7 @@ export default [
   },{
     path: '/purposes/fellowship',
     name: 'fellowship',
-    component: purposeFellowship,
+    component: () => import('@/views/purposes/purposeFellowship.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -106,7 +95,7 @@ export default [
   },{
     path: '/purposes/discepleship',
     name: 'discepleship',
-    component: purposeDiscepleship,
+    component: () => import('@/views/purposes/purposeDiscepleship.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -116,7 +105,7 @@ export default [
   },{
     path: '/purposes/ministry',
     name: 'ministry',
-    component: purposeMinistry,
+    component: () => import('@/views/purposes/purposeMinistry.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -126,7 +115,7 @@ export default [
   },{
     path: '/purposes/evangelism',
     name: 'evangelism',
-    component: purposeEvangelism,
+    component: () => import('@/views/purposes/purposeEvangelism.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -136,7 +125,7 @@ export default [
   },{
     path: '/purposes/youth',
     name: 'youth',
-    component: purposeYouth,
+    component: () => import('@/views/purposes/purposeYouth.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -146,7 +135,7 @@ export default [
   },{
     path: '/:catchAll(.*)', // catchall 404
     name: 'notFound',
-    component: notfoundPage,
+    component: () => import('@/views/404/notfoundPage.vue'),
     meta: {
       title: 'Not Found',
       layout: 'card',

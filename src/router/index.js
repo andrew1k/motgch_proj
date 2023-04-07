@@ -25,13 +25,13 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
-App.addListener('backButton', () => {router.back()})
+App.addListener('backButton', () => {router.back()}) // для Android слушает кнопку назад
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   const {isAuthed} = storeToRefs(authStore)
   const requireAuth = to.meta.auth
-  if (requireAuth && !isAuthed.value) next('/auth?message=needAuthorization')
+  if (requireAuth && !isAuthed.value) next('/auth')
   else if (requireAuth && isAuthed.value) next()
   else if (!requireAuth && isAuthed.value) next('/')
   else next()

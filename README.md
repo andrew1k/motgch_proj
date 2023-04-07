@@ -7,7 +7,7 @@ For backend discover  [Firebase Documentation](https://firebase.google.com/docs?
 - [Firebase Authentification](https://firebase.google.com/docs/auth/web/start?hl=en&authuser=0) - for auth service
 - [Firebase Cloud messaging](https://firebase.google.com/docs/cloud-messaging/js/client?authuser=0&hl=en) - for push notifications
 
-For mobile dev - [Ionic Capacitor Library](https://capacitorjs.com/)
+For mobile dev - [Ionic Capacitor Library](https://capacitorjs.com/) & capacitor plugins:
 
 - [App](https://capacitorjs.com/docs/apis/app)
 - [Android](https://capacitorjs.com/docs/android)
@@ -15,14 +15,15 @@ For mobile dev - [Ionic Capacitor Library](https://capacitorjs.com/)
 - [local-notifications](https://capacitorjs.com/docs/apis/local-notifications)
 - [push-notifications](https://capacitorjs.com/docs/apis/push-notifications)
 - [assets](https://www.npmjs.com/package/@capacitor/assets)
+- [status-bar](https://capacitorjs.com/docs/apis/status-bar)
 
-For store - [Pinia](https://pinia.vuejs.org/) in composition api for reusability uses [composables](https://vuejs.org/guide/reusability/composables.html) 
+For store - [Pinia](https://pinia.vuejs.org/) in setup api & [composables](https://vuejs.org/guide/reusability/composables.html) 
 
 as router - [official vue router v4](https://router.vuejs.org/guide/) 
 
 It uses [composition API](https://vuejs.org/guide/introduction.html#composition-api)
 
-[Vuetify Components Lib](https://next.vuetifyjs.com/en/getting-started/release-notes/)
+& [Vuetify Components Lib](https://next.vuetifyjs.com/en/getting-started/release-notes/)
 
 ### Project setup
 ```
