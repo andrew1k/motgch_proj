@@ -9,8 +9,24 @@
     },
     "LocalNotifications": {
       "smallIcon": "ic_stat_icon_config_sample",
-      "iconColor": "#488AFF",
+      "iconColor": "#013e57",
       "sound": "beep.wav"
+    },
+    "SplashScreen": {
+      "launchShowDuration": 1000,
+      "launchAutoHide": true,
+      "launchFadeOutDuration": 500,
+      "backgroundColor": "#f4f4f4",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false,
+      "androidSpinnerStyle": "large",
+      "iosSpinnerStyle": "small",
+      "spinnerColor": "#013e57",
+      "splashFullScreen": false,
+      "splashImmersive": true,
+      "layoutName": "launch_screen",
+      "useDialog": false
     }
   }
 }

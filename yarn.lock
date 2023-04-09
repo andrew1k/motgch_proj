@@ -1061,6 +1061,11 @@
   "resolved" "https://registry.npmjs.org/@capacitor/push-notifications/-/push-notifications-4.1.2.tgz"
   "version" "4.1.2"
 
+"@capacitor/splash-screen@^4.2.0":
+  "integrity" "sha512-XtGqM7J/yVEl/tKksKa7l1B6IDzhq4JJkadRuT8ohf/N7fD/1z45+id/4twM2Vnsxazh1fur2gq8rma7HaXMEw=="
+  "resolved" "https://registry.npmjs.org/@capacitor/splash-screen/-/splash-screen-4.2.0.tgz"
+  "version" "4.2.0"
+
 "@capacitor/status-bar@^4.1.1":
   "integrity" "sha512-3wosxMD1XuIFz88+c2GdVEHSJV6u7suOeKQjyWf3zf9eFr622Sg+udZqDbC0dtTWXw97BWyCjv3r1EYJw7XnIA=="
   "resolved" "https://registry.npmjs.org/@capacitor/status-bar/-/status-bar-4.1.1.tgz"
