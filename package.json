@@ -26,17 +26,17 @@
     "pinia": "2.0.33",
     "roboto-fontface": "*",
     "v-calendar": "3.0.3",
-    "vee-validate": "^4.8.4",
+    "vee-validate": "^4.8.6",
     "vue": "^3.2.47",
     "vue-lite-youtube-embed": "^1.2.0",
     "vue-router": "^4.1.6",
-    "vuetify": "3.1.13",
+    "vuetify": "3.1.15",
     "webfontloader": "^1.0.0",
-    "yup": "^1.0.0"
+    "yup": "^1.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.5",
-    "@babel/eslint-parser": "^7.12.16",
+    "@babel/core": "^7.21.4",
+    "@babel/eslint-parser": "^7.21.3",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
