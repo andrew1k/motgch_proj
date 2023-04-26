@@ -75,7 +75,7 @@ export default [
   },{
     path: '/purposes/worship',
     name: 'worship',
-    component: () => import('@/views/purposes/purposeWorship.vue'),
+    component: () => import('@/views/purposes/worship/purposeWorship.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -85,7 +85,7 @@ export default [
   },{
     path: '/purposes/fellowship',
     name: 'fellowship',
-    component: () => import('@/views/purposes/purposeFellowship.vue'),
+    component: () => import('@/views/purposes/fellowship/purposeFellowship.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -95,7 +95,7 @@ export default [
   },{
     path: '/purposes/discepleship',
     name: 'discepleship',
-    component: () => import('@/views/purposes/purposeDiscepleship.vue'),
+    component: () => import('@/views/purposes/discepleship/purposeDiscepleship.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -105,7 +105,7 @@ export default [
   },{
     path: '/purposes/ministry',
     name: 'ministry',
-    component: () => import('@/views/purposes/purposeMinistry.vue'),
+    component: () => import('@/views/purposes/ministry/purposeMinistry.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -115,7 +115,7 @@ export default [
   },{
     path: '/purposes/evangelism',
     name: 'evangelism',
-    component: () => import('@/views/purposes/purposeEvangelism.vue'),
+    component: () => import('@/views/purposes/evangelism/purposeEvangelism.vue'),
     meta: {
       layout: 'card',
       auth: true,
@@ -125,7 +125,7 @@ export default [
   },{
     path: '/purposes/youth',
     name: 'youth',
-    component: () => import('@/views/purposes/purposeYouth.vue'),
+    component: () => import('@/views/purposes/youth/purposeYouth.vue'),
     meta: {
       layout: 'card',
       auth: true,

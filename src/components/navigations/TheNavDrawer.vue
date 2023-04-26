@@ -36,8 +36,8 @@
         <VSpacer/>
         <VBtn density="compact" icon="mdi-youtube" color="error" to="https://www.youtube.com/@120SPD"/>
         <VSpacer />
-        <VBtn icon="mdi-telegram" density="compact" color="info" />
-        <VSpacer/>
+<!--        <VBtn icon="mdi-telegram" density="compact" color="info" />-->
+<!--        <VSpacer/>-->
       </v-card-actions>
     </template>
   </v-navigation-drawer>
@@ -67,12 +67,13 @@ const navList = ref([
     color: 'indigo',
     title: 'Открой для себя церковь',
     routeTo: '/discover',
-  }, {
-    icon: 'mdi-clock',
-    color: 'cyan',
-    title: 'В это воскресенье',
-    routeTo: '/sunday',
   },
+  // {
+  //   icon: 'mdi-clock',
+  //   color: 'cyan',
+  //   title: 'В это воскресенье',
+  //   routeTo: '/sunday',
+  // },
 ])
 
 const purposeNavList = ref([

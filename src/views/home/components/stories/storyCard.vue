@@ -5,7 +5,7 @@
     eager
   >
     <template v-slot:activator="{ props }">
-      <VCard
+      <v-card
         class="ma-2 d-flex align-end"
         height="120"
         width="100"
@@ -16,13 +16,15 @@
         elevation="3"
       >
         <h6 class="text-white ma-2" v-text="title"/>
-      </VCard>
+      </v-card>
     </template>
     <v-card rounded="0" elevation="0">
       <v-toolbar color="surface" density="compact">
         <v-btn @click="dialog = false" prepend-icon="mdi-close">Закрыть</v-btn>
+          <VSpacer />
+          <v-btn v-if="linkLabel" :to="link">{{linkLabel}}</v-btn>
       </v-toolbar>
-      <v-card-text class="ma-10">
+      <v-card-text class="ma-4">
         <v-card class="mx-auto" max-width="600">
           <v-carousel hide-delimiters progress="secondary" height="">
             <template v-slot:prev="{ props }">
@@ -74,17 +76,16 @@ defineProps({
   color: {
     required: false,
     type: String,
+  },
+  link: {
+    required:false,
+    type: String,
+  },
+  linkLabel: {
+    required: false,
+    type: String,
   }
 })
 
 const dialog = ref(false)
-// const progressValue = ref(0)
-// const openDialog = () => {
-//   dialog.value = true
-//   setTimeout(() => dialog.value = false, props.storyImgs.length * 6 * 1000)
-//   setInterval(() => {
-//     progressValue.value++
-//   }, props.storyImgs.length*6*10)
-//   progressValue.value = 0
-// }
 </script>

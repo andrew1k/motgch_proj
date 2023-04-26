@@ -9,12 +9,12 @@
           </template>
         </v-list-item>
         <vDivider/>
-        <v-list-item title="Уведомления" to="/notifications">
-          <template v-slot:append>
-            <VIcon icon="mdi-bell" color="secondary"/>
-          </template>
-        </v-list-item>
-        <VDivider />
+<!--        <v-list-item title="Уведомления" to="/notifications">-->
+<!--          <template v-slot:append>-->
+<!--            <VIcon icon="mdi-bell" color="secondary"/>-->
+<!--          </template>-->
+<!--        </v-list-item>-->
+<!--        <VDivider />-->
         <v-list-item title="Пожертвование" to="/giving">
           <template v-slot:append>
             <VIcon icon="mdi-gift"/>

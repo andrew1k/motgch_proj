@@ -1,20 +1,38 @@
 <template>
-  <VCardTitle class="mt-4" v-text="'Хочу служить'"/>
+  <VCardTitle class="mt-4" v-text="'Шаг 3 - Служение'"/>
   <v-card class="ma-2">
-    <v-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eum explicabo harum incidunt
-      laudantium neque rerum vel veniam. Debitis hic iure perferendis quo? Ad animi architecto aut, commodi culpa
-      dolorem ducimus enim facere fugit incidunt ipsa ipsam ipsum maxime minus nihil nulla obcaecati odio quas
-      repudiandae rerum sint ut vel?
+    <v-card-text>Цель «Служение» открывает двери в мир помощи и заботы, в мир даров и талантов, в мир устройства и порядка, в мир радости и добра. И все это преображает нас в образ Иисуса Христа!
+        <br/><b>Записаться на основополагающий семинар церкви «СЛУЖЕНИЕ», который поможет определить вашу уникальность, выявить дары и таланты и помочь выбрать направление для служения.</b>
     </v-card-text>
+      <v-card-actions>
+          <VSpacer />
+          <VBtn v-text="'Записаться'" />
+      </v-card-actions>
   </v-card>
   <VCardTitle class="mt-4" v-text="'Наши служения'"/>
-  <DescriptionsCard
-    v-for="(serv, i) in ourServs"
-    :key="i"
-    :title="serv.title"
-    :subtitle="serv.subtitle"
-    :text="serv.text"
-    />
+
+      <v-data-table
+              show-expand
+              v-model:expanded="expanded"
+              :items="ourServs"
+              item-value="title"
+              :headers="servHeaders">
+          <template v-slot:expanded-row="{ columns, item }">
+              <tr>
+                  <td :colspan="columns.length">
+                      More info about {{ item.raw.title }}
+                  </td>
+              </tr>
+          </template>
+      </v-data-table>
+
+<!--  <DescriptionsCard-->
+<!--    v-for="(serv, i) in ourServs"-->
+<!--    :key="i"-->
+<!--    :title="serv.title"-->
+<!--    :subtitle="serv.subtitle"-->
+<!--    :text="serv.text"-->
+<!--    />-->
   <VCardTitle class="mt-4" v-text="'Шаг 3'"/>
   <v-card class="ma-2">
     <v-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci, alias aliquam aliquid,
@@ -44,9 +62,10 @@
 
 <script setup>
 import {ref} from 'vue'
-import DescriptionsCard from '@/views/purposes/components/purposeMinistry/descriptionsCard.vue'
+// import DescriptionsCard from '@/views/purposes/ministry/components/descriptionsCard.vue'
 
-
+const servHeaders = ref([{title: 'Служение', key: 'title'}])
+const expanded =ref([])
 const ourServs = ref([
   {
     title: 'Приветствие',

@@ -32,9 +32,9 @@ import firstMeeting from '@/assets/fellowshipPics/firstMeeting.png'
 import smallGroups from '@/assets/fellowshipPics/smallGroups.png'
 import onePlusOne from '@/assets/fellowshipPics/onePlusOne.png'
 import {ref} from 'vue'
-import SignToBaptism from '@/views/purposes/components/purposeFellowship/signToBaptism.vue'
-import FellowshipCards from '@/views/purposes/components/purposeFellowship/fellowshipCards.vue'
-import SignToSG from '@/views/purposes/components/purposeFellowship/signToSG.vue'
+import SignToBaptism from '@/views/purposes/fellowship/views/signToBaptism.vue'
+import FellowshipCards from '@/views/purposes/fellowship/components/fellowshipCards.vue'
+import SignToSG from '@/views/purposes/fellowship/views/signToSG.vue'
 
 const togglerSG = ref(false)
 const baptismToggler = ref(false)
