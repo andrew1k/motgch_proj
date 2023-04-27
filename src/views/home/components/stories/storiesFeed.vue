@@ -1,7 +1,13 @@
 <template>
     <v-slide-group v-model="model" selected-class="bg-primary" center-active>
-        <v-slide-group-item>
-            <StoryCreationCard v-if="isAdmin"/>
+        <StoryCreationCard v-if="isAdmin"/>
+        <v-slide-group-item v-if="isPending">
+            <v-card height="120" width="100" class="ma-2">
+                <VSkeletonLoader />
+            </v-card>
+            <v-card height="120" width="100" class="ma-2">
+                <VSkeletonLoader />
+            </v-card>
         </v-slide-group-item>
         <v-slide-group-item
                 v-for="story in stories"
@@ -20,10 +26,14 @@ import {onBeforeMount, ref} from 'vue'
 import StoryCard from '@/views/home/components/stories/storyCard.vue'
 import StoryCreationCard from '@/views/home/components/stories/storyCreationCard.vue'
 import {useAuthStore} from '@/stores/authStore'
+import {useAppState} from '@/stores/appState'
 
 const newsfeedStore = useNewsfeedStore()
 const {getStories} = newsfeedStore
 const {stories} = storeToRefs(newsfeedStore)
+
+const appState = useAppState()
+const {isPending} = storeToRefs(appState)
 
 onBeforeMount(() => {
   getStories()

@@ -3,11 +3,12 @@
   <v-card
     to="/sunday"
     class="ma-2"
-    v-if="!isPending"
   >
-    <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title" />
+      <VSkeletonLoader v-if="isPending" />
+    <LiteYouTubeEmbed v-if="!isPending" :id="sunday?.id" :title="sunday?.title" />
   </v-card>
-  <v-card-text>
+    <VSkeletonLoader type="list-item" color="background" v-if="isPending" />
+  <v-card-text v-if="!isPending">
     <h4 class="font-weight-light" v-html="sunday?.title"/>
   </v-card-text>
 <!--   ----------------------------------------------------------------------------------------------------------------------- Admin tool  -->

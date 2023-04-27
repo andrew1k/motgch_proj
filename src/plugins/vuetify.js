@@ -5,6 +5,7 @@ import 'vuetify/styles'
 // Vuetify
 import {createVuetify} from 'vuetify'
 import {VDataTable, VDataTableVirtual} from 'vuetify/lib/labs/VDataTable'
+import {VSkeletonLoader} from 'vuetify/lib/labs/VSkeletonLoader'
 import {md3} from 'vuetify/blueprints'
 
 export default createVuetify({
@@ -31,6 +32,7 @@ export default createVuetify({
     components: {
       VDataTable, // Не забыть убрать, если с Virtual будет все ок
       VDataTableVirtual,
+      VSkeletonLoader,
     },
     theme: {
       themes: {
