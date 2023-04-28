@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import baptism from '@/assets/fellowshipPics/baptism.png'
+import baptism from '@/assets/fellowshipPics/baptism.jpg'
 import firstMeeting from '@/assets/fellowshipPics/firstMeeting.png'
 import smallGroups from '@/assets/fellowshipPics/smallGroups.png'
 import onePlusOne from '@/assets/fellowshipPics/onePlusOne.png'

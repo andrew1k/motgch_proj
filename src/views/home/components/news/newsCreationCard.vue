@@ -27,7 +27,7 @@
     <v-card-actions>
       <VBtn icon="mdi-close" @click="showForm = !showForm"/>
       <VSpacer/>
-      <v-btn variant="flat" @click="uploadNews(img, {title, subtitle, text, leaderName: leader.leaderName, leaderTitle: leader.leaderTitle, leaderUrl: leader.leaderUrl})">Сохранить</v-btn>
+      <v-btn variant="flat" @click="uploadNews(img, {title, subtitle, text, leader: leader.leaderTitle})">Сохранить</v-btn>
     </v-card-actions>
   </v-card>
   <VDivider />
@@ -45,8 +45,16 @@ const subtitle = ref('')
 const text = ref('')
 const leader = ref()
 const leaders = ref([
-  {leaderName: 'Даниил Шатров', leaderTitle: 'Ведущий пастор', leaderUrl: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/leaders%2FDaniil%20Shatrov.jpg?alt=media&token=b63b150a-8c9d-4c48-a1fd-4bd72a808bfa'},
-  {leaderName: 'Дмитрий Шатров', leaderTitle: 'Епископ', leaderUrl: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/leaders%2FDD.png?alt=media&token=7b1cf06a-7af4-4dc2-86ee-bd06f432d392'},
-  {leaderName: 'Александр Холеменко', leaderTitle: 'Пастор', leaderUrl: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/leaders%2FAH.jpg?alt=media&token=99ac13aa-ab4a-41d9-a791-e1d06165aec2'},
-  ])
+  {leaderName: 'Даниил Шатров', leaderTitle: 'DaDm'},
+  {leaderName: 'Дмитрий Шатров', leaderTitle: 'DmDm'},
+  {leaderName: 'Александр Холеменко', leaderTitle: 'AlHo'},
+  {leaderName: 'Анастасия Кошелева', leaderTitle: 'AnKo'},
+  {leaderName: 'Татьяна Ступа', leaderTitle: 'TaSt'},
+  {leaderName: 'Виталий Голиков', leaderTitle: 'ViGo'},
+])
+// const leaders = ref([
+//   {leaderName: 'Даниил Шатров', leaderTitle: 'Ведущий пастор', leaderUrl: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/leaders%2FDaniil%20Shatrov.jpg?alt=media&token=b63b150a-8c9d-4c48-a1fd-4bd72a808bfa'},
+//   {leaderName: 'Дмитрий Шатров', leaderTitle: 'Епископ', leaderUrl: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/leaders%2FDD.png?alt=media&token=7b1cf06a-7af4-4dc2-86ee-bd06f432d392'},
+//   {leaderName: 'Александр Холеменко', leaderTitle: 'Пастор', leaderUrl: 'https://firebasestorage.googleapis.com/v0/b/telegraf-e4d87.appspot.com/o/leaders%2FAH.jpg?alt=media&token=99ac13aa-ab4a-41d9-a791-e1d06165aec2'},
+//   ])
 </script>

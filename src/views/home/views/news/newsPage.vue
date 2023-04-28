@@ -1,24 +1,32 @@
 <template>
-  <v-toolbar color="background" density="compact">
-    <VBtn variant="text" prepend-icon="mdi-chevron-left" @click="$router.push('/')">Назад</VBtn>
-    <VSpacer/>
-    <VBtn variant="text" append-icon="mdi-bookmark-outline">Сохранить</VBtn>
-  </v-toolbar>
-  <v-card class="ma-2">
-    <VImg :src="newsItem?.url"/>
-  </v-card>
-  <v-card class="ma-2">
-    <VCardTitle class="text-indigo-darken-2 font-weight-bold" v-html="newsItem?.title"/>
-    <VCardSubtitle v-html="newsItem?.subtitle" />
-    <VCardItem :prepend-avatar="newsItem?.leaderUrl" :title="newsItem?.leaderName" :subtitle="newsItem?.leaderTitle" />
-    <VCardText v-html="newsItem?.text"/>
-  </v-card>
+    <v-toolbar color="background" density="compact">
+        <VBtn variant="text" prepend-icon="mdi-chevron-left" @click="$router.push('/')">Назад</VBtn>
+        <VSpacer/>
+        <VBtn variant="text" append-icon="mdi-bookmark-outline">Сохранить</VBtn>
+    </v-toolbar>
+    <v-card class="ma-2">
+        <VImg :src="newsItem?.url"/>
+    </v-card>
+    <v-card class="ma-2">
+        <VCardTitle class="text-indigo-darken-2 font-weight-bold" v-html="newsItem?.title"/>
+        <VCardSubtitle v-html="newsItem?.subtitle"/>
+        <component :is="leader"/>
+        <VCardText v-html="newsItem?.text"/>
+    </v-card>
 </template>
 
 <script setup>
-import {defineProps} from 'vue'
+/* eslint-disable */
+import {watch, defineProps, ref, onBeforeMount, computed} from 'vue'
 import {useNewsfeedStore} from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
+import AlHo from '@/components/leaders/AlHo.vue'
+import DaDm from '@/components/leaders/DaDm.vue'
+import DmDm from '@/components/leaders/DmDm.vue'
+import MBV from '@/components/leaders/MBV.vue'
+import ViGo from '@/components/leaders/ViGo.vue'
+import TaSt from '@/components/leaders/TaSt.vue'
+import AnKo from '@/components/leaders/AnKo.vue'
 
 const newsfeedStore = useNewsfeedStore()
 const {getNewsItem} = newsfeedStore
@@ -28,5 +36,27 @@ const props = defineProps({
     type: String,
   },
 })
-getNewsItem(props.id)
+
+onBeforeMount(() => {
+    getNewsItem(props.id)
+})
+let leader = computed(() => {
+  switch (newsItem.value?.leader) {
+    case 'AlHo' :
+      return leader = AlHo
+    case 'DaDm':
+      return DaDm
+    case 'DmDm':
+      return DmDm
+    case 'ViGo':
+      return ViGo
+    case 'TaSt':
+      return TaSt
+    case 'AnKo':
+      return AnKo
+    default:
+      return MBV
+  }
+})
+/* eslint-disable */
 </script>
