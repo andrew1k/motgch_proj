@@ -40,36 +40,37 @@ const selectableItems = ref([
     value: 'membership',
     color: 'orange',
   }, {
-    title: 'Хочу наставника',
+    title: 'Программа наставничества',
     value: 'magistr',
     color: 'orange-darken-3',
   }, {
-    title: 'Хочу в малую группу',
+    title: 'Присоединиться к малой группе',
     value: 'smallGroup',
     color: 'green',
   }, {
-    title: 'Записаться на душепопечение',
+    title: 'Записаться на душепопечение', // Уточнить у Ирины
     value: 'soulHealth',
     color: 'primary',
   }, {
-    title: 'Помогать церкви',
+    title: 'Помогать церкви', // Уточнить у Натальи
     value: 'helpToChurch',
     color: 'success',
   }, {
-    title: 'Хочу на шаг1',
-    value: 'stepOne',
-    color: 'warning',
-  }, {
-    title: 'Записаться к пастору',
+    title: 'Записаться к пастору', // Уточнить у Маргариты
     value: 'signToPastor',
     color: 'info',
   }, {
-    title: 'Молитвенная нужда',
+    title: 'Молитвенная нужда', // Уточнить у Татьяны Николаевны
     value: 'prayNeeded',
     color: 'error',
   }, {
     title: 'Дргуое',
-    value: 'prayNeeded',
+    value: 'other',
+    color: 'error',
+    component: connectionOtherThings
+  }, {
+    title: 'Оставить feedback',
+    value: 'feedb ack',
     color: 'error',
     component: connectionOtherThings
   },

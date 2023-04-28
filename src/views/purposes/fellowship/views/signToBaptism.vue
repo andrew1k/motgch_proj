@@ -25,7 +25,7 @@
   <v-card-actions>
     <VBtn icon="mdi-chevron-left" color="fellowship" density="comfortable" @click="$emit('goBack')"/>
     <VSpacer/>
-    <v-btn color="fellowship" @click="signToBaptism">Занисаться на крещение</v-btn>
+    <v-btn color="fellowship" @click="signToBaptism">Записаться на крещение</v-btn>
   </v-card-actions>
 </template>
 

@@ -16,8 +16,7 @@
 </template>
 
 <script setup>
-/* eslint-disable */
-import {watch, defineProps, ref, onBeforeMount, computed} from 'vue'
+import { defineProps, onBeforeMount, computed} from 'vue'
 import {useNewsfeedStore} from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
 import AlHo from '@/components/leaders/AlHo.vue'
@@ -58,5 +57,4 @@ let leader = computed(() => {
       return MBV
   }
 })
-/* eslint-disable */
 </script>

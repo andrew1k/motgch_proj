@@ -1,14 +1,19 @@
 <template>
-    <!------------------------------------------------------------------------------------------------------------------------------    Small Group-->
+    <!------------------------------------------------------------------------------------------------------------------------------    Step  -->
 <!--    <VCardTitle class="mt-6" v-text="'МАЛЫЕ ГРУППЫ'"/>-->
     <v-card class="ma-2">
-      <FellowshipCards v-if="!togglerSG" title="Малые группы - это место силы" btn="Найти Малую Группу" :img="smallGroups" :text="sgText" color="fellowship" @toggler-btn="togglerSG = !togglerSG"/>
+      <FellowshipCards title="Семинар - шаг 1 «Общение»" btn="Записаться на Шаг 1" :img="step" :text="stepText" color="fellowship" @toggler-btn="signToStep"/>
+    </v-card>
+  <!------------------------------------------------------------------------------------------------------------------------------    Small Group-->
+<!--    <VCardTitle class="mt-6" v-text="'МАЛЫЕ ГРУППЫ'"/>-->
+    <v-card class="ma-2">
+      <FellowshipCards v-if="!togglerSG" title="Малые группы" btn="Найти Малую Группу" :img="smallGroups" :text="sgText" color="fellowship" @toggler-btn="togglerSG = !togglerSG"/>
       <SignToSG v-if="togglerSG" @go-back="togglerSG = !togglerSG"/>
     </v-card>
     <!------------------------------------------------------------------------------------------------------------------------------ Baptism-->
 <!--    <VCardTitle v-text="'КРЕЩЕНИЕ'" class="mt-6"/>-->
     <v-card class="ma-2">
-      <FellowshipCards v-if="!baptismToggler" title="Водное крещение" btn="Хочу креститься" :img="baptism" :text="textBaptism" color="fellowship" @toggler-btn="baptismToggler = !baptismToggler" />
+      <FellowshipCards v-if="!baptismToggler" title="Водное крещение" btn="Хочу принять водное крещение" :img="baptism" :text="textBaptism" color="fellowship" @toggler-btn="baptismToggler = !baptismToggler" />
       <SignToBaptism @goBack="baptismToggler = !baptismToggler" v-if="baptismToggler"/>
     </v-card>
 
@@ -28,9 +33,10 @@
 
 <script setup>
 import baptism from '@/assets/fellowshipPics/baptism.jpg'
-import firstMeeting from '@/assets/fellowshipPics/firstMeeting.png'
-import smallGroups from '@/assets/fellowshipPics/smallGroups.png'
-import onePlusOne from '@/assets/fellowshipPics/onePlusOne.png'
+import step from '@/assets/fellowshipPics/step.jpg'
+import firstMeeting from '@/assets/fellowshipPics/firstMeeting.jpg'
+import smallGroups from '@/assets/fellowshipPics/smallGroups.jpg'
+import onePlusOne from '@/assets/fellowshipPics/onePlusOne.jpg'
 import {ref} from 'vue'
 import SignToBaptism from '@/views/purposes/fellowship/views/signToBaptism.vue'
 import FellowshipCards from '@/views/purposes/fellowship/components/fellowshipCards.vue'
@@ -44,11 +50,19 @@ const signToFirstMeeting = () => {
 const signToOnePlusOne = () => {
   console.log('signToOnePlusOne')
 }
+const signToStep = () => {
+  console.log('signToOnePlusOne')
+}
 
 const sgText = ref([
   `Малая группа - это встречи верующих людей среди недели в тёплой, домашней, дружеской обстановке для общения, изучения Библии, совместных молитв и помощи друг другу.`,
   `Это то, что нужно каждому христианину, чтобы возрастать во Христе и чувствовать себя частью церковной семьи. `,
   `Малые группы проходят еженедельно в разных районах города. Напишите нам, чтобы найти свою Малую группу`,
+])
+const stepText = ref([
+  `Шаг 1 «Общение» или «Узнавая больше о нашей церковной семье» – это первый из основополагающих курсов церкви «Миссия Благая Весть».`,
+  `Каждый человек создан для того, чтобы быть частью церковной семьи, и церковь «Миссия Благая Весть» хочет стать для вас местом, где вам будет комфортно, как дома. Каждая здоровая семья имеет общие убеждения, цели и обязательства и на этом семинаре мы хотим поделиться с вами тем, кто мы, во что мы верим и куда мы идём.`,
+  `Мы поговорим о том, как устроена наша церковь, какова её история, видение и структура. Раскроем пять жизненных целей, которые были предназначены для нас Богом, поговорим о преимуществах церковной семьи, а также о том, как стать членом церкви «Миссия Благая Весть».`,
 ])
 const textBaptism = ref([
   `- это первое важнейшее таинство в жизни верующего человека. Оно не делает человека христианином, но оно показывает, что он им является. Это внешний символ внутреннего посвящения, которое делает человек в своём сердце, обретая новую жизнь в Иисусе Христе.`,
