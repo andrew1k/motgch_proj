@@ -1,28 +1,56 @@
 <template>
     <!------------------------------------------------------------------------------------------------------------------------------    Step  -->
-<!--    <VCardTitle class="mt-6" v-text="'МАЛЫЕ ГРУППЫ'"/>-->
     <v-card class="ma-2">
-      <FellowshipCards title="Семинар - шаг 1 «Общение»" btn="Записаться на Шаг 1" :img="step" :text="stepText" color="fellowship" @toggler-btn="signToStep"/>
+      <FellowshipCards title="Семинар - шаг 1 «Общение»" btn="Записаться на Шаг 1" :img="step" :text="stepText" color="fellowship" @toggler-btn="signToStep = !signToStep"/>
     </v-card>
+    <v-expand-transition>
+        <v-card v-show="signToStep" variant="text" elevation="0" rounded="0" class="ma-2">
+            <VCardSubtitle v-text="'Ближайший шаг 1 в календаре'" />
+            <CalendarEventCard
+              v-for="evnt in filteredEvents"
+              :key="evnt.id"
+              :event-title="evnt.title"
+              :event-text="evnt.text"
+              :event-time="evnt.start"
+              :event-color="evnt.color"
+              :event-icon="evnt.icon"
+              :event-id="evnt.id"
+              @sign-btn="signToEvent(evnt)"
+              @unsign-btn="unsignToEvent(evnt)" />
+        </v-card>
+    </v-expand-transition>
   <!------------------------------------------------------------------------------------------------------------------------------    Small Group-->
 <!--    <VCardTitle class="mt-6" v-text="'МАЛЫЕ ГРУППЫ'"/>-->
     <v-card class="ma-2">
-      <FellowshipCards v-if="!togglerSG" title="Малые группы" btn="Найти Малую Группу" :img="smallGroups" :text="sgText" color="fellowship" @toggler-btn="togglerSG = !togglerSG"/>
-      <SignToSG v-if="togglerSG" @go-back="togglerSG = !togglerSG"/>
+      <FellowshipCards title="Малые группы" btn="Найти Малую Группу" :img="smallGroups" :text="sgText" color="fellowship" @toggler-btn="togglerSG = !togglerSG"/>
     </v-card>
-    <!------------------------------------------------------------------------------------------------------------------------------ Baptism-->
+    <v-expand-transition>
+        <v-card v-show="togglerSG" variant="text" elevation="0" rounded="0" class="ma-2">
+            <SignToSG @go-back="togglerSG = !togglerSG"/>
+        </v-card>
+    </v-expand-transition>
+  <!------------------------------------------------------------------------------------------------------------------------------ Baptism-->
 <!--    <VCardTitle v-text="'КРЕЩЕНИЕ'" class="mt-6"/>-->
     <v-card class="ma-2">
-      <FellowshipCards v-if="!baptismToggler" title="Водное крещение" btn="Хочу принять водное крещение" :img="baptism" :text="textBaptism" color="fellowship" @toggler-btn="baptismToggler = !baptismToggler" />
-      <SignToBaptism @goBack="baptismToggler = !baptismToggler" v-if="baptismToggler"/>
+      <FellowshipCards title="Водное крещение" btn="Хочу принять водное крещение" :img="baptism" :text="textBaptism" color="fellowship" @toggler-btn="baptismToggler = !baptismToggler" />
     </v-card>
+    <v-expand-transition>
+        <v-card v-show="baptismToggler" variant="text" elevation="0" rounded="0" class="ma-2">
+            <SignToBaptism @goBack="baptismToggler = !baptismToggler" />
+        </v-card>
+    </v-expand-transition>
 
     <!---------------------------------------------------------------------------------------------------------------------------  First Meeting-->
 <!--    <VCardTitle class=" mt-6" v-text="'ВСТРЕЧА-ЗНАКОМСТВО'"/>-->
     <v-card class="ma-2">
-      <FellowshipCards title="Встреча-знакомство" btn="Записаться" :img="firstMeeting" :text="textFirstMeeting" color="fellowship" @toggler-btn="signToFirstMeeting" />
+      <FellowshipCards title="Встреча-знакомство" btn="Записаться" :img="firstMeeting" :text="textFirstMeeting" color="fellowship" @toggler-btn="signToFirstMeeting = !signToFirstMeeting" />
     </v-card>
-
+    <v-expand-transition>
+        <v-card v-show="signToFirstMeeting" variant="text" elevation="0" rounded="0" class="ma-2">
+            <VCardSubtitle v-text="'Ближайшая встреча-знакомство в календаре'" />
+            <VDivider />
+        </v-card>
+    </v-expand-transition>
     <!----------------------------------------------------------------------------------------------------------------------------  One Plus One -->
 <!--    <VCardTitle class=" mt-6" v-text="'ИНДИВИДУАЛЬНОЕ НАСТАВНИЧЕСТВО'"/>-->
     <v-card class=" ma-2">
@@ -41,18 +69,17 @@ import {ref} from 'vue'
 import SignToBaptism from '@/views/purposes/fellowship/views/signToBaptism.vue'
 import FellowshipCards from '@/views/purposes/fellowship/components/fellowshipCards.vue'
 import SignToSG from '@/views/purposes/fellowship/views/signToSG.vue'
+import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue'
+import {useCalendarEventsStore} from '@/stores/calendarStore'
+import {storeToRefs} from 'pinia'
 
 const togglerSG = ref(false)
 const baptismToggler = ref(false)
-const signToFirstMeeting = () => {
-  console.log('signToFirstMeeting')
-}
+const signToFirstMeeting = ref(false)
 const signToOnePlusOne = () => {
   console.log('signToOnePlusOne')
 }
-const signToStep = () => {
-  console.log('signToOnePlusOne')
-}
+const signToStep = ref(false)
 
 const sgText = ref([
   `Малая группа - это встречи верующих людей среди недели в тёплой, домашней, дружеской обстановке для общения, изучения Библии, совместных молитв и помощи друг другу.`,
@@ -80,4 +107,14 @@ const textFirstMeeting = ref([
   `Если вы недавно присоединились к нашей церкви (в течение 2 месяцев) или сегодня пришли впервые, приглашаем вас на Встречу-Знакомство.`,
   `Мы с пасторами, лидерами и служителями церкви будем рады познакомиться с вами и провести время в дружеском общении за чашечкой чая, рассказать о себе, о церкви, ответить на вопросы и помолиться за вас.`,
 ])
+
+// ---------------------------------------------------------------------------------- calendar
+const calendarEventsStore = useCalendarEventsStore()
+const {allCalendarEvents} = storeToRefs(calendarEventsStore)
+const filteredEvents = ref([])
+const {signToEvent, unsignToEvent} = calendarEventsStore
+
+filteredEvents.value = allCalendarEvents.value.filter(evnt => {
+    if (evnt.chipValues.includes('first')) return evnt
+})
 </script>

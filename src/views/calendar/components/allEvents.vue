@@ -79,6 +79,10 @@ const eventsChips = ref([
     value: 'youth',
     title: 'молодежное',
     color: 'indigo',
+  }, {
+    value: 'baptism',
+    title: 'крещение',
+    color: 'teal',
   },
 ])
 
