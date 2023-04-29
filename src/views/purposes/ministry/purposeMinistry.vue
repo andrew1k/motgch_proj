@@ -1,16 +1,32 @@
 <template>
-  <VCardTitle class="mt-4" v-text="'Шаг 3 - Служение'"/>
-  <v-card class="ma-2">
-    <v-card-text>Цель «Служение» открывает двери в мир помощи и заботы, в мир даров и талантов, в мир устройства и порядка, в мир радости и добра. И все это преображает нас в образ Иисуса Христа!
-        <br/><b>Записаться на основополагающий семинар церкви «СЛУЖЕНИЕ», который поможет определить вашу уникальность, выявить дары и таланты и помочь выбрать направление для служения.</b>
-    </v-card-text>
-      <v-card-actions>
-          <VSpacer />
-          <VBtn v-text="'Записаться'" />
-      </v-card-actions>
-  </v-card>
+    <v-card class="ma-2">
+        <v-img :src="step" class="align-end">
+            <VCardTitle class="text-white" v-text="'Семинар «Шаг 3. Служение» '"/>
+        </v-img>
+        <VCardText v-html="stepText" />
+        <v-card-actions>
+            <VSpacer/>
+            <VBtn color="ministry" @click="signToStep = !signToStep" v-text="'Записаться на шаг 3'"/>
+        </v-card-actions>
+    </v-card>
+    <v-expand-transition>
+        <v-card v-show="signToStep" variant="text" elevation="0" rounded="0" class="ma-2">
+            <VCardText v-text="'Запишитесь на ближайший шаг в календаре и вам придет уведомление за день до семинара'" />
+            <CalendarEventCard
+                    v-for="evnt in filteredEvents"
+                    :key="evnt.id"
+                    :event-title="evnt.title"
+                    :event-text="evnt.text"
+                    :event-time="evnt.start"
+                    :event-color="evnt.color"
+                    :event-icon="evnt.icon"
+                    :event-id="evnt.id"
+                    @sign-btn="signToEvent(evnt)"
+                    @unsign-btn="unsignToEvent(evnt)" />
+        </v-card>
+    </v-expand-transition>
+<!--   ------------------------------------------------------------------------------------------------------------------ -->
   <VCardTitle class="mt-4" v-text="'Наши служения'"/>
-
       <v-data-table
               show-expand
               v-model:expanded="expanded"
@@ -61,9 +77,6 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-// import DescriptionsCard from '@/views/purposes/ministry/components/descriptionsCard.vue'
-
 const servHeaders = ref([{title: 'Служение', key: 'title'}])
 const expanded =ref([])
 const ourServs = ref([
@@ -134,4 +147,24 @@ const ourServs = ref([
     icon: '',
   },
 ])
+
+// ------------------------------------------------------------------------------------------------------------------------------ STEP
+import {ref} from 'vue'
+import step from '@/assets/ministryPics/step.jpg'
+import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue'
+import {useCalendarEventsStore} from '@/stores/calendarStore'
+import {storeToRefs} from 'pinia'
+
+const stepText = ref(`Узнавая больше о своей уникальности!<br/><br/>
+Мы верим, что каждый член церковной семьи — служитель! <br/> Бог не планировал, что участвовать в деле церкви могут только выпускники семинарий — это может делать каждый из нас! Шаг 3 предназначен для того, чтобы определить вашу уникальность, выявить ваши дары и таланты и помочь выбрать то направление или служение, которое подойдет вам лучше всего! На семинаре с помощью расширенного, многопрофильного теста, вы узнаете, как Бог может направить ваше сердце, опыт, способности, уникальность личности и духовные дары для служения другим людям.`)
+const signToStep = ref(false)
+
+const calendarEventsStore = useCalendarEventsStore()
+const {allCalendarEvents} = storeToRefs(calendarEventsStore)
+const filteredEvents = ref([])
+const {signToEvent, unsignToEvent} = calendarEventsStore
+
+filteredEvents.value = allCalendarEvents.value.filter(evnt => {
+  if (evnt.chipValues.includes('third')) return evnt
+})
 </script>

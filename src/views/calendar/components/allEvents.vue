@@ -4,8 +4,7 @@
   <v-card variant="text" elevation="0">
     <v-chip-group
       variant="flat"
-      multiple
-      v-model="selectedChips"
+      v-model="selectedChip"
       filter
       column
       class="mx-2"
@@ -86,18 +85,15 @@ const eventsChips = ref([
   },
 ])
 
-const selectedChips = ref([])
+const selectedChip = ref([])
 
-watch(selectedChips, () => {
-  if (selectedChips.value.length) {
-    selectedChips.value.forEach(chip => {
+watch(selectedChip, () => {
+  if (selectedChip.value) {
       filteredEvents.value = allCalendarEvents.value.filter(evnt => {
-        if (evnt.chipValues.includes(chip)) return evnt
+        if (evnt.chipValues.includes(selectedChip.value)) return evnt
       })
-    })
   } else {
     filteredEvents.value = allCalendarEvents.value
   }
 })
-
 </script>

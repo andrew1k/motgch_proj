@@ -1,5 +1,5 @@
 <template>
-  <v-img :src="img" :lazy-src="img" class="align-end">
+  <v-img :src="img" class="align-end">
     <VCardTitle class="text-white" v-text="title"/>
   </v-img>
   <VCardText v-for="(txt, i) in text" :key="i" v-text="txt"/>
