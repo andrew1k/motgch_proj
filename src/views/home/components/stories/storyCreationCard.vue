@@ -1,10 +1,10 @@
 <template>
-  <v-card v-if="!showCard" @click="showCard = !showCard" class="ma-2 " height="120" width="100" >
-    <div class="d-flex fill-height align-center justify-center">
-      <VIcon  icon="mdi-plus" />
-    </div>
-  </v-card>
-  <v-card class="ma-2" v-if="showCard" elevation="0" rounded="0" variant="text">
+<!--  <v-card v-if="!showCard" @click="showCard = !showCard" class="ma-2 " height="120" width="100" >-->
+<!--    <div class="d-flex fill-height align-center justify-center">-->
+<!--      <VIcon  icon="mdi-plus" />-->
+<!--    </div>-->
+<!--  </v-card>-->
+  <v-card class="ma-2" elevation="0" rounded="0" variant="text">
     <VTextField
       class="mt-2"
       v-model="title"
@@ -46,5 +46,5 @@ const title = ref('')
 
 const {uploadStory} = useNewsfeedStore()
 
-const showCard = ref(false)
+// const showCard = ref(false)
 </script>

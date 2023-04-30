@@ -1,6 +1,6 @@
 {
   "name": "motgch_proj",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": "AndyKo",
   "private": true,
   "scripts": {
@@ -43,6 +43,8 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
     "vue-cli-plugin-vuetify": "~2.5.8",
     "webpack-plugin-vuetify": "^2.0.1"
   },

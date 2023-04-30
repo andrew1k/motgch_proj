@@ -1,5 +1,5 @@
 <template>
-    <v-slide-group selected-class="bg-primary" center-active v-if="isPending">
+    <v-slide-group v-if="isPending">
         <v-slide-group-item>
             <v-card height="120" width="100" class="ma-2">
                 <VSkeletonLoader />
@@ -11,8 +11,6 @@
     </v-slide-group>
     <Transition name="slide-fade" >
     <v-slide-group v-if="!isPending" v-model="model" selected-class="bg-primary" center-active>
-        <StoryCreationCard v-if="isAdmin"/>
-
         <v-slide-group-item
                 v-for="story in stories"
                 :key="story.id"
@@ -22,6 +20,7 @@
         </v-slide-group-item>
     </v-slide-group>
     </Transition>
+    <StoryCreationCard v-if="isAdmin"/>
 </template>
 
 <script setup>
@@ -48,7 +47,7 @@ const model = ref(null)
 const {isAdmin} = useAuthStore()
 </script>
 
-<style>
+<style scoped>
 .slide-fade-enter-active {
     transition: all 0.5s ease-out;
 }
@@ -59,7 +58,7 @@ const {isAdmin} = useAuthStore()
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-    transform: translateY(-10px);
+    transform: translateX(-10px);
     opacity: 0;
 }
 </style>

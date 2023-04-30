@@ -6,7 +6,7 @@
   >
     <template v-slot:activator="{ props }">
       <v-card
-        class="ma-2 d-flex align-end"
+        class="ma-2"
         height="120"
         width="100"
         v-bind="props"
@@ -15,7 +15,9 @@
         :variant="color ? 'outlined' : 'elevated'"
         elevation="3"
       >
-        <h6 class="text-white ma-2" v-text="title"/>
+          <div class="fill-height bottom-gradient d-flex align-end">
+              <h6 class="text-white ma-2" v-text="title"/>
+          </div>
       </v-card>
     </template>
     <v-card rounded="0" elevation="0">
@@ -38,7 +40,7 @@
               :key="i"
               cover
             >
-              <v-img :src="img._storyImgUrl" :lazy-src="img._storyImgUrl">
+              <v-img :src="img._storyImgUrl">
                 <template v-slot:placeholder>
                   <v-row
                     class="fill-height ma-0"
@@ -89,3 +91,13 @@ defineProps({
 
 const dialog = ref(false)
 </script>
+
+<style scoped>
+.bottom-gradient {
+    background-image: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.7) 0%,
+            transparent 80px
+    );
+}
+</style>

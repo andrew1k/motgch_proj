@@ -8,6 +8,7 @@ import vuetify from './plugins/vuetify'
 import {loadFonts} from './plugins/webfontloader'
 import {auth } from '@/plugins/firebase.config'
 import {onAuthStateChanged} from 'firebase/auth'
+import '@/plugins/variables.scss'
 
 loadFonts()
 

@@ -1,0 +1,8 @@
+@use "vuetify" with (
+$shadow-key-umbra-opacity: rgba(#5e5e5e, 0.04),
+$shadow-key-penumbra-opacity: rgba(#5e5e5e, 0.04),
+$shadow-key-ambient-opacity: rgba(#414141, 0.1),
+//$shadow-key-umbra-opacity: rgba(#1a237e, 0.05),
+//$shadow-key-penumbra-opacity: rgba(#1a237e, 0.05),
+//$shadow-key-ambient-opacity: rgba(#1a237e, 0.05),
+);

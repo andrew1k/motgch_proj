@@ -1,15 +1,18 @@
 <template>
     <v-card-title class="mt-2">В это воскресенье</v-card-title>
-    <VSkeletonLoader v-if="isPending"/>
-    <Transition name="fade">
-        <v-card to="/sunday" v-if="!isPending" class="ma-2">
-            <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title"/>
+        <v-card to="/sunday" class="ma-2">
+            <v-skeleton-loader :loading="isPending" type="image">
+                <v-responsive>
+                    <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title"/>
+                </v-responsive>
+            </v-skeleton-loader>
+            <VSkeletonLoader v-if="isPending" max-height="100" type="image"/>
         </v-card>
-    </Transition>
-    <VSkeletonLoader type="list-item" color="background" v-if="isPending"/>
-    <v-card-text v-if="!isPending">
-        <h4 class="font-weight-light" v-html="sunday?.title"/>
-    </v-card-text>
+    <v-skeleton-loader type="list-item" color="background" :loading="isPending">
+        <v-card-text>
+            <h4 class="font-weight-light" v-html="sunday?.title"/>
+        </v-card-text>
+    </v-skeleton-loader>
   <!--   ----------------------------------------------------------------------------------------------------------------------- Admin tool  -->
     <v-btn class="mx-2" v-if="isAdmin" @click="show = !show">Обновить ВС</v-btn>
     <v-card v-if="show" class="ma-2">
@@ -62,14 +65,6 @@ const {isAdmin} = useAuthStore()
 const show = ref(false)
 </script>
 
-<style>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 1.5s ease;
-}
+<style scoped>
 
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
 </style>
