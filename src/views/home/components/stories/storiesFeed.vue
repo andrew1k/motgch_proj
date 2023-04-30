@@ -1,7 +1,6 @@
 <template>
-    <v-slide-group v-model="model" selected-class="bg-primary" center-active>
-        <StoryCreationCard v-if="isAdmin"/>
-        <v-slide-group-item v-if="isPending">
+    <v-slide-group selected-class="bg-primary" center-active v-if="isPending">
+        <v-slide-group-item>
             <v-card height="120" width="100" class="ma-2">
                 <VSkeletonLoader />
             </v-card>
@@ -9,6 +8,11 @@
                 <VSkeletonLoader />
             </v-card>
         </v-slide-group-item>
+    </v-slide-group>
+    <Transition name="slide-fade" >
+    <v-slide-group v-if="!isPending" v-model="model" selected-class="bg-primary" center-active>
+        <StoryCreationCard v-if="isAdmin"/>
+
         <v-slide-group-item
                 v-for="story in stories"
                 :key="story.id"
@@ -17,6 +21,7 @@
                        :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" :color="story.color"/>
         </v-slide-group-item>
     </v-slide-group>
+    </Transition>
 </template>
 
 <script setup>
@@ -42,3 +47,19 @@ onBeforeMount(() => {
 const model = ref(null)
 const {isAdmin} = useAuthStore()
 </script>
+
+<style>
+.slide-fade-enter-active {
+    transition: all 0.5s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+</style>

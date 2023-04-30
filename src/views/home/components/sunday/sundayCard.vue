@@ -1,42 +1,41 @@
 <template>
-  <v-card-title class="mt-2">В это воскресенье</v-card-title>
-  <v-card
-    to="/sunday"
-    class="ma-2"
-  >
-      <VSkeletonLoader v-if="isPending" />
-    <LiteYouTubeEmbed v-if="!isPending" :id="sunday?.id" :title="sunday?.title" />
-  </v-card>
-    <VSkeletonLoader type="list-item" color="background" v-if="isPending" />
-  <v-card-text v-if="!isPending">
-    <h4 class="font-weight-light" v-html="sunday?.title"/>
-  </v-card-text>
-<!--   ----------------------------------------------------------------------------------------------------------------------- Admin tool  -->
+    <v-card-title class="mt-2">В это воскресенье</v-card-title>
+    <VSkeletonLoader v-if="isPending"/>
+    <Transition name="fade">
+        <v-card to="/sunday" v-if="!isPending" class="ma-2">
+            <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title"/>
+        </v-card>
+    </Transition>
+    <VSkeletonLoader type="list-item" color="background" v-if="isPending"/>
+    <v-card-text v-if="!isPending">
+        <h4 class="font-weight-light" v-html="sunday?.title"/>
+    </v-card-text>
+  <!--   ----------------------------------------------------------------------------------------------------------------------- Admin tool  -->
     <v-btn class="mx-2" v-if="isAdmin" @click="show = !show">Обновить ВС</v-btn>
     <v-card v-if="show" class="ma-2">
-      <VTextField
-        class="ma-2"
-        v-model="title"
-        label="Описание"
-        hide-details
-      />
-      <VTextarea
-        class="ma-2"
-        v-model="text"
-        label="Текст"
-        hide-details
-        variant="outlined"
-      />
-      <VTextField
-        class="ma-2"
-        v-model="id"
-        label="ID"
-        hide-details
-      />
-      <v-card-actions>
-        <VSpacer />
-        <v-btn @click="updateSunday({text, title, id})">Обновить</v-btn>
-      </v-card-actions>
+        <VTextField
+                class="ma-2"
+                v-model="title"
+                label="Описание"
+                hide-details
+        />
+        <VTextarea
+                class="ma-2"
+                v-model="text"
+                label="Текст"
+                hide-details
+                variant="outlined"
+        />
+        <VTextField
+                class="ma-2"
+                v-model="id"
+                label="ID"
+                hide-details
+        />
+        <v-card-actions>
+            <VSpacer/>
+            <v-btn @click="updateSunday({text, title, id})">Обновить</v-btn>
+        </v-card-actions>
     </v-card>
 </template>
 
@@ -47,6 +46,7 @@ import {storeToRefs} from 'pinia'
 import {ref} from 'vue'
 import {useAuthStore} from '@/stores/authStore'
 import {useAppState} from '@/stores/appState'
+
 const newsfeedStore = useNewsfeedStore()
 const {updateSunday} = newsfeedStore
 const {sunday} = storeToRefs(newsfeedStore)
@@ -61,3 +61,15 @@ const id = ref('')
 const {isAdmin} = useAuthStore()
 const show = ref(false)
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 1.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>
