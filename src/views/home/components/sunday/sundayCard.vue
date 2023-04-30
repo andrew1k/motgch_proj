@@ -1,18 +1,19 @@
 <template>
     <v-card-title class="mt-2">В это воскресенье</v-card-title>
-        <v-card to="/sunday" class="ma-2">
-            <v-skeleton-loader :loading="isPending" type="image">
-                <v-responsive>
-                    <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title"/>
-                </v-responsive>
-            </v-skeleton-loader>
-            <VSkeletonLoader v-if="isPending" max-height="100" type="image"/>
+    <v-card class="ma-2" v-if="isPending" color="background">
+        <VResponsive :aspect-ratio="16 / 9"/>
+    </v-card>
+    <Transition mode="out-in" name="fade">
+        <v-card v-if="!isPending" to="/sunday" class="ma-2">
+            <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title"/>
         </v-card>
-    <v-skeleton-loader type="list-item" color="background" :loading="isPending">
-        <v-card-text>
+    </Transition>
+    <VSkeletonLoader v-if="isPending" type="list-item-two-line" color="background"/>
+    <Transition name="slide-fade" mode="out-in">
+        <v-card-text v-if="!isPending">
             <h4 class="font-weight-light" v-html="sunday?.title"/>
         </v-card-text>
-    </v-skeleton-loader>
+    </Transition>
   <!--   ----------------------------------------------------------------------------------------------------------------------- Admin tool  -->
     <v-btn class="mx-2" v-if="isAdmin" @click="show = !show">Обновить ВС</v-btn>
     <v-card v-if="show" class="ma-2">
@@ -66,5 +67,27 @@ const show = ref(false)
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
 
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.6s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+}
 </style>

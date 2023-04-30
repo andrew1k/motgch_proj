@@ -13,6 +13,7 @@ import {
 import {db, auth} from '@/plugins/firebase.config'
 import {useAuthStore} from '@/stores/authStore'
 import {useNotificationsStore} from '@/stores/notificationsStore'
+import {useAppState} from '@/stores/appState'
 
 export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
 
@@ -24,7 +25,11 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
   const docIds = ref([])
   const {scheduleNotifications} = useNotificationsStore()
 
+  const appState = useAppState()
+  const {isPending} = storeToRefs(appState)
+
   async function getCalendarEvents() {
+    isPending.value = true
     const colRef = collection(db, 'calendar')
 
     await onSnapshot(colRef, snapshot => {
@@ -69,6 +74,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
       })
       allCalendarEvents.value = events
       weekCalendarEvents.value = filteredEvents
+      isPending.value = false
     })
   }
 

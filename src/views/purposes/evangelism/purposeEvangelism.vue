@@ -1,9 +1,11 @@
 <template>
     <v-card class="ma-2">
-        <v-img :src="step" class="align-end">
-            <VCardTitle class="text-white" v-text="'Семинар «Шаг 4. Благовестие» '"/>
+        <v-img :src="step">
+            <div class="fill-height bottom-gradient d-flex align-end">
+                <VCardTitle class="text-white" v-text="'Семинар «Шаг 4. Благовестие» '"/>
+            </div>
         </v-img>
-        <VCardText v-html="stepText" />
+        <VCardText v-html="stepText"/>
         <v-card-actions>
             <VSpacer/>
             <VBtn color="evangelism" @click="signToStep = !signToStep" v-text="'Записаться на шаг 4'"/>
@@ -11,7 +13,7 @@
     </v-card>
     <v-expand-transition>
         <v-card v-show="signToStep" variant="text" elevation="0" rounded="0" class="ma-2">
-            <VCardText v-text="'Запишитесь на ближайший шаг в календаре и вам придет уведомление за день до семинара'" />
+            <VCardText v-text="'Запишитесь на ближайший шаг в календаре и вам придет уведомление за день до семинара'"/>
             <CalendarEventCard
                     v-for="evnt in filteredEvents"
                     :key="evnt.id"
@@ -22,12 +24,12 @@
                     :event-icon="evnt.icon"
                     :event-id="evnt.id"
                     @sign-btn="signToEvent(evnt)"
-                    @unsign-btn="unsignToEvent(evnt)" />
+                    @unsign-btn="unsignToEvent(evnt)"/>
         </v-card>
     </v-expand-transition>
-  <v-card class="ma-2">
-    <v-img :src="vechno" />
-  </v-card>
+    <v-card class="ma-2">
+        <v-img :src="vechno"/>
+    </v-card>
 
 </template>
 
@@ -51,3 +53,13 @@ filteredEvents.value = allCalendarEvents.value.filter(evnt => {
 const signToStep = ref(false)
 const stepText = ref(`Это 4-х часовой семинар, на котором вы узнаете о том, как привлекать людей к Иисусу Христу, способствуя изменению их жизни, а также узнаете о том, как рассказывать о вере, надежде и Божьей любви так, чтобы Божье спасение достигало как можно большего числа людей.`)
 </script>
+
+<style scoped>
+.bottom-gradient {
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      transparent 90px
+    );
+}
+</style>

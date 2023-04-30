@@ -1,25 +1,27 @@
 <template>
-    <v-slide-group v-if="isPending">
-        <v-slide-group-item>
-            <v-card height="120" width="100" class="ma-2">
-                <VSkeletonLoader />
-            </v-card>
-            <v-card height="120" width="100" class="ma-2">
-                <VSkeletonLoader />
-            </v-card>
-        </v-slide-group-item>
-    </v-slide-group>
-    <Transition name="slide-fade" >
-    <v-slide-group v-if="!isPending" v-model="model" selected-class="bg-primary" center-active>
-        <v-slide-group-item
-                v-for="story in stories"
-                :key="story.id"
-        >
-            <StoryCard :title="story.title" :link="story.link" :link-label="story.linkLabel"
-                       :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" :color="story.color"/>
-        </v-slide-group-item>
-    </v-slide-group>
-    </Transition>
+    <v-card min-height="140" variant="text" elevation="0" rounded="0">
+        <v-slide-group v-if="isPending">
+            <v-slide-group-item>
+                <v-card height="120" width="100" class="ma-2">
+                    <VSkeletonLoader/>
+                </v-card>
+                <v-card height="120" width="100" class="ma-2">
+                    <VSkeletonLoader/>
+                </v-card>
+            </v-slide-group-item>
+        </v-slide-group>
+        <Transition name="slide-fade" mode="out-in">
+            <v-slide-group v-show="!isPending" v-model="model" selected-class="bg-primary" center-active>
+                <v-slide-group-item
+                        v-for="story in stories"
+                        :key="story.id"
+                >
+                    <StoryCard :title="story.title" :link="story.link" :link-label="story.linkLabel"
+                               :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" :color="story.color"/>
+                </v-slide-group-item>
+            </v-slide-group>
+        </Transition>
+    </v-card>
     <StoryCreationCard v-if="isAdmin"/>
 </template>
 
@@ -49,7 +51,7 @@ const {isAdmin} = useAuthStore()
 
 <style scoped>
 .slide-fade-enter-active {
-    transition: all 0.5s ease-out;
+    transition: all 0.6s ease-out;
 }
 
 .slide-fade-leave-active {
@@ -58,7 +60,7 @@ const {isAdmin} = useAuthStore()
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-    transform: translateX(-10px);
+    transform: translateX(15px);
     opacity: 0;
 }
 </style>
