@@ -36,7 +36,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
         const data = doc.data()
         if (!newsIds.value.includes(id)) {
           newsIds.value.push(id)
-          news.value.push({...data, id})
+          news.value.unshift({...data, id})
         }
         isPending.value = false
       })
@@ -59,7 +59,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
         const data = doc.data()
         if (!storiesIds.value.includes(id)) {
           storiesIds.value.push(id)
-          stories.value.push({id, ...data})
+          stories.value.unshift({id, ...data})
         }
         isPending.value = false
       })
@@ -102,7 +102,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
     await deleteDoc(doc(db, 'newsfeed', newsId))
     await alert('all done')
   }
-  async function uploadStory(prevImg, storyImgs, title) {
+  async function uploadStory(prevImg, storyImgs, title, link, linkColor, linkLabel) {
     const storyId = Date.now().toString()
 
     try {
@@ -132,6 +132,9 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
         previewImgPath,
         storyImages,
         title,
+        link,
+        linkColor,
+        linkLabel
       })
       await alert('all done successfully')
     } catch (e) {

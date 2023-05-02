@@ -16,7 +16,7 @@
                         v-for="story in stories"
                         :key="story.id"
                 >
-                    <StoryCard :title="story.title" :link="story.link" :link-label="story.linkLabel"
+                    <StoryCard :title="story.title" :link="story.link" :link-label="story.linkLabel" :link-color="story.linkColor"
                                :prev-img="story.previewImgUrl" :story-imgs="story.storyImages" :color="story.color"/>
                 </v-slide-group-item>
             </v-slide-group>
@@ -51,7 +51,7 @@ const {isAdmin} = useAuthStore()
 
 <style scoped>
 .slide-fade-enter-active {
-    transition: all 0.6s ease-out;
+    transition: all 0.5s ease-out;
 }
 
 .slide-fade-leave-active {

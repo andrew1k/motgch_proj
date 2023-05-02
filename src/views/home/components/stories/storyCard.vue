@@ -24,7 +24,7 @@
       <v-toolbar color="surface" density="compact">
         <v-btn @click="dialog = false" prepend-icon="mdi-close">Закрыть</v-btn>
           <VSpacer />
-          <v-btn v-if="linkLabel" :to="link">{{linkLabel}}</v-btn>
+          <v-btn :color="linkColor" variant="tonal" v-if="linkLabel" :to="link">{{linkLabel}}</v-btn>
       </v-toolbar>
       <v-card-text class="ma-4">
         <v-card class="mx-auto" max-width="600">
@@ -85,6 +85,11 @@ defineProps({
   },
   linkLabel: {
     required: false,
+    type: String,
+  },
+  linkColor: {
+    required: false,
+    default: 'secondary',
     type: String,
   }
 })
