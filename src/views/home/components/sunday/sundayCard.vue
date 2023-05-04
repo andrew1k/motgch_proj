@@ -23,13 +23,7 @@
                 label="Описание"
                 hide-details
         />
-        <VTextarea
-                class="ma-2"
-                v-model="text"
-                label="Текст"
-                hide-details
-                variant="outlined"
-        />
+        <QuillEditor v-model:content="text" content-type="html" />
         <VTextField
                 class="ma-2"
                 v-model="id"
@@ -50,6 +44,8 @@ import {storeToRefs} from 'pinia'
 import {ref} from 'vue'
 import {useAuthStore} from '@/stores/authStore'
 import {useAppState} from '@/stores/appState'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 const newsfeedStore = useNewsfeedStore()
 const {updateSunday} = newsfeedStore

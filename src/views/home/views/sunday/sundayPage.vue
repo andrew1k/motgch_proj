@@ -5,19 +5,16 @@
     <LiteYouTubeEmbed :id="sunday.id" :title="sunday.title" />
   </v-card>
   <v-card class="ma-2 pa-2">
-<!--    <v-textarea-->
-<!--      outlined-->
-<!--      auto-grow-->
-<!--      density="comfortable"-->
-<!--      v-model="text"-->
-<!--      variant="underlined"-->
-<!--      class="ma-1"-->
-<!--      v-html="item.text"-->
-<!--    />-->
-    <v-card-text v-html="sunday.text" />
+    <v-card-title v-text="'Конспект проповеди'" />
+      <QuillEditor v-model:content="sunday.text" content-type="html" toolbar="minimal" />
     <v-card-actions>
       <vSpacer/>
-      <v-btn @click="saveNotes(text, sunday.id)" variant="text" append-icon="mdi-bookmark-outline">Сохранить
+      <v-btn
+              @click="saveNotes(sunday.text, sunday.id)"
+              variant="text"
+              append-icon="mdi-bookmark-outline"
+      >
+          Сохранить
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -26,19 +23,18 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
 import LiteYouTubeEmbed from 'vue-lite-youtube-embed'
 import 'vue-lite-youtube-embed/style.css'
 import {useNewsfeedStore} from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 const newsfeedStore = useNewsfeedStore()
 const {sunday} = storeToRefs(newsfeedStore)
 
-
-const text = ref('')
-const saveNotes = (txt) => {
-  console.log(txt)
+const saveNotes = (txt, id) => {
+  console.log(txt, id)
 }
 
 </script>

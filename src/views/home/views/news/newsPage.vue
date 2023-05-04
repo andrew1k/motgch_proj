@@ -1,8 +1,6 @@
 <template>
     <v-toolbar color="background" density="compact">
         <VBtn variant="text" prepend-icon="mdi-chevron-left" @click="$router.push('/')">Назад</VBtn>
-        <VSpacer/>
-        <VBtn variant="text" append-icon="mdi-bookmark-outline">Сохранить</VBtn>
     </v-toolbar>
     <v-card class="ma-2">
         <VImg :src="newsItem?.url"/>
@@ -13,10 +11,19 @@
         <component :is="leader"/>
         <VCardText v-html="newsItem?.text"/>
     </v-card>
+    <v-card v-if="newsItem?.form" class="ma-2 pa-2" elevation="0" rounded="0" variant="text">
+        <FormKit type="form" @submit="sendForm" :actions="false" v-model="forma">
+            <FormKitSchema :schema="newsItem?.formSchema" />
+            <v-card-actions>
+                <VSpacer />
+                <VBtn type="submit">Отправить</VBtn>
+            </v-card-actions>
+        </FormKit>
+    </v-card>
 </template>
 
 <script setup>
-import { defineProps, onBeforeMount, computed} from 'vue'
+import {defineProps, onBeforeMount, computed, ref} from 'vue'
 import {useNewsfeedStore} from '@/stores/newsfeedStore'
 import {storeToRefs} from 'pinia'
 import AlHo from '@/components/leaders/AlHo.vue'
@@ -57,4 +64,9 @@ let leader = computed(() => {
       return MBV
   }
 })
+
+const forma = ref({})
+const sendForm = () => {
+    console.log(forma.value)
+}
 </script>

@@ -9,6 +9,8 @@ import {loadFonts} from './plugins/webfontloader'
 import {auth } from '@/plugins/firebase.config'
 import {onAuthStateChanged} from 'firebase/auth'
 import '@/plugins/variables.scss'
+import { plugin, FormKitSchema, defaultConfig } from '@formkit/vue'
+import formkitConfig from '@/plugins/formkit.config'
 
 loadFonts()
 
@@ -21,5 +23,7 @@ onAuthStateChanged(auth, () => {
     .use(router)
     .use(vuetify)
     .use(VCalendar, {})
+    .use(plugin, defaultConfig(formkitConfig))
+    .use(FormKitSchema)
     .mount('#app')
 })
