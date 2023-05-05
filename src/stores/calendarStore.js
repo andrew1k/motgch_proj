@@ -13,10 +13,10 @@ import {
 import {db, auth} from '@/plugins/firebase.config'
 import {useAuthStore} from '@/stores/authStore'
 import {useNotificationsStore} from '@/stores/notificationsStore'
-import {useAppState} from '@/stores/appState'
+import {useAppState, useSnackbarMessages} from '@/stores/appState'
 
 export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
-
+  const {setMessage} = useSnackbarMessages()
   const authStore = useAuthStore()
   const {signedEventsIds} = storeToRefs(authStore)
 
@@ -98,6 +98,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
         id: +eventId.slice(0, 5),
         schedule: { at: new Date(evnt.start) },
       })
+      await setMessage(`Отлично, теперь вы записаны на ${evnt.title}`)
     }
   }
 
@@ -113,6 +114,7 @@ export const useCalendarEventsStore = defineStore('calendarEventsStore', () => {
     await updateDoc(doc(db, 'users', auth.currentUser.uid), {
       signedEvents: arrayRemove({eventDay, eventId}),
     })
+    await setMessage('Вы отписались.')
   }
   // ------------------------------------------------------------------------------------------------------------------------------------------------ admin funcs
   async function saveEventToDB(payload) {

@@ -12,7 +12,7 @@
         <VCardText v-html="newsItem?.text"/>
     </v-card>
     <v-card v-if="newsItem?.form" class="ma-2 pa-2" elevation="0" rounded="0" variant="text">
-        <FormKit type="form" @submit="sendForm" :actions="false" v-model="forma">
+        <FormKit type="form" @submit="sendForm({...forma, from: newsItem.title})" :actions="false" v-model="forma">
             <FormKitSchema :schema="newsItem?.formSchema" />
             <v-card-actions>
                 <VSpacer />
@@ -33,6 +33,7 @@ import MBV from '@/components/leaders/MBV.vue'
 import ViGo from '@/components/leaders/ViGo.vue'
 import TaSt from '@/components/leaders/TaSt.vue'
 import AnKo from '@/components/leaders/AnKo.vue'
+import {useFormsStore} from '@/stores/formsStore'
 
 const newsfeedStore = useNewsfeedStore()
 const {getNewsItem} = newsfeedStore
@@ -66,7 +67,5 @@ let leader = computed(() => {
 })
 
 const forma = ref({})
-const sendForm = () => {
-    console.log(forma.value)
-}
+const { sendForm } = useFormsStore()
 </script>

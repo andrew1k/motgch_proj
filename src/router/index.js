@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import homePage from '@/views/home/homePage'
 import auth from '@/router/routes/auth'
 import nav from '@/router/routes/nav'
+import admin from '@/router/routes/admin'
 import {useAuthStore} from '@/stores/authStore'
 import {storeToRefs} from 'pinia'
 import {App} from '@capacitor/app'
@@ -19,6 +20,7 @@ const routes = [
   },
   ...nav,
   ...auth,
+  ...admin,
 ]
 
 const router = createRouter({
