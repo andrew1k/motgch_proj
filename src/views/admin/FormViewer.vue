@@ -1,22 +1,31 @@
 <template>
-<v-card>
-    <VTextField
-            prepend-inner-icon="mdi-magnify"
-            v-model="searchText"
-            label="Поиск"
-            variant="outlined"
-            class="ma-2"
-    />
-    <VDataTable
-            v-model="selectedTable"
-            fixed-header
-            :headers="tableHeader"
-            :items="formsData"
-            :search="searchText"
-            height="400"
-            must-sort
-    />
-</v-card>
+    <v-card>
+        <VTextField
+                prepend-inner-icon="mdi-magnify"
+                v-model="searchText"
+                label="Поиск"
+                variant="outlined"
+                class="ma-2"
+        />
+        <VDataTable
+                density="compact"
+                items-per-page="100"
+                :group-by="[{key: 'from'}]"
+                v-model="selectedTable"
+                fixed-header
+                :headers="tableHeader"
+                :items="formsData"
+                :search="searchText"
+                height="400"
+                :sort-by="[{key: 'time', order: 'desc'}]"
+        >
+            <template #item="{item}">
+                <v-chip>
+                    {{item.row.fullName}}
+                </v-chip>
+            </template>
+        </VDataTable>
+    </v-card>
 </template>
 
 <script setup>
@@ -33,35 +42,20 @@ const searchText = ref()
 
 const tableHeader = ref([
   {
-
-  }
+    title: 'Время',
+    key: 'time',
+  }, {
+    title: 'Имя',
+    key: 'fullName',
+  }, {
+    title: 'Возраст',
+    key: 'age',
+  }, {
+    title: 'Телефон',
+    key: 'phoneNumber',
+  }, {
+    title: 'Ответ',
+    key: 'answer',
+  },
 ])
-// const tableHeader = ref([
-//   {
-//     title: 'Имя',
-//     align: 'start',
-//     sortable: true,
-//     key: 'firstName',
-//   }, {
-//     title: 'Ведущий',
-//     align: 'start',
-//     sortable: true,
-//     key: 'leader',
-//   }, {
-//     title: 'День',
-//     align: 'start',
-//     sortable: true,
-//     key: 'day',
-//   }, {
-//     title: 'Возраст',
-//     align: 'start',
-//     sortable: true,
-//     key: 'ageVal',
-//   }, {
-//     title: 'Тип',
-//     align: 'start',
-//     sortable: true,
-//     key: 'type',
-//   },
-// ])
 </script>

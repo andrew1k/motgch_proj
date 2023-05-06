@@ -4,7 +4,7 @@ export default [
     name: 'formViewer',
     component: () => import('@/views/admin/FormViewer.vue'),
     meta: {
-      layout:  'main',
+      layout:  'admin',
       auth: true,
       admin: true,
     }
