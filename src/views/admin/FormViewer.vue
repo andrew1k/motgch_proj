@@ -19,10 +19,31 @@
                 height="400"
                 :sort-by="[{key: 'time', order: 'desc'}]"
         >
-            <template #item="{item}">
+            <template v-slot:group-header="{ item, columns, toggleGroup, isGroupOpen }">
+                <tr>
+                    <td :colspan="columns.length">
+                        <v-btn
+                                size="small"
+                                variant="text"
+                                :prepend-icon="isGroupOpen(item) ? '$expand' : '$next'"
+                                @click="toggleGroup(item)"
+                        >{{ item.value }}
+                        </v-btn>
+                    </td>
+                </tr>
+            </template>
+            <template #item.fullName="{item}">
                 <v-chip>
-                    {{item.row.fullName}}
+                    <!-- item.raw.uid-->
+                    {{ item.raw.fullName }}
                 </v-chip>
+            </template>
+            <template #item.answer="{item}">
+                <ul>
+                    <li v-for="(val, key) in JSON.parse(item.raw.answer)">
+                        {{ key }} : {{ val }}
+                    </li>
+                </ul>
             </template>
         </VDataTable>
     </v-card>
