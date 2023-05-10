@@ -1,5 +1,5 @@
 <template>
-  <v-card-title class="mt-6">Жизнь церкви</v-card-title>
+  <v-card-title class="mt-6">Для вас</v-card-title>
   <NewsCreationCard v-if="isAdmin" />
 <!--                                            Skeleton Cards                -->
     <v-card class="ma-2" v-if="isPending">

@@ -12,7 +12,7 @@
         <VCardText v-html="newsItem?.text"/>
     </v-card>
     <v-card v-if="newsItem?.form" class="ma-2 pa-2" elevation="0" rounded="0" variant="text">
-        <FormKit type="form" @submit="sendForm({...forma, from: newsItem.title})" :actions="false" v-model="forma">
+        <FormKit type="form" @submit="sendForm('forms',{...forma}, newsItem.title)" :actions="false" v-model="forma">
             <FormKitSchema :schema="newsItem?.formSchema" />
             <v-card-actions>
                 <VSpacer />

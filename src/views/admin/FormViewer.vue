@@ -1,51 +1,21 @@
 <template>
-    <v-card>
-        <VTextField
-                prepend-inner-icon="mdi-magnify"
-                v-model="searchText"
-                label="Поиск"
-                variant="outlined"
-                class="ma-2"
-        />
-        <VDataTable
-                density="compact"
-                items-per-page="100"
-                :group-by="[{key: 'from'}]"
-                v-model="selectedTable"
-                fixed-header
-                :headers="tableHeader"
-                :items="formsData"
-                :search="searchText"
-                height="400"
-                :sort-by="[{key: 'time', order: 'desc'}]"
-        >
-            <template v-slot:group-header="{ item, columns, toggleGroup, isGroupOpen }">
-                <tr>
-                    <td :colspan="columns.length">
-                        <v-btn
-                                size="small"
-                                variant="text"
-                                :prepend-icon="isGroupOpen(item) ? '$expand' : '$next'"
-                                @click="toggleGroup(item)"
-                        >{{ item.value }}
-                        </v-btn>
-                    </td>
-                </tr>
-            </template>
-            <template #item.fullName="{item}">
-                <v-chip>
-                    <!-- item.raw.uid-->
-                    {{ item.raw.fullName }}
-                </v-chip>
-            </template>
-            <template #item.answer="{item}">
-                <ul>
-                    <li v-for="(val, key) in JSON.parse(item.raw.answer)">
-                        {{ key }} : {{ val }}
-                    </li>
-                </ul>
-            </template>
-        </VDataTable>
+    <v-card class="ma-2">
+        <v-tabs v-model="tab">
+            <v-tab value="start" variant="text" rounded="0">Начало</v-tab>
+            <v-tab value="forms" variant="text" rounded="0">Формы</v-tab>
+            <v-tab value="fellowship" variant="text" rounded="0">Общение</v-tab>
+        </v-tabs>
+        <v-window v-model="tab">
+            <v-window-item value="start">
+                <v-card-title>Таблицы заполненных форм</v-card-title>
+            </v-window-item>
+            <v-window-item value="forms" @group:selected="getForms('forms')">
+                <FormsTable :table-header="tableHeader" :forms-data="formsData.forms" />
+            </v-window-item>
+            <v-window-item value="fellowship" @group:selected="getForms('fellowship')">
+                <FormsTable :table-header="tableHeader" :forms-data="formsData.fellowship" />
+            </v-window-item>
+        </v-window>
     </v-card>
 </template>
 
@@ -53,10 +23,10 @@
 import {ref} from 'vue'
 import {useFormsStore} from '@/stores/formsStore'
 import {storeToRefs} from 'pinia'
+import FormsTable from '@/views/admin/components/formsTable.vue'
 
 const formsStore = useFormsStore()
 const {getForms} = formsStore
-getForms()
 const {formsData} = storeToRefs(formsStore)
 const selectedTable = ref()
 const searchText = ref()
@@ -79,4 +49,5 @@ const tableHeader = ref([
     key: 'answer',
   },
 ])
+const tab = ref('start')
 </script>

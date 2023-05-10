@@ -1,6 +1,6 @@
 <template>
     <VSelect
-            v-model="selectFrom"
+            v-model="from"
             :items="selectForm"
             multiple
             :item-value="value"
@@ -10,20 +10,14 @@
             class="mx-2 mt-4"
     />
     <VTextField
-            v-model="ageToSign"
-            variant="outlined"
-            type="Number"
-            class="ma-2"
-            label="Ваш возраст"
-    />
-    <VTextField
             label="Район, где вам удобно посещать Малую Группу"
-            v-model="sgDistrict"
+            v-model="metro"
             variant="outlined"
             class="ma-2"
     />
     <VDivider/>
-    <v-card-text>Ниже вы можете ознакомиться с группами и выбрать подходящую или просто нажмите присоединиться. Вы
+    <v-card-text>
+        Ниже вы можете ознакомиться с группами и выбрать подходящую или просто нажмите присоединиться. Вы
         можете воспользоваться поиском или сортировкой нажав на нужную вам категорию
     </v-card-text>
     <VTextField
@@ -34,7 +28,7 @@
             class="ma-2"
     />
     <VDataTableVirtual
-            v-model="selectedTable"
+            v-model="leader"
             show-select
             fixed-header
             :headers="tableHeader"
@@ -44,18 +38,18 @@
             must-sort
     />
     <v-card-actions>
-        <VBtn icon="mdi-chevron-left" density="comfortable" color="fellowship" @click="$emit('goBack')"/>
         <VSpacer/>
-        <v-btn color="fellowship" elevation="0" @click="signToSG({selectedTable, sgDistrict, ageToSign, selectFrom})">
+        <v-btn color="fellowship" elevation="0" @click="sendForm('fellowship', {leader, metro, from}, 'Записаться в мг')">
             Присоединиться
         </v-btn>
     </v-card-actions>
 </template>
 
 <script setup>
-import {ref, defineEmits} from 'vue'
+import {ref} from 'vue'
 import {useSGLeadersTable} from '@/stores/dataTablesStore'
 import {storeToRefs} from 'pinia'
+import {useFormsStore} from '@/stores/formsStore'
 
 const sgLeadersTable = useSGLeadersTable()
 const {getSGLeaders} = sgLeadersTable
@@ -66,19 +60,18 @@ const {sgLeadersData} = storeToRefs(sgLeadersTable)
 const searchText = ref()
 
 const selectForm = ref([
-  {title: 'Соц.Сети церкви', value: 'socials'},
-  {title: 'Услышали на служении в церкви', value: 'heard'},
-  {title: 'Узнали от друзей', value: 'friends'},
-  {title: 'Увидели листовку', value: 'list'},
-  {title: 'На шаге 1 или 2', value: 'steps'},
-  {title: 'На сайте', value: 'site'},
-  {title: 'Другое', value: 'other'},
+  {title: 'Соц.Сети церкви', value: 'Соц.Сети церкви'},
+  {title: 'Услышали на служении в церкви', value: 'Услышали на служении в церкви'},
+  {title: 'Узнали от друзей', value: 'Узнали от друзей'},
+  {title: 'Увидели листовку', value: 'Увидели листовку'},
+  {title: 'На шаге 1 или 2', value: 'На шаге 1 или 2'},
+  {title: 'На сайте', value: 'На сайте'},
+  {title: 'Другое', value: 'Другое'},
 ])
 
-const selectFrom = ref([])
-const ageToSign = ref('')
-const sgDistrict = ref('')
-const selectedTable = ref([])
+const from = ref([])
+const metro = ref('')
+const leader = ref([])
 
 const tableHeader = ref([
   {
@@ -109,9 +102,5 @@ const tableHeader = ref([
   },
 ])
 
-defineEmits(['goBack'])
-
-const signToSG = (payload) => {
-  console.log(payload)
-}
+const {sendForm} = useFormsStore()
 </script>

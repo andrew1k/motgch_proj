@@ -26,7 +26,7 @@
     </v-card>
     <v-expand-transition>
         <v-card v-show="togglerSG" variant="text" elevation="0" rounded="0" class="ma-2">
-            <SignToSG @go-back="togglerSG = !togglerSG"/>
+            <SignToSG />
         </v-card>
     </v-expand-transition>
   <!------------------------------------------------------------------------------------------------------------------------------ Baptism-->
@@ -36,7 +36,7 @@
     </v-card>
     <v-expand-transition>
         <v-card v-show="baptismToggler" variant="text" elevation="0" rounded="0" class="ma-2">
-            <SignToBaptism @goBack="baptismToggler = !baptismToggler" />
+            <SignToBaptism />
         </v-card>
     </v-expand-transition>
 
@@ -66,9 +66,9 @@ import firstMeeting from '@/assets/fellowshipPics/firstMeeting.jpg'
 import smallGroups from '@/assets/fellowshipPics/smallGroups.jpg'
 import onePlusOne from '@/assets/fellowshipPics/onePlusOne.jpg'
 import {ref} from 'vue'
-import SignToBaptism from '@/views/purposes/fellowship/views/signToBaptism.vue'
+import SignToBaptism from '@/views/purposes/fellowship/components/forms/signToBaptism.vue'
 import FellowshipCards from '@/views/purposes/fellowship/components/fellowshipCards.vue'
-import SignToSG from '@/views/purposes/fellowship/views/signToSG.vue'
+import SignToSG from '@/views/purposes/fellowship/components/forms/signToSG.vue'
 import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue'
 import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'

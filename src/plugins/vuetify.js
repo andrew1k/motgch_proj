@@ -13,7 +13,7 @@ export default createVuetify({
     defaults: {
       global: {},
       VCard: {
-        elevation: 5,
+        elevation: 4,
         rounded: 'xl',
       },
       VCardActions:{
