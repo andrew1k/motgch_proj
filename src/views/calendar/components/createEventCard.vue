@@ -73,7 +73,7 @@ import {useCalendarEventsStore} from '@/stores/calendarStore'
 
 const {saveEventToDB} = useCalendarEventsStore()
 
-const chipItems = ref(['ministry', 'fellowship', 'discepleship', 'evangelism', 'worship', 'youth', 'first', 'second', 'third', 'fourth', 'baptism'])
+const chipItems = ref(['ministry', 'fellowship', 'discepleship', 'evangelism', 'worship', 'youth', 'first', 'second', 'third', 'fourth', 'baptism', 'firstMeeting'])
 const chipIcons = ref(['mdi-heart', 'mdi-account-multiple', 'mdi-school', 'mdi-hand-heart', 'mdi-torch', 'mdi-run',])
 const chipIcon = ref()
 const chipValues = ref([])

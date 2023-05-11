@@ -1,60 +1,91 @@
 <template>
-    <!------------------------------------------------------------------------------------------------------------------------------    Step  -->
+  <!------------------------------------------------------------------------------------------------------------------------------    Step  -->
     <v-card class="ma-2">
-      <FellowshipCards title="Семинар - шаг 1 «Общение»" btn="Записаться на Шаг 1" :img="step" :text="stepText" color="fellowship" @toggler-btn="signToStep = !signToStep"/>
+        <FellowshipCards title="Семинар - шаг 1 «Общение»" btn="Записаться на Шаг 1" :img="step" :text="stepText"
+                         color="fellowship" @toggler-btn="signToStep = !signToStep"/>
     </v-card>
     <v-expand-transition>
         <v-card v-show="signToStep" variant="text" elevation="0" rounded="0" class="ma-2">
-            <VCardText v-text="'Запишитесь на ближайший шаг в календаре и вам придет уведомление за день до семинара'" />
+            <VCardText v-text="'Запишитесь на ближайший шаг в календаре и вам придет уведомление за день до семинара'"/>
             <CalendarEventCard
-              v-for="evnt in filteredEvents"
-              :key="evnt.id"
-              :event-title="evnt.title"
-              :event-text="evnt.text"
-              :event-time="evnt.start"
-              :event-color="evnt.color"
-              :event-icon="evnt.icon"
-              :event-id="evnt.id"
-              @sign-btn="signToEvent(evnt)"
-              @unsign-btn="unsignToEvent(evnt)" />
+                    v-for="evnt in filteredEvents"
+                    :key="evnt.id"
+                    :event-title="evnt.title"
+                    :event-text="evnt.text"
+                    :event-time="evnt.start"
+                    :event-color="evnt.color"
+                    :event-icon="evnt.icon"
+                    :event-id="evnt.id"
+                    @sign-btn="signToEvent(evnt)"
+                    @unsign-btn="unsignToEvent(evnt)"
+                    :show="true"
+            />
         </v-card>
     </v-expand-transition>
   <!------------------------------------------------------------------------------------------------------------------------------    Small Group-->
-<!--    <VCardTitle class="mt-6" v-text="'МАЛЫЕ ГРУППЫ'"/>-->
+  <!--    <VCardTitle class="mt-6" v-text="'МАЛЫЕ ГРУППЫ'"/>-->
     <v-card class="ma-2">
-      <FellowshipCards title="Малые группы" btn="Найти Малую Группу" :img="smallGroups" :text="sgText" color="fellowship" @toggler-btn="togglerSG = !togglerSG"/>
+        <FellowshipCards title="Малые группы" btn="Найти Малую Группу" :img="smallGroups" :text="sgText"
+                         color="fellowship" @toggler-btn="togglerSG = !togglerSG"/>
     </v-card>
     <v-expand-transition>
         <v-card v-show="togglerSG" variant="text" elevation="0" rounded="0" class="ma-2">
-            <SignToSG />
+            <SignToSG/>
         </v-card>
     </v-expand-transition>
   <!------------------------------------------------------------------------------------------------------------------------------ Baptism-->
-<!--    <VCardTitle v-text="'КРЕЩЕНИЕ'" class="mt-6"/>-->
+  <!--    <VCardTitle v-text="'КРЕЩЕНИЕ'" class="mt-6"/>-->
     <v-card class="ma-2">
-      <FellowshipCards title="Водное крещение" btn="Хочу принять водное крещение" :img="baptism" :text="textBaptism" color="fellowship" @toggler-btn="baptismToggler = !baptismToggler" />
+        <FellowshipCards title="Водное крещение" btn="Хочу принять водное крещение" :img="baptism" :text="textBaptism"
+                         color="fellowship" @toggler-btn="baptismToggler = !baptismToggler"/>
     </v-card>
     <v-expand-transition>
         <v-card v-show="baptismToggler" variant="text" elevation="0" rounded="0" class="ma-2">
-            <SignToBaptism />
+            <SignToBaptism/>
         </v-card>
     </v-expand-transition>
 
-    <!---------------------------------------------------------------------------------------------------------------------------  First Meeting-->
-<!--    <VCardTitle class=" mt-6" v-text="'ВСТРЕЧА-ЗНАКОМСТВО'"/>-->
+  <!---------------------------------------------------------------------------------------------------------------------------  First Meeting-->
+  <!--    <VCardTitle class=" mt-6" v-text="'ВСТРЕЧА-ЗНАКОМСТВО'"/>-->
     <v-card class="ma-2">
-      <FellowshipCards title="Встреча-знакомство" btn="Записаться" :img="firstMeeting" :text="textFirstMeeting" color="fellowship" @toggler-btn="signToFirstMeeting = !signToFirstMeeting" />
+        <FellowshipCards
+                title="Встреча-знакомство"
+                btn="Записаться"
+                :img="firstMeeting"
+                :text="textFirstMeeting"
+                color="fellowship"
+                @toggler-btn="signToFirstMeeting = !signToFirstMeeting"/>
     </v-card>
     <v-expand-transition>
         <v-card v-show="signToFirstMeeting" variant="text" elevation="0" rounded="0" class="ma-2">
-            <VCardSubtitle v-text="'Ближайшая встреча-знакомство в календаре'" />
-            <VDivider />
+            <VCardSubtitle v-text="'Ближайшая встреча-знакомство в календаре'"/>
+            <VDivider/>
+            <CalendarEventCard
+                    v-for="evnt in firstMeetingEvnt"
+                    :key="evnt.id"
+                    :event-title="evnt.title"
+                    :event-text="evnt.text"
+                    :event-time="evnt.start"
+                    :event-color="evnt.color"
+                    :event-icon="evnt.icon"
+                    :event-id="evnt.id"
+                    @sign-btn="signToEvent(evnt)"
+                    @unsign-btn="unsignToEvent(evnt)"
+                    :show="true"
+            />
         </v-card>
     </v-expand-transition>
-    <!----------------------------------------------------------------------------------------------------------------------------  One Plus One -->
-<!--    <VCardTitle class=" mt-6" v-text="'ИНДИВИДУАЛЬНОЕ НАСТАВНИЧЕСТВО'"/>-->
+  <!----------------------------------------------------------------------------------------------------------------------------  One Plus One -->
+  <!--    <VCardTitle class=" mt-6" v-text="'ИНДИВИДУАЛЬНОЕ НАСТАВНИЧЕСТВО'"/>-->
     <v-card class=" ma-2">
-      <FellowshipCards title="Программа «1+1»" btn="Найти мне наставника" :img="onePlusOne" :text="textOnePlusOne" color="fellowship" @toggler-btn="signToOnePlusOne" />
+        <FellowshipCards
+                title="Программа «1+1»"
+                btn="Найти мне наставника"
+                :img="onePlusOne"
+                :text="textOnePlusOne"
+                color="fellowship"
+                @toggler-btn="signToOnePlusOne"
+        />
     </v-card>
 
 </template>
@@ -112,9 +143,13 @@ const textFirstMeeting = ref([
 const calendarEventsStore = useCalendarEventsStore()
 const {allCalendarEvents} = storeToRefs(calendarEventsStore)
 const filteredEvents = ref([])
+const firstMeetingEvnt = ref([])
 const {signToEvent, unsignToEvent} = calendarEventsStore
 
 filteredEvents.value = allCalendarEvents.value.filter(evnt => {
-    if (evnt.chipValues.includes('first')) return evnt
+  if (evnt.chipValues.includes('first')) return evnt
+})
+firstMeetingEvnt.value = allCalendarEvents.value.filter(evnt => {
+  if (evnt.chipValues.includes('firstMeeting')) return evnt
 })
 </script>

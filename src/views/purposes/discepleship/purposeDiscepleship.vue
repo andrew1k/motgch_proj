@@ -23,6 +23,7 @@
                     :event-color="evnt.color"
                     :event-icon="evnt.icon"
                     :event-id="evnt.id"
+                    :show="true"
                     @sign-btn="signToEvent(evnt)"
                     @unsign-btn="unsignToEvent(evnt)"/>
         </v-card>

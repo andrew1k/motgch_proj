@@ -23,6 +23,7 @@
                     :event-color="evnt.color"
                     :event-icon="evnt.icon"
                     :event-id="evnt.id"
+                    :show="true"
                     @sign-btn="signToEvent(evnt)"
                     @unsign-btn="unsignToEvent(evnt)"/>
         </v-card>
@@ -57,9 +58,9 @@ const stepText = ref(`Это 4-х часовой семинар, на котор
 <style scoped>
 .bottom-gradient {
     background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.7) 0%,
-      transparent 90px
+            to top,
+            rgba(0, 0, 0, 0.7) 0%,
+            transparent 90px
     );
 }
 </style>

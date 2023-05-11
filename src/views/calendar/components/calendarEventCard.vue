@@ -3,6 +3,7 @@
     class="mx-1 my-2"
     :elevation="show ? 0 : 4"
     rounded="pill"
+    :color="show ? 'background' : 'surface'"
     @click="show = !show"
   >
     <v-card-actions>
@@ -38,7 +39,7 @@ import {storeToRefs} from 'pinia'
 const authStore = useAuthStore()
 const {signedEventsIds} = storeToRefs(authStore)
 
-const show = ref(false)
+// const show = ref(false)
 defineProps({
   eventTitle: {
     type: String,
@@ -61,6 +62,10 @@ defineProps({
   },
   eventIcon: {
     type: String,
+  },
+  show: {
+    type: Boolean,
+    default: false
   }
 })
 

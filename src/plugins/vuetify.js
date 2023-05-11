@@ -18,19 +18,17 @@ export default createVuetify({
       },
       VCardActions:{
         VBtn: {
-          variant: 'outlined'
+          variant: 'flat',
+          size: 'large'
         }
       },
       VBtn: {
         elevation: 0,
         variant: 'flat',
       },
-      VTextField: {
-        variant: 'outlined',
-      }
     },
     components: {
-      VDataTable, // Не забыть убрать, если с Virtual будет все ок
+      VDataTable,
       VDataTableVirtual,
       VSkeletonLoader,
     },
