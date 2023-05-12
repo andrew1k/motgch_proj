@@ -31,7 +31,9 @@
     <v-card class="ma-2">
         <v-img :src="vechno"/>
     </v-card>
-
+    <v-card class="ma-2">
+        <v-img :src="vechno"/>
+    </v-card>
 </template>
 
 <script setup>

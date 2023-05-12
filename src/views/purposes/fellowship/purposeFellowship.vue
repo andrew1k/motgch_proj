@@ -84,10 +84,22 @@
                 :img="onePlusOne"
                 :text="textOnePlusOne"
                 color="fellowship"
-                @toggler-btn="signToOnePlusOne"
+                @toggler-btn="oPo = !oPo"
         />
     </v-card>
-
+    <v-expand-transition>
+        <v-card v-show="oPo" variant="text" elevation="0" rounded="0" class="ma-2">
+            <v-radio-group v-model="answer"  class="my-1" label="Как с вами удобнее связаться?" density="comfortable" color="success" hide-details>
+                <VRadio label="What's App" value="WhatsApp" />
+                <VRadio label="Telegram" value="Telegram" />
+                <VRadio label="По телефону" value="По телефону" />
+            </v-radio-group>
+            <v-card-actions>
+                <VSpacer/>
+                <v-btn color="fellowship" @click="sendForm('fellowship', {answer}, '1 + 1')">Отправить</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-expand-transition>
 </template>
 
 <script setup>
@@ -98,15 +110,18 @@ import smallGroups from '@/assets/fellowshipPics/smallGroups.jpg'
 import onePlusOne from '@/assets/fellowshipPics/onePlusOne.jpg'
 import {ref} from 'vue'
 import SignToBaptism from '@/views/purposes/fellowship/components/forms/signToBaptism.vue'
-import FellowshipCards from '@/views/purposes/fellowship/components/fellowshipCards.vue'
+import FellowshipCards from '@/components/purposes/cardsInPurposes.vue'
 import SignToSG from '@/views/purposes/fellowship/components/forms/signToSG.vue'
 import CalendarEventCard from '@/views/calendar/components/calendarEventCard.vue'
 import {useCalendarEventsStore} from '@/stores/calendarStore'
 import {storeToRefs} from 'pinia'
+import {useFormsStore} from '@/stores/formsStore'
 
 const togglerSG = ref(false)
 const baptismToggler = ref(false)
 const signToFirstMeeting = ref(false)
+const oPo = ref(false)
+const answer = ref('')
 const signToOnePlusOne = () => {
   console.log('signToOnePlusOne')
 }
@@ -152,4 +167,6 @@ filteredEvents.value = allCalendarEvents.value.filter(evnt => {
 firstMeetingEvnt.value = allCalendarEvents.value.filter(evnt => {
   if (evnt.chipValues.includes('firstMeeting')) return evnt
 })
+// ---------------------------------------------------------------------------------
+const {sendForm} = useFormsStore()
 </script>

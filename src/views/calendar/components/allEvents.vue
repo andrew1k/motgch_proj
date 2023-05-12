@@ -3,21 +3,17 @@
   <v-card-title v-if="!allCalendarEvents.length" class="mt-4">Пока что нет новых событий</v-card-title>
   <v-card variant="text" elevation="0">
     <v-chip-group
-      variant="flat"
       v-model="selectedChip"
       filter
-      column
-      class="mx-2"
+      class="mx-2 text-center"
     >
-      <v-chip
+      <VChip
         v-for="chip in eventsChips"
         :key="chip.title"
         :color="chip.color"
         :text="chip.title"
         :value="chip.value"
-        rounded="pill"
-        filter
-      ></v-chip>
+      />
     </v-chip-group>
   </v-card>
   <calendar-event-card
@@ -74,15 +70,16 @@ const eventsChips = ref([
     value: 'worship',
     title: 'поклонение',
     color: 'red',
-  }, {
-    value: 'youth',
-    title: 'молодежное',
-    color: 'indigo',
-  }, {
-    value: 'baptism',
-    title: 'крещение',
-    color: 'teal',
   },
+  // {
+  //   value: 'youth',
+  //   title: 'молодежное',
+  //   color: 'indigo',
+  // }, {
+  //   value: 'baptism',
+  //   title: 'крещение',
+  //   color: 'teal',
+  // },
 ])
 
 const selectedChip = ref([])

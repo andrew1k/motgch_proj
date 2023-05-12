@@ -26,6 +26,18 @@ export default createVuetify({
         elevation: 0,
         variant: 'flat',
       },
+
+      VChipGroup: {
+        variant: 'flat',
+      },
+      VChip: {
+        size: 'large',
+        rounded: 'pill',
+        pill: true,
+      },
+      VTextField: {
+        variant: 'outlined'
+      }
     },
     components: {
       VDataTable,
