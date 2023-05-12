@@ -26,7 +26,7 @@
           <v-chip v-if="signedEventsIds.includes(eventId)" rounded="pill" color="success" >вы записаны</v-chip>
         <VSpacer />
         <slot name="deleteBtnSpace"/>
-        <v-btn color="secondary" v-if="!signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('signBtn')">Записаться</v-btn>
+        <v-btn :color="eventColor" v-if="!signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('signBtn')">Записаться</v-btn>
         <v-btn color="error" v-if="signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('unsignBtn')">Отменить запись</v-btn>
       </v-card-actions>
     </v-card>

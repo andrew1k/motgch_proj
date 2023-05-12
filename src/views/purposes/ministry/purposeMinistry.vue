@@ -1,15 +1,13 @@
 <template>
     <v-card class="ma-2">
-        <v-img :src="step">
-            <div class="fill-height bottom-gradient d-flex align-end">
-                <VCardTitle class="text-white" v-text="'Семинар «Шаг 3. Служение» '"/>
-            </div>
-        </v-img>
-        <VCardText v-html="stepText"/>
-        <v-card-actions>
-            <VSpacer/>
-            <VBtn color="ministry" @click="signToStep = !signToStep" v-text="'Записаться на шаг 3'"/>
-        </v-card-actions>
+        <PCard
+                title="Семинар «Шаг 3. Служение»"
+                :img="step"
+                :text="stepText"
+                btn="Записаться на Шаг 3"
+                color="ministry"
+                @togglerBtn="signToStep = !signToStep"
+        />
     </v-card>
     <v-expand-transition>
         <v-card v-show="signToStep" variant="text" elevation="0" rounded="0" class="ma-2">
@@ -29,49 +27,32 @@
         </v-card>
     </v-expand-transition>
   <!--   ------------------------------------------------------------------------------------------------------------------ -->
-    <VCardTitle class="mt-4" v-text="'Наши служения'"/>
-    <v-data-table
-            show-expand
-            v-model:expanded="expanded"
-            :items="ourServs"
-            item-value="title"
-            :headers="servHeaders">
-        <template v-slot:expanded-row="{ columns, item }">
-            <tr>
-                <td :colspan="columns.length">
-                    More info about {{ item.raw.title }}
-                </td>
-            </tr>
-        </template>
-    </v-data-table>
-
-  <!--  <DescriptionsCard-->
-  <!--    v-for="(serv, i) in ourServs"-->
-  <!--    :key="i"-->
-  <!--    :title="serv.title"-->
-  <!--    :subtitle="serv.subtitle"-->
-  <!--    :text="serv.text"-->
-  <!--    />-->
-    <VCardTitle class="mt-4" v-text="'Шаг 3'"/>
     <v-card class="ma-2">
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci, alias aliquam
-            aliquid,
-            animi aspernatur atque, debitis dolore dolorem eveniet exercitationem explicabo ipsa modi mollitia
-            necessitatibus
-            neque nulla numquam obcaecati odit officiis optio placeat quae quis repellendus sint suscipit tempora
-            tenetur
-            vitae voluptas voluptates! Corporis dolores iure magnam officia rem!
-        </v-card-text>
+        <v-data-table-virtual
+                show-expand
+                v-model:expanded="expanded"
+                :items="ourServs"
+                item-value="title"
+                :headers="servHeaders"
+                items-per-page="25"
+        >
+            <template v-slot:expanded-row="{ columns, item }">
+                <v-card-subtitle class="mt-2">{{ item.raw.subtitle }}</v-card-subtitle>
+                <v-card-text>
+                    {{ item.raw.text }}
+                </v-card-text>
+            </template>
+        </v-data-table-virtual>
     </v-card>
-    <VCardTitle class="mt-4" v-text="'Консультация'"/>
     <v-card class="ma-2">
+        <VCardTitle v-text="'Консультация'"/>
         <v-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis culpa deleniti dolor dolore
             dolorum
             esse eveniet inventore libero quidem vel?
         </v-card-text>
     </v-card>
-    <VCardTitle class="mt-4" v-text="`Проект 'Век Добра'`"/>
     <v-card class="ma-2">
+        <VCardTitle v-text="`Проект 'Век Добра'`"/>
         <v-card-text>
             Церковь- это место, где каждый человек может найти поддержку, принятие и помощь.
             Мы хотим помочь вам преодолевать трудные ситуации и вместе с вами радоваться победам!
@@ -85,7 +66,9 @@
 </template>
 
 <script setup>
-const servHeaders = ref([{title: 'Служение', key: 'title'}])
+import PCard from '@/components/purposes/cardsInPurposes.vue'
+
+const servHeaders = ref([{title: 'Наши служения', key: 'title'}])
 const expanded = ref([])
 const ourServs = ref([
   {
@@ -176,13 +159,3 @@ filteredEvents.value = allCalendarEvents.value.filter(evnt => {
   if (evnt.chipValues.includes('third')) return evnt
 })
 </script>
-
-<style scoped>
-.bottom-gradient {
-    background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.7) 0%,
-      transparent 90px
-    );
-}
-</style>

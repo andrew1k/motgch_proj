@@ -23,7 +23,7 @@
       variant="solo"
       v-model="eventColor"
       label="Цвет"
-      :items="['gray', 'red', 'orange', 'yellow', 'green', 'teal', 'blue', 'indigo', 'purple', 'pink']"
+      :items="['gray', 'red', 'orange', 'yellow', 'green', 'teal', 'blue', 'indigo', 'purple', 'pink', 'brown']"
     />
     <VTextField
       class="ma-1"
