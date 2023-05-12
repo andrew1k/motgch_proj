@@ -4,6 +4,7 @@
             <v-tab value="start" variant="text" rounded="0">Начало</v-tab>
             <v-tab value="forms" variant="text" rounded="0">Формы</v-tab>
             <v-tab value="fellowship" variant="text" rounded="0">Общение</v-tab>
+            <v-tab value="evangelism" variant="text" rounded="0">Благовестие</v-tab>
         </v-tabs>
         <v-window v-model="tab">
             <v-window-item value="start">
@@ -14,6 +15,9 @@
             </v-window-item>
             <v-window-item value="fellowship" @group:selected="getForms('fellowship')">
                 <FormsTable :table-header="tableHeader" :forms-data="formsData.fellowship" />
+            </v-window-item>
+            <v-window-item value="evangelism" @group:selected="getForms('evangelism')">
+                <FormsTable :table-header="tableHeader" :forms-data="formsData.evangelism" />
             </v-window-item>
         </v-window>
     </v-card>

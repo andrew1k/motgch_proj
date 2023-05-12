@@ -10,7 +10,7 @@
       <VIcon :icon="eventIcon" :color="eventColor" class="ml-2" />
       <VCardItem :title="eventTitle" :subtitle="show ? `${eventTime.slice(0,10)}  в ${eventTime.slice(11)}`  : null" />
     <VSpacer/>
-      <v-chip v-if="signedEventsIds.includes(eventId)" rounded="pill" color="success" >вы записаны</v-chip>
+        <v-chip v-if="signedEventsIds.includes(eventId)" rounded="pill" color="success" ><VIcon icon="mdi-check"/></v-chip>
     <VIcon class="mx-2" :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
   </v-card-actions>
   </v-card>
@@ -23,6 +23,7 @@
     >
       <VCardText v-html="eventText" />
       <v-card-actions class="mx-2">
+          <v-chip v-if="signedEventsIds.includes(eventId)" rounded="pill" color="success" >вы записаны</v-chip>
         <VSpacer />
         <slot name="deleteBtnSpace"/>
         <v-btn color="secondary" v-if="!signedEventsIds.includes(eventId)" variant="outlined" @click="$emit('signBtn')">Записаться</v-btn>

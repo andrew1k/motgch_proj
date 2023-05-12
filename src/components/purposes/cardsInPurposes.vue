@@ -1,11 +1,11 @@
 <template>
     <v-img :src="img">
-        <div class="fill-height bottom-gradient d-flex align-end">
+        <div v-if="title" class="fill-height bottom-gradient d-flex align-end">
             <VCardTitle class="text-white" v-text="title"/>
         </div>
     </v-img>
-    <VCardText v-for="(txt, i) in text" :key="i" v-text="txt"/>
-    <v-card-actions>
+    <VCardText v-html="text" />
+    <v-card-actions v-if="btn">
         <VSpacer/>
         <VBtn :color="color" @click="$emit('togglerBtn')" v-text="btn"/>
     </v-card-actions>
@@ -17,10 +17,10 @@ import {defineProps, defineEmits} from 'vue'
 defineProps({
   title: {
     type: String,
-    required: true,
+    required: false,
   },
   text: {
-    type: Array,
+    type: String,
     required: true,
   },
   img: {
@@ -32,7 +32,7 @@ defineProps({
   },
   btn: {
     type: String,
-    required: true,
+    required: false,
   },
 })
 defineEmits(['togglerBtn'])
