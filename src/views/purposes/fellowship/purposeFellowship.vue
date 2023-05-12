@@ -108,10 +108,11 @@
     </v-card>
     <v-expand-transition>
         <v-card v-show="oPo" variant="text" elevation="0" rounded="0" class="ma-2">
-            <v-radio-group v-model="answer"  class="my-1" label="Как с вами удобнее связаться?" density="comfortable" color="success" hide-details>
-                <VRadio label="What's App" value="WhatsApp" />
-                <VRadio label="Telegram" value="Telegram" />
-                <VRadio label="По телефону" value="По телефону" />
+            <v-radio-group v-model="answer" class="my-1" label="Как с вами удобнее связаться?" density="comfortable"
+                           color="success" hide-details>
+                <VRadio label="What's App" value="WhatsApp"/>
+                <VRadio label="Telegram" value="Telegram"/>
+                <VRadio label="По телефону" value="По телефону"/>
             </v-radio-group>
             <v-card-actions>
                 <VSpacer/>
@@ -149,7 +150,7 @@ const signToStep = ref(false)
 const sgText = ref([
   `Малая группа - это встречи верующих людей среди недели в тёплой, домашней, дружеской обстановке для общения, изучения Библии, совместных молитв и помощи друг другу. <br /><br />
   Это то, что нужно каждому христианину, чтобы возрастать во Христе и чувствовать себя частью церковной семьи. <br /><br />
-  Малые группы проходят еженедельно в разных районах города. Напишите нам, чтобы найти свою Малую группу`
+  Малые группы проходят еженедельно в разных районах города. Напишите нам, чтобы найти свою Малую группу`,
 ])
 const stepText = ref([
   `Шаг 1 «Общение» или «Узнавая больше о нашей церковной семье» – это первый из основополагающих курсов церкви «Миссия Благая Весть». <br /><br />

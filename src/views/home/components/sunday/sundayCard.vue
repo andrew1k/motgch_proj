@@ -3,17 +3,17 @@
     <v-card class="ma-2" v-if="isPending" color="background">
         <VResponsive :aspect-ratio="16 / 9"/>
     </v-card>
-    <Transition mode="out-in" name="fade">
+    <v-scale-transition origin="center center">
         <v-card v-if="!isPending" to="/sunday" class="ma-2">
             <LiteYouTubeEmbed :id="sunday?.id" :title="sunday?.title"/>
         </v-card>
-    </Transition>
+    </v-scale-transition>
     <VSkeletonLoader v-if="isPending" type="list-item-two-line" color="background"/>
-    <Transition name="slide-fade" mode="out-in">
+    <v-scale-transition origin="left center">
         <v-card-text v-if="!isPending">
             <h4 class="font-weight-light" v-html="sunday?.title"/>
         </v-card-text>
-    </Transition>
+    </v-scale-transition>
   <!--   ----------------------------------------------------------------------------------------------------------------------- Admin tool  -->
     <v-btn class="mx-2" v-if="isAdmin" @click="show = !show">Обновить ВС</v-btn>
     <v-card v-if="show" class="ma-2">

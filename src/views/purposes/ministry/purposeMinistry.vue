@@ -36,7 +36,7 @@
                 :headers="servHeaders"
                 items-per-page="25"
         >
-            <template v-slot:expanded-row="{ columns, item }">
+            <template v-slot:expanded-row="{ item }">
                 <v-card-subtitle class="mt-2">{{ item.raw.subtitle }}</v-card-subtitle>
                 <v-card-text>
                     {{ item.raw.text }}

@@ -12,6 +12,7 @@
     </VBtn>
 
     <VSpacer />
+      <VBtn icon="mdi-gift" to="/giving" color="info"/>
     <TheAccountMenu />
   </v-app-bar>
 </template>

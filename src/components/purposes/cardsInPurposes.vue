@@ -1,5 +1,5 @@
 <template>
-    <v-img :src="img">
+    <v-img :src="img" :options="{threshold: 0}">
         <div v-if="title" class="fill-height bottom-gradient d-flex align-end">
             <VCardTitle class="text-white" v-text="title"/>
         </div>
