@@ -3,6 +3,7 @@
             v-model="dialog"
             fullscreen
             eager
+            transition="dialog-top-transition"
     >
         <template v-slot:activator="{ props }">
             <v-card
@@ -20,15 +21,17 @@
                 </div>
             </v-card>
         </template>
-        <v-card rounded="0" elevation="0">
-            <v-toolbar color="surface" density="compact">
-                <v-btn @click="dialog = false" prepend-icon="mdi-close">Закрыть</v-btn>
-                <VSpacer/>
-                <v-btn :color="linkColor" variant="tonal" v-if="linkLabel" :to="link">{{ linkLabel }}</v-btn>
-            </v-toolbar>
-            <v-card-text class="ma-4">
+        <v-card rounded="0" class="bg-transparent" elevation="0">
+
+            <v-card-text class="mt-9">
                 <v-card class="mx-auto" max-width="600">
-                    <v-carousel hide-delimiters :progress="storyImgs.length > 1 ? linkColor : 'background'" height="">
+                    <v-toolbar color="surface" density="compact">
+                        <v-btn @click="dialog = false" :color="linkColor" prepend-icon="mdi-close" class="mx-0">Закрыть</v-btn>
+                        <VSpacer/>
+                        <v-btn :color="linkColor" variant="tonal" v-if="linkLabel" :to="link" class="mx-0">{{ linkLabel }}</v-btn>
+                    </v-toolbar>
+                    <v-carousel hide-delimiters :progress="storyImgs.length > 1 ? linkColor : false" height="">
+
                         <template v-slot:prev="{ props }">
                             <VBtn variant="text" size="x-large" icon="mdi-chevron-left" class="ml-n6"
                                   @click="props.onClick"/>

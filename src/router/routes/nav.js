@@ -2,6 +2,7 @@ import calendarPage from '@/views/calendar/calendarPage.vue'
 import discoverPage from '@/views/discover/discoverPage'
 import sundayPage from '@/views/home/views/sunday/sundayPage.vue'
 import newsPage from '@/views/home/views/news/newsPage.vue'
+import prayPage from '@/views/home/views/pray/prayPage.vue'
 import eventPage from '@/views/calendar/views/event/eventPage.vue'
 export default [
   {
@@ -159,6 +160,16 @@ export default [
     meta: {
       title: 'Event',
       layout: 'card',
+      auth: true,
+    }
+  },{
+    path: '/prayPage',
+    name: 'prayPage',
+    props: true,
+    component: prayPage,
+    meta: {
+      title: 'Молитва',
+      layout: 'news',
       auth: true,
     }
   },

@@ -1,17 +1,17 @@
 <template>
-  <v-card-title class="mt-6">Для вас</v-card-title>
-  <NewsCreationCard v-if="isAdmin" />
-<!--                                            Skeleton Cards                -->
+    <v-card-title class="mt-6">Для вас</v-card-title>
+    <NewsCreationCard v-if="isAdmin"/>
+  <!--                                            Skeleton Cards                -->
     <v-card class="ma-2" v-if="isPending">
         <v-container class="ma-0 pa-0">
             <v-row>
                 <v-col cols="4">
                     <v-card elevation="0">
-                        <VSkeletonLoader type="image" />
+                        <VSkeletonLoader type="image"/>
                     </v-card>
                 </v-col>
                 <v-col cols="8" class="d-flex flex-column">
-                    <VSkeletonLoader type="list-item" />
+                    <VSkeletonLoader type="list-item"/>
                 </v-col>
             </v-row>
         </v-container>
@@ -21,25 +21,26 @@
             <v-row>
                 <v-col cols="4">
                     <v-card elevation="0">
-                        <VSkeletonLoader type="image" />
+                        <VSkeletonLoader type="image"/>
                     </v-card>
                 </v-col>
                 <v-col cols="8" class="d-flex flex-column">
-                    <VSkeletonLoader type="list-item" />
+                    <VSkeletonLoader type="list-item"/>
                 </v-col>
             </v-row>
         </v-container>
     </v-card>
-<!--                                             News Cards                  -->
+  <!--                                             News Cards                  -->
+    <PrayCard/>
     <NewsCard
-    v-for="item in news"
-    :key="item.id"
-    :title="item.title"
-    :img="item.url"
-    :leader-name="item.leaderName"
-    :leader-url="item.leaderUrl"
-    :id="item.id"
-  />
+            v-for="item in news"
+            :key="item.id"
+            :title="item.title"
+            :img="item.url"
+            :leader-name="item.leaderName"
+            :leader-url="item.leaderUrl"
+            :id="item.id"
+    />
 </template>
 
 <script setup>
@@ -50,6 +51,7 @@ import {onBeforeMount} from 'vue'
 import NewsCreationCard from '@/views/home/components/news/newsCreationCard.vue'
 import {useAuthStore} from '@/stores/authStore'
 import {useAppState} from '@/stores/appState'
+import PrayCard from '@/views/home/components/pray/prayCard.vue'
 
 const newsfeedStore = useNewsfeedStore()
 const {getNews} = newsfeedStore

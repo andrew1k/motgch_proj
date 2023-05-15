@@ -28,21 +28,21 @@
     </v-expand-transition>
   <!--   ------------------------------------------------------------------------------------------------------------------ -->
     <v-card class="ma-2">
-        <v-data-table-virtual
-                show-expand
-                v-model:expanded="expanded"
-                :items="ourServs"
-                item-value="title"
-                :headers="servHeaders"
-                items-per-page="25"
-        >
-            <template v-slot:expanded-row="{ item }">
-                <v-card-subtitle class="mt-2">{{ item.raw.subtitle }}</v-card-subtitle>
-                <v-card-text>
-                    {{ item.raw.text }}
-                </v-card-text>
-            </template>
-        </v-data-table-virtual>
+        <v-expansion-panels variant="accordion">
+            <v-expansion-panel v-for="(panel, i) in ourServs" :key="i">
+                <v-expansion-panel-title>
+                    {{panel.title}}
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
+                    <v-card-text>
+                        {{panel.text}}
+                    </v-card-text>
+                    <v-card-text class="font-weight-thin">
+                        {{panel.subtitle}}
+                    </v-card-text>
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+        </v-expansion-panels>
     </v-card>
     <v-card class="ma-2">
         <VCardTitle v-text="'Консультация'"/>
