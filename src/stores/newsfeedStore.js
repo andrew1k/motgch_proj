@@ -1,9 +1,22 @@
 import {defineStore, storeToRefs} from 'pinia'
 import {db, storage} from '@/plugins/firebase.config'
-import {doc, collection, onSnapshot, deleteDoc, setDoc, query, orderBy, limit, getDocs} from 'firebase/firestore'
+import {
+  doc,
+  collection,
+  onSnapshot,
+  deleteDoc,
+  setDoc,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+  where,
+  getDoc,
+} from 'firebase/firestore'
 import {uploadBytes, ref as sref, getDownloadURL, deleteObject} from 'firebase/storage'
 import {ref} from 'vue'
 import {useAppState} from '@/stores/appState'
+import {useAuthStore} from '@/stores/authStore'
 
 export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   const news = ref([])
@@ -12,17 +25,18 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   const storiesIds = ref([])
   const newsItem = ref()
   const sunday = ref({docId: '0'})
-
+  const authStore = useAuthStore()
+  const {userAge} = storeToRefs(authStore)
   const appState = useAppState()
   const {isPending} = storeToRefs(appState)
 
   async function getSunday() {
     isPending.value = true
-    const q = query(collection(db, 'sunday'), orderBy('timeId', "desc"), limit(1))
+    const q = query(collection(db, 'sunday'), orderBy('timeId', 'desc'), limit(1))
     const qSnapshot = await getDocs(q)
     qSnapshot.forEach(doc => {
       const docId = doc.id
-      sunday.value = {...doc.data(), docId }
+      sunday.value = {...doc.data(), docId}
       isPending.value = false
     })
   }
@@ -44,9 +58,8 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
   }
 
   async function getNewsItem(newsId) {
-    await onSnapshot(doc(db, 'newsfeed', newsId), (doc) => {
-      newsItem.value = doc.data()
-    })
+    const newsSnap = await getDoc(doc(db, 'newsfeed', newsId))
+    if (newsSnap.exists()) newsItem.value = newsSnap.data()
   }
 
 
@@ -65,6 +78,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
       })
     })
   }
+
   // ------------------------------------------------------------------------------------------------------------------------------ admin Funcs
   async function uploadNews(imgs, payload) {
     const newsId = Date.now().toString()
@@ -86,9 +100,7 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
         title: payload.title,
         subtitle: payload.subtitle,
         text: payload.text,
-        leaderName: payload.leaderName,
-        leaderTitle: payload.leaderTitle,
-        leaderUrl: payload.leaderUrl,
+        leader: payload.leader,
         url: url,
         filePath: filePath,
       })
@@ -97,11 +109,13 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
       console.log(e)
     }
   }
+
   async function deleteNewsItem(newsId) {
     await deleteObject(sref(storage, `newsfeed/${newsId}`))
     await deleteDoc(doc(db, 'newsfeed', newsId))
     await alert('all done')
   }
+
   async function uploadStory(prevImg, storyImgs, title, link, linkColor, linkLabel) {
     const storyId = Date.now().toString()
 
@@ -134,15 +148,16 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
         title,
         link,
         linkColor,
-        linkLabel
+        linkLabel,
       })
       await alert('all done successfully')
     } catch (e) {
       console.log(e)
     }
   }
+
   async function updateSunday(payload) {
-    const timeId =  Date.now().toString()
+    const timeId = Date.now().toString()
     await setDoc(doc(db, 'sunday', timeId), {...payload, timeId})
     await alert('Обновлено')
   }

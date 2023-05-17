@@ -1,40 +1,42 @@
 import {defineStore, storeToRefs} from 'pinia'
 import {useAuthStore} from '@/stores/authStore'
-import {collection, doc, onSnapshot, setDoc} from 'firebase/firestore'
+import {collection, doc, onSnapshot, setDoc, query, where, getDocs} from 'firebase/firestore'
 import {db} from '@/plugins/firebase.config'
 import {useSnackbarMessages} from '@/stores/appState'
 import {ref} from 'vue'
 
 export const useFormsStore = defineStore('formsStore', () => {
   const authStore = useAuthStore()
-  const {uid, dbUser} = storeToRefs(authStore)
+  const {
+    uid,
+    dbUser,
+    userAge,
+  } = storeToRefs(authStore)
   const {setMessage} = useSnackbarMessages()
   const formsData = ref({})
 
   const sendForm = async (path, form, from) => {
     const id = Date.now().toString()
-
-    function age(birthdate) {
-      const today = new Date()
-      return today.getFullYear() - birthdate.getFullYear() -
-        (today.getMonth() < birthdate.getMonth() ||
-          (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate()))
-    }
-
-    const userAge = age(new Date(dbUser.value.birthDate))
     const toDB = {
       uid: uid.value,
       fullName: `${dbUser.value.secondName} ${dbUser.value.firstName}`,
-      age: userAge,
+      age: userAge.value,
       phoneNumber: dbUser.value.phoneNumber,
       from,
     }
+    let requestAlreadyExist
     try {
-      await setDoc(doc(db, path, id), {
-        ...toDB,
-        answer: JSON.stringify(form),
+      const querySnapshot = await getDocs(query(collection(db, path), where('uid', '==', uid.value)))
+      querySnapshot.forEach((doc) => {
+        requestAlreadyExist = doc.id
       })
-      await setMessage('Ваша форма успешно отправленна')
+      if (!requestAlreadyExist) {
+        await setDoc(doc(db, path, id), {
+          ...toDB,
+          answer: JSON.stringify(form),
+        })
+        await setMessage('Ваша форма успешно отправленна')
+      } else setMessage(`Вы уже отправляли ответ, номер заявки ${requestAlreadyExist}`)
     } catch (e) {
       setMessage(e)
     }

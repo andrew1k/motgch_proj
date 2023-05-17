@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="4">
           <v-card elevation="0">
-            <VImg :src="img"/>
+            <VImg :src="img" eager/>
           </v-card>
         </v-col>
         <v-col cols="8" class="d-flex flex-column">

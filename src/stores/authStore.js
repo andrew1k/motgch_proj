@@ -22,6 +22,13 @@ export const useAuthStore = defineStore('authStore', () => {
   const email = computed(() => user.value.email)
   const isAuthed = computed(() => !!user.value)
   const isAdmin = computed(() => user.value.uid === process.env.VUE_APP_ADMIN_ID)
+  const userAge = computed(() => {
+    const birthdate = new Date(dbUser.value.birthDate)
+    const today = new Date()
+    return today.getFullYear() - birthdate.getFullYear() -
+      (today.getMonth() < birthdate.getMonth() ||
+        (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate()))
+  })
   // calendar part
   const signedEventsIds = ref(computed(() => dbUser.value.signedEvents?.map(e => e.eventId)))
   const appSignup = async (payload) => {  // ------------------------------------------------------------------------------------------------------------------------------------ Done: tests needed
@@ -157,6 +164,7 @@ export const useAuthStore = defineStore('authStore', () => {
     email,
     isAuthed,
     isAdmin,
+    userAge,
     signedEventsIds,
     appLogin,
     appSignup,

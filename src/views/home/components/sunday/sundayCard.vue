@@ -1,6 +1,6 @@
 <template>
     <v-card-title class="mt-2">В это воскресенье</v-card-title>
-    <v-card class="ma-2" v-if="isPending" color="background">
+    <v-card class="ma-2" v-if="isPending" variant="tonal">
         <VResponsive :aspect-ratio="16 / 9"/>
     </v-card>
     <v-scale-transition origin="center center">

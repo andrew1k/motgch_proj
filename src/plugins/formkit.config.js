@@ -8,7 +8,7 @@ const config = {
   theme: 'genesis',
   plugins: [
     createFloatingLabelsPlugin({
-      useAsDefault: true
+      useAsDefault: false
     })
   ]
 }

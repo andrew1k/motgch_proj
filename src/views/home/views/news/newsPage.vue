@@ -6,7 +6,7 @@
         <VImg :src="newsItem?.url"/>
     </v-card>
     <v-card class="ma-2">
-        <VCardTitle class="text-indigo-darken-2 font-weight-bold" v-html="newsItem?.title"/>
+        <VCardTitle class="font-weight-bold" v-html="newsItem?.title"/>
         <VCardSubtitle v-html="newsItem?.subtitle"/>
         <component :is="leader"/>
         <VCardText v-html="newsItem?.text"/>
