@@ -43,18 +43,16 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
 
   async function getNews() {
     isPending.value = true
-    const colRef = collection(db, 'newsfeed')
-    await onSnapshot(colRef, snapshot => {
-      snapshot.docs.forEach(doc => {
-        const id = doc.id
-        const data = doc.data()
-        if (!newsIds.value.includes(id)) {
-          newsIds.value.push(id)
-          news.value.unshift({...data, id})
-        }
-        isPending.value = false
-      })
+    const newsSnapshoot = await getDocs(collection(db, 'newsfeed'))
+    newsSnapshoot.forEach(doc => {
+      const id = doc.id
+      const data = doc.data()
+      if (!newsIds.value.includes(id)) {
+        newsIds.value.push(id)
+        news.value.unshift({...data, id})
+      }
     })
+    isPending.value = false
   }
 
   async function getNewsItem(newsId) {
@@ -65,18 +63,16 @@ export const useNewsfeedStore = defineStore('newsfeedStore', () => {
 
   async function getStories() {
     isPending.value = true
-    const colRef = collection(db, 'stories')
-    await onSnapshot(colRef, snapshot => {
-      snapshot.docs.forEach(doc => {
-        const id = doc.id
-        const data = doc.data()
-        if (!storiesIds.value.includes(id)) {
-          storiesIds.value.push(id)
-          stories.value.unshift({id, ...data})
-        }
-        isPending.value = false
-      })
+    const storySnapshot = await getDocs(collection(db, 'stories'))
+    storySnapshot.forEach(doc => {
+      const id = doc.id
+      const data = doc.data()
+      if (!storiesIds.value.includes(id)) {
+        storiesIds.value.push(id)
+        stories.value.unshift({id, ...data})
+      }
     })
+    isPending.value = false
   }
 
   // ------------------------------------------------------------------------------------------------------------------------------ admin Funcs

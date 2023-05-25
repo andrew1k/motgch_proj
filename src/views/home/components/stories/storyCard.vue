@@ -7,7 +7,7 @@
     >
         <template v-slot:activator="{ props }">
             <v-card
-                    class="ma-2"
+                    class="my-2 mx-1"
                     height="130"
                     width="110"
                     v-bind="props"
@@ -26,9 +26,9 @@
             <v-card-text class="mt-9">
                 <v-card class="mx-auto" max-width="600">
                     <v-toolbar color="surface" density="compact">
-                        <v-btn @click="dialog = false" :color="linkColor" prepend-icon="mdi-close" class="mx-0">Закрыть</v-btn>
+                        <v-btn @click="dialog = false" :color="linkColor" prepend-icon="mdi-close">Закрыть</v-btn>
                         <VSpacer/>
-                        <v-btn :color="linkColor" variant="tonal" v-if="linkLabel" :to="link" class="mx-0">{{ linkLabel }}</v-btn>
+                        <v-btn :color="linkColor" variant="tonal" v-if="linkLabel" :to="link">{{ linkLabel }}</v-btn>
                     </v-toolbar>
                     <v-carousel hide-delimiters :progress="storyImgs.length > 1 ? linkColor : false" height="">
 
